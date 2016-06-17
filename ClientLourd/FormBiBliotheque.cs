@@ -23,7 +23,8 @@ namespace ClientLourd
         private int iTentativeDeValidation = NOMBRE_MAXIMUM_DE_TENTATIVES_DE_CONNEXION;
 
         //  Contient les onglets que l'on pourra afficher/cacher :
-        //  Il est nécessaire
+        //  Il est nécessaire d'utiliser des variables pour stocker nos tabPages car on ne peut pas les cacher
+        //  en changeant la propriété Visible : Il faut les enlever de la collection TabPages du TabControl
         private TabPage oTabPageBibliothecaire;
         private TabPage oTabPageAdherent;
         private TabPage oTabPageLivre;
@@ -115,9 +116,9 @@ namespace ClientLourd
                 else
                 {   //  Si le bibliothécaire éxiste dans la base, on lui souhaite le bonjour :)
                     MessageBox.Show("Bonjour " + oBibliothecaire.bibliothecaire_prenom + " " + oBibliothecaire.bibliothecaire_nom);
-                    tabControlBibliotheque.TabPages.Add(oStaticTabPageBibliothecaire);
-                    tabControlBibliotheque.TabPages.Add(oStaticTabPageAdherent);
-                    tabControlBibliotheque.TabPages.Add(oStaticTabPageLivre);
+                    tabControlBibliotheque.TabPages.Add(oTabPageBibliothecaire);
+                    tabControlBibliotheque.TabPages.Add(oTabPageAdherent);
+                    tabControlBibliotheque.TabPages.Add(oTabPageLivre);
                 }
 
             }
