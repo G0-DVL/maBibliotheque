@@ -40,12 +40,12 @@ namespace ClientLourd
 
         private void LabelLogin_click(object sender, EventArgs e)
         {
-            TextBoxLogin.Focus();
+            TextBoxLogin.SelectAll();
         }
 
         private void LabelPass_click(object sender, EventArgs e)
         {
-            TextBoxPass.Focus();
+            TextBoxPass.SelectAll();
         }
 
         private void ButtonIdentificationValidate_Click(object sender, EventArgs e)
@@ -66,11 +66,7 @@ namespace ClientLourd
                 }
                 else
                 {
-                    identificationToolStripMenuItem.Text = oBibliothecaire.bibliothecaire_prenom + " " + oBibliothecaire.bibliothecaire_nom;
-                    adherentToolStripMenuItem.Visible = true;
-                    bibliothécaireToolStripMenuItem.Visible = true;
-                    livreToolStripMenuItem.Visible = true;
-                    PanelIdentification.Visible = false;
+                    MessageBox.Show("Bonjour "+ oBibliothecaire.bibliothecaire_prenom + " " + oBibliothecaire.bibliothecaire_nom);
                 }
 
             }
@@ -92,83 +88,9 @@ namespace ClientLourd
             }
         }
 
-        private void identificationToolStripMenuItem_Click(object sender, EventArgs e)
+        private void TextBoxIdentification_Enter(object sender, EventArgs e)
         {
-            if (null != oPanelVisible)
-            {
-                oPanelVisible.Visible = false;
-            }
-            PanelIdentification.Visible = true;
-            oPanelVisible = PanelIdentification;
-        }
-
-        private void adhérentsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-            if (null != oPanelVisible)
-            {
-                oPanelVisible.Visible = false;
-            }
-            PanelAdherent.Visible = true;
-            oPanelVisible = PanelAdherent;
-        }
-
-        private void livresToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-            if (null != oPanelVisible)
-            {
-                oPanelVisible.Visible = false;
-            }
-            PanelLivre.Visible = true;
-            oPanelVisible = PanelLivre;
-        }
-
-        private void dataGridView1_UserAddedRow(object sender, DataGridViewRowEventArgs e)
-        {
-            //  StagiaireTableAdapter oDataAdapter = new StagiaireTableAdapter();
-            //  DataSetStagiaire oDataSet = new DataSetStagiaire();
-            //  oDataAdapter.Fill(oDataSet);
-            
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            string sSqlConnectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Exemple;Integrated Security=True";
-            SqlConnection oSqlConn = new SqlConnection(sSqlConnectionString);
-            oSqlConn.Open();
-            SqlCommand oSqlCommand = new SqlCommand("SELECT COUNT(1) FROM Stagiaire", oSqlConn);
-            SqlDataReader oSqlReader = oSqlCommand.ExecuteReader();
-            
-            while(oSqlReader.Read())
-            {
-                MessageBox.Show("Votre table contient "+oSqlReader.GetInt32(0)+" enregistrements");
-            }
-            oSqlReader.Close();
-            oSqlConn.Close();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            string sSqlConnectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Exemple;Integrated Security=True";
-            SqlConnection oSqlConn = new SqlConnection(sSqlConnectionString);
-            //  oSqlConn.Open();
-            //  SqlCommand oSqlCommand = new SqlCommand();
-            SqlDataAdapter oSqlDataAdapter = new SqlDataAdapter("SELECT COUNT(1) FROM Stagiaire", oSqlConn);
-            DataSet oDataSet = new DataSet();
-
-            oSqlDataAdapter.Fill(oDataSet, "Stagiaire");
-            DataTableReader oDataTableReader = oDataSet.CreateDataReader();
-            while(oDataTableReader.Read())
-            {
-                MessageBox.Show("Votre table contient " + oDataTableReader.GetInt32(0) + " enregistrements");
-            }
-            oSqlConn.Close();
-        }
-
-        private void aze(object sender, EventArgs e)
-        {
-            MessageBox.Show(((TextBox)sender).Name);
+            ((TextBox)sender).SelectAll();
         }
     }
 }
