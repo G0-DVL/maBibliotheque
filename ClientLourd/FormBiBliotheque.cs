@@ -26,7 +26,7 @@ namespace ClientLourd
         //  Il est nécessaire
         private TabPage oStaticTabPageBibliothecaire;
         private TabPage oStaticTabPageAdherent;
-        private TabPage oStaticTabPageLivre;       
+        private TabPage oStaticTabPageLivre;
 
         //  Fonction lancée à la création de la fenêtre (constructeur)
         public FormBiBliotheque()
@@ -42,7 +42,8 @@ namespace ClientLourd
                 if (iCount == 0)
                 {
                     //  Nous en créeons un nouveau
-                    var monNouveauBibliothecaire = new bibliothecaire {
+                    var monNouveauBibliothecaire = new bibliothecaire
+                    {
                         bibliothecaire_ID = 1,
                         bibliothecaire_login = "admin",
                         bibliothecaire_password = "admin",
@@ -100,7 +101,7 @@ namespace ClientLourd
                     MessageBox.Show("ACCES REFUSE" + "\n"
                     + "Il vous reste " + iTentativeDeValidation
                     + " tentative" + (iTentativeDeValidation > 1 ? "s" : "") + "."
-                    + (iTentativeDeValidation == 0 ? "\nAurevoir !" : "") );
+                    + (iTentativeDeValidation == 0 ? "\nAurevoir !" : ""));
 
                     if (0 == iTentativeDeValidation)
                     {   //  Si le nombre de tentatives est dépassé, on ferme la fenêtre (dans ta gueule)
@@ -109,7 +110,7 @@ namespace ClientLourd
                 }
                 else
                 {   //  Si le bibliothécaire éxiste dans la base, on lui souhaite le bonjour :)
-                    MessageBox.Show("Bonjour "+ oBibliothecaire.bibliothecaire_prenom + " " + oBibliothecaire.bibliothecaire_nom);
+                    MessageBox.Show("Bonjour " + oBibliothecaire.bibliothecaire_prenom + " " + oBibliothecaire.bibliothecaire_nom);
                     tabControl1.TabPages.Add(oStaticTabPageBibliothecaire);
                     tabControl1.TabPages.Add(oStaticTabPageAdherent);
                     tabControl1.TabPages.Add(oStaticTabPageLivre);
@@ -121,7 +122,7 @@ namespace ClientLourd
         //  Fonction appellée à chaque touche du clavier appuyée sur le TextBoxLogin
         private void TextBoxLogin_keyPress(object sender, KeyPressEventArgs e)
         {   //  Si l'utilisateur appuie sur la touche ENTREE
-            if((char)Keys.Return== e.KeyChar)
+            if ((char)Keys.Return == e.KeyChar)
             {   //  Nous appelons la fonction de validation de l'identification
                 //  comme s'il avait appuyé sur le bouton "Valider"
                 ButtonIdentificationValidate_Click(sender, e);
@@ -142,6 +143,10 @@ namespace ClientLourd
         private void TextBoxIdentification_Enter(object sender, EventArgs e)
         {   //  Nous sélectionnons tout le texte du TextBox
             ((TextBoxBase)sender).SelectAll();
+        }
+        private void buttonBibliothecaireCreation_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
