@@ -97,5 +97,10 @@ namespace ClientLourd
         {
 
         }
+
+        private void dataGridViewLivre_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
