@@ -24,9 +24,9 @@ namespace ClientLourd
 
         //  Contient les onglets que l'on pourra afficher/cacher :
         //  Il est nécessaire
-        private TabPage oStaticTabPageBibliothecaire;
-        private TabPage oStaticTabPageAdherent;
-        private TabPage oStaticTabPageLivre;
+        private TabPage oTabPageBibliothecaire;
+        private TabPage oTabPageAdherent;
+        private TabPage oTabPageLivre;
 
         //  Fonction lancée à la création de la fenêtre (constructeur)
         public FormBiBliotheque()
@@ -58,16 +58,16 @@ namespace ClientLourd
             }
 
             //  Nous cachons les tab dont l'utilisateur n'a pas besoin tant qu'il n'est pas identifié !
-            oStaticTabPageBibliothecaire = tabPageBibliothecaire;
-            oStaticTabPageAdherent = tabPageAdherent;
-            oStaticTabPageLivre = tabPageLivre;
-            tabControl1.TabPages.Remove(tabPageBibliothecaire);
-            tabControl1.TabPages.Remove(tabPageAdherent);
-            tabControl1.TabPages.Remove(tabPageLivre);
+            oTabPageBibliothecaire = tabPageBibliothecaire;
+            oTabPageAdherent       = tabPageAdherent;
+            oTabPageLivre          = tabPageLivre;
+            tabControlBibliotheque.TabPages.Remove(tabPageBibliothecaire);
+            tabControlBibliotheque.TabPages.Remove(tabPageAdherent);
+            tabControlBibliotheque.TabPages.Remove(tabPageLivre);
 
             //  Pour notre tabControl, nous voulons qu'il soit redimensionné à la taille de notre fenêtre
             //  Pour cela, nous utilisons des ancres (Anchor) en haut, à gauche
-            tabControl1.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right);
+            tabControlBibliotheque.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right);
         }
 
         //  Fonction lancée au clic sur le label "Login :" dans le tab d'identification
@@ -115,9 +115,9 @@ namespace ClientLourd
                 else
                 {   //  Si le bibliothécaire éxiste dans la base, on lui souhaite le bonjour :)
                     MessageBox.Show("Bonjour " + oBibliothecaire.bibliothecaire_prenom + " " + oBibliothecaire.bibliothecaire_nom);
-                    tabControl1.TabPages.Add(oStaticTabPageBibliothecaire);
-                    tabControl1.TabPages.Add(oStaticTabPageAdherent);
-                    tabControl1.TabPages.Add(oStaticTabPageLivre);
+                    tabControlBibliotheque.TabPages.Add(oStaticTabPageBibliothecaire);
+                    tabControlBibliotheque.TabPages.Add(oStaticTabPageAdherent);
+                    tabControlBibliotheque.TabPages.Add(oStaticTabPageLivre);
                 }
 
             }

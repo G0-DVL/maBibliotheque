@@ -34,7 +34,7 @@
             this.TextBoxPass = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.ButtonIdentificationValidate = new System.Windows.Forms.Button();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabControlBibliotheque = new System.Windows.Forms.TabControl();
             this.tabPageIdentification = new System.Windows.Forms.TabPage();
             this.tabPageBibliothecaire = new System.Windows.Forms.TabPage();
             this.dataGridViewBibliothecaire = new System.Windows.Forms.DataGridView();
@@ -56,6 +56,26 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPageAdherent = new System.Windows.Forms.TabPage();
+            this.dateTimePickerAdherentDateInscr = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerAdherentDateNaiss = new System.Windows.Forms.DateTimePicker();
+            this.dataGridViewAdherent = new System.Windows.Forms.DataGridView();
+            this.AdherentId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AdherentNom = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AdherentPrenom = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AdherentDateNaiss = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AdherentAdresse = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AdherentCodePostal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AdherentTel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AdherentEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AdherentDateInscr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.textBoxAdherentEmail = new System.Windows.Forms.TextBox();
+            this.textBoxAdherentTelephone = new System.Windows.Forms.TextBox();
+            this.textBoxAdherentCodePostal = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.buttonAdherentSupp = new System.Windows.Forms.Button();
             this.buttonAdherentModif = new System.Windows.Forms.Button();
             this.buttonAdherentCreation = new System.Windows.Forms.Button();
@@ -68,46 +88,26 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.tabPageLivre = new System.Windows.Forms.TabPage();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.textBoxAdherentCodePostal = new System.Windows.Forms.TextBox();
-            this.textBoxAdherentTelephone = new System.Windows.Forms.TextBox();
-            this.textBoxAdherentEmail = new System.Windows.Forms.TextBox();
-            this.dataGridViewAdherent = new System.Windows.Forms.DataGridView();
-            this.AdherentId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AdherentNom = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AdherentPrenom = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AdherentDateNaiss = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AdherentAdresse = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AdherentCodePostal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AdherentTel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AdherentEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AdherentDateInscr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateTimePickerAdherentDateNaiss = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePickerAdherentDateInscr = new System.Windows.Forms.DateTimePicker();
-            this.textBoxLivreId = new System.Windows.Forms.TextBox();
-            this.textBoxLivreTitre = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.dateTimePickerLivreAnneeParution = new System.Windows.Forms.DateTimePicker();
-            this.buttonLivreCreation = new System.Windows.Forms.Button();
-            this.buttonLivreModification = new System.Windows.Forms.Button();
-            this.buttonLivreSuppression = new System.Windows.Forms.Button();
             this.dataGridViewLivre = new System.Windows.Forms.DataGridView();
             this.LivreId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LivreTitre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LivreAnneeParution = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabControl1.SuspendLayout();
+            this.buttonLivreSuppression = new System.Windows.Forms.Button();
+            this.buttonLivreModification = new System.Windows.Forms.Button();
+            this.buttonLivreCreation = new System.Windows.Forms.Button();
+            this.dateTimePickerLivreAnneeParution = new System.Windows.Forms.DateTimePicker();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.textBoxLivreTitre = new System.Windows.Forms.TextBox();
+            this.textBoxLivreId = new System.Windows.Forms.TextBox();
+            this.tabControlBibliotheque.SuspendLayout();
             this.tabPageIdentification.SuspendLayout();
             this.tabPageBibliothecaire.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBibliothecaire)).BeginInit();
             this.tabPageAdherent.SuspendLayout();
-            this.tabPageLivre.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAdherent)).BeginInit();
+            this.tabPageLivre.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLivre)).BeginInit();
             this.SuspendLayout();
             // 
@@ -169,17 +169,17 @@
             this.ButtonIdentificationValidate.UseVisualStyleBackColor = true;
             this.ButtonIdentificationValidate.Click += new System.EventHandler(this.ButtonIdentificationValidate_Click);
             // 
-            // tabControl1
+            // tabControlBibliotheque
             // 
-            this.tabControl1.Controls.Add(this.tabPageIdentification);
-            this.tabControl1.Controls.Add(this.tabPageBibliothecaire);
-            this.tabControl1.Controls.Add(this.tabPageAdherent);
-            this.tabControl1.Controls.Add(this.tabPageLivre);
-            this.tabControl1.Location = new System.Drawing.Point(2, 1);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(629, 490);
-            this.tabControl1.TabIndex = 9;
+            this.tabControlBibliotheque.Controls.Add(this.tabPageIdentification);
+            this.tabControlBibliotheque.Controls.Add(this.tabPageBibliothecaire);
+            this.tabControlBibliotheque.Controls.Add(this.tabPageAdherent);
+            this.tabControlBibliotheque.Controls.Add(this.tabPageLivre);
+            this.tabControlBibliotheque.Location = new System.Drawing.Point(2, 1);
+            this.tabControlBibliotheque.Name = "tabControlBibliotheque";
+            this.tabControlBibliotheque.SelectedIndex = 0;
+            this.tabControlBibliotheque.Size = new System.Drawing.Size(629, 490);
+            this.tabControlBibliotheque.TabIndex = 9;
             // 
             // tabPageIdentification
             // 
@@ -391,6 +391,153 @@
             this.tabPageAdherent.Text = "Adhérent";
             this.tabPageAdherent.UseVisualStyleBackColor = true;
             // 
+            // dateTimePickerAdherentDateInscr
+            // 
+            this.dateTimePickerAdherentDateInscr.CustomFormat = "dd/MM/yyyy";
+            this.dateTimePickerAdherentDateInscr.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePickerAdherentDateInscr.Location = new System.Drawing.Point(101, 343);
+            this.dateTimePickerAdherentDateInscr.Name = "dateTimePickerAdherentDateInscr";
+            this.dateTimePickerAdherentDateInscr.Size = new System.Drawing.Size(100, 20);
+            this.dateTimePickerAdherentDateInscr.TabIndex = 41;
+            // 
+            // dateTimePickerAdherentDateNaiss
+            // 
+            this.dateTimePickerAdherentDateNaiss.CustomFormat = " dd/MM/yyyy";
+            this.dateTimePickerAdherentDateNaiss.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePickerAdherentDateNaiss.Location = new System.Drawing.Point(101, 181);
+            this.dateTimePickerAdherentDateNaiss.Name = "dateTimePickerAdherentDateNaiss";
+            this.dateTimePickerAdherentDateNaiss.Size = new System.Drawing.Size(100, 20);
+            this.dateTimePickerAdherentDateNaiss.TabIndex = 40;
+            // 
+            // dataGridViewAdherent
+            // 
+            this.dataGridViewAdherent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewAdherent.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.AdherentId,
+            this.AdherentNom,
+            this.AdherentPrenom,
+            this.AdherentDateNaiss,
+            this.AdherentAdresse,
+            this.AdherentCodePostal,
+            this.AdherentTel,
+            this.AdherentEmail,
+            this.AdherentDateInscr});
+            this.dataGridViewAdherent.Location = new System.Drawing.Point(222, 70);
+            this.dataGridViewAdherent.Name = "dataGridViewAdherent";
+            this.dataGridViewAdherent.Size = new System.Drawing.Size(573, 150);
+            this.dataGridViewAdherent.TabIndex = 39;
+            // 
+            // AdherentId
+            // 
+            this.AdherentId.HeaderText = "Id";
+            this.AdherentId.Name = "AdherentId";
+            // 
+            // AdherentNom
+            // 
+            this.AdherentNom.HeaderText = "Nom";
+            this.AdherentNom.Name = "AdherentNom";
+            // 
+            // AdherentPrenom
+            // 
+            this.AdherentPrenom.HeaderText = "Prenom";
+            this.AdherentPrenom.Name = "AdherentPrenom";
+            // 
+            // AdherentDateNaiss
+            // 
+            this.AdherentDateNaiss.HeaderText = "Date Naissance";
+            this.AdherentDateNaiss.Name = "AdherentDateNaiss";
+            // 
+            // AdherentAdresse
+            // 
+            this.AdherentAdresse.HeaderText = "Adresse";
+            this.AdherentAdresse.Name = "AdherentAdresse";
+            // 
+            // AdherentCodePostal
+            // 
+            this.AdherentCodePostal.HeaderText = "Code Postal";
+            this.AdherentCodePostal.Name = "AdherentCodePostal";
+            // 
+            // AdherentTel
+            // 
+            this.AdherentTel.HeaderText = "Telephone";
+            this.AdherentTel.Name = "AdherentTel";
+            // 
+            // AdherentEmail
+            // 
+            this.AdherentEmail.HeaderText = "Email";
+            this.AdherentEmail.Name = "AdherentEmail";
+            // 
+            // AdherentDateInscr
+            // 
+            this.AdherentDateInscr.HeaderText = "Date Inscription";
+            this.AdherentDateInscr.Name = "AdherentDateInscr";
+            // 
+            // textBoxAdherentEmail
+            // 
+            this.textBoxAdherentEmail.Location = new System.Drawing.Point(101, 304);
+            this.textBoxAdherentEmail.Name = "textBoxAdherentEmail";
+            this.textBoxAdherentEmail.Size = new System.Drawing.Size(100, 20);
+            this.textBoxAdherentEmail.TabIndex = 37;
+            // 
+            // textBoxAdherentTelephone
+            // 
+            this.textBoxAdherentTelephone.Location = new System.Drawing.Point(101, 273);
+            this.textBoxAdherentTelephone.Name = "textBoxAdherentTelephone";
+            this.textBoxAdherentTelephone.Size = new System.Drawing.Size(100, 20);
+            this.textBoxAdherentTelephone.TabIndex = 36;
+            // 
+            // textBoxAdherentCodePostal
+            // 
+            this.textBoxAdherentCodePostal.Location = new System.Drawing.Point(101, 247);
+            this.textBoxAdherentCodePostal.Name = "textBoxAdherentCodePostal";
+            this.textBoxAdherentCodePostal.Size = new System.Drawing.Size(100, 20);
+            this.textBoxAdherentCodePostal.TabIndex = 35;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(10, 343);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(81, 13);
+            this.label15.TabIndex = 34;
+            this.label15.Text = "Date Inscription";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(10, 311);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(32, 13);
+            this.label14.TabIndex = 33;
+            this.label14.Text = "Email";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(8, 279);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(58, 13);
+            this.label13.TabIndex = 32;
+            this.label13.Text = "Telephone";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(10, 250);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(64, 13);
+            this.label12.TabIndex = 31;
+            this.label12.Text = "Code Postal";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(10, 102);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(29, 13);
+            this.label10.TabIndex = 30;
+            this.label10.Text = "Nom";
+            // 
             // buttonAdherentSupp
             // 
             this.buttonAdherentSupp.Location = new System.Drawing.Point(10, 445);
@@ -501,230 +648,6 @@
             this.tabPageLivre.Text = "Livre";
             this.tabPageLivre.UseVisualStyleBackColor = true;
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(10, 102);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(29, 13);
-            this.label10.TabIndex = 30;
-            this.label10.Text = "Nom";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(10, 250);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(64, 13);
-            this.label12.TabIndex = 31;
-            this.label12.Text = "Code Postal";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(8, 279);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(58, 13);
-            this.label13.TabIndex = 32;
-            this.label13.Text = "Telephone";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(10, 311);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(32, 13);
-            this.label14.TabIndex = 33;
-            this.label14.Text = "Email";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(10, 343);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(81, 13);
-            this.label15.TabIndex = 34;
-            this.label15.Text = "Date Inscription";
-            // 
-            // textBoxAdherentCodePostal
-            // 
-            this.textBoxAdherentCodePostal.Location = new System.Drawing.Point(101, 247);
-            this.textBoxAdherentCodePostal.Name = "textBoxAdherentCodePostal";
-            this.textBoxAdherentCodePostal.Size = new System.Drawing.Size(100, 20);
-            this.textBoxAdherentCodePostal.TabIndex = 35;
-            // 
-            // textBoxAdherentTelephone
-            // 
-            this.textBoxAdherentTelephone.Location = new System.Drawing.Point(101, 273);
-            this.textBoxAdherentTelephone.Name = "textBoxAdherentTelephone";
-            this.textBoxAdherentTelephone.Size = new System.Drawing.Size(100, 20);
-            this.textBoxAdherentTelephone.TabIndex = 36;
-            // 
-            // textBoxAdherentEmail
-            // 
-            this.textBoxAdherentEmail.Location = new System.Drawing.Point(101, 304);
-            this.textBoxAdherentEmail.Name = "textBoxAdherentEmail";
-            this.textBoxAdherentEmail.Size = new System.Drawing.Size(100, 20);
-            this.textBoxAdherentEmail.TabIndex = 37;
-            // 
-            // dataGridViewAdherent
-            // 
-            this.dataGridViewAdherent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewAdherent.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.AdherentId,
-            this.AdherentNom,
-            this.AdherentPrenom,
-            this.AdherentDateNaiss,
-            this.AdherentAdresse,
-            this.AdherentCodePostal,
-            this.AdherentTel,
-            this.AdherentEmail,
-            this.AdherentDateInscr});
-            this.dataGridViewAdherent.Location = new System.Drawing.Point(222, 70);
-            this.dataGridViewAdherent.Name = "dataGridViewAdherent";
-            this.dataGridViewAdherent.Size = new System.Drawing.Size(573, 150);
-            this.dataGridViewAdherent.TabIndex = 39;
-            // 
-            // AdherentId
-            // 
-            this.AdherentId.HeaderText = "Id";
-            this.AdherentId.Name = "AdherentId";
-            // 
-            // AdherentNom
-            // 
-            this.AdherentNom.HeaderText = "Nom";
-            this.AdherentNom.Name = "AdherentNom";
-            // 
-            // AdherentPrenom
-            // 
-            this.AdherentPrenom.HeaderText = "Prenom";
-            this.AdherentPrenom.Name = "AdherentPrenom";
-            // 
-            // AdherentDateNaiss
-            // 
-            this.AdherentDateNaiss.HeaderText = "Date Naissance";
-            this.AdherentDateNaiss.Name = "AdherentDateNaiss";
-            // 
-            // AdherentAdresse
-            // 
-            this.AdherentAdresse.HeaderText = "Adresse";
-            this.AdherentAdresse.Name = "AdherentAdresse";
-            // 
-            // AdherentCodePostal
-            // 
-            this.AdherentCodePostal.HeaderText = "Code Postal";
-            this.AdherentCodePostal.Name = "AdherentCodePostal";
-            // 
-            // AdherentTel
-            // 
-            this.AdherentTel.HeaderText = "Telephone";
-            this.AdherentTel.Name = "AdherentTel";
-            // 
-            // AdherentEmail
-            // 
-            this.AdherentEmail.HeaderText = "Email";
-            this.AdherentEmail.Name = "AdherentEmail";
-            // 
-            // AdherentDateInscr
-            // 
-            this.AdherentDateInscr.HeaderText = "Date Inscription";
-            this.AdherentDateInscr.Name = "AdherentDateInscr";
-            // 
-            // dateTimePickerAdherentDateNaiss
-            // 
-            this.dateTimePickerAdherentDateNaiss.CustomFormat = " dd/MM/yyyy";
-            this.dateTimePickerAdherentDateNaiss.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePickerAdherentDateNaiss.Location = new System.Drawing.Point(101, 181);
-            this.dateTimePickerAdherentDateNaiss.Name = "dateTimePickerAdherentDateNaiss";
-            this.dateTimePickerAdherentDateNaiss.Size = new System.Drawing.Size(100, 20);
-            this.dateTimePickerAdherentDateNaiss.TabIndex = 40;
-            // 
-            // dateTimePickerAdherentDateInscr
-            // 
-            this.dateTimePickerAdherentDateInscr.CustomFormat = "dd/MM/yyyy";
-            this.dateTimePickerAdherentDateInscr.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePickerAdherentDateInscr.Location = new System.Drawing.Point(101, 343);
-            this.dateTimePickerAdherentDateInscr.Name = "dateTimePickerAdherentDateInscr";
-            this.dateTimePickerAdherentDateInscr.Size = new System.Drawing.Size(100, 20);
-            this.dateTimePickerAdherentDateInscr.TabIndex = 41;
-            // 
-            // textBoxLivreId
-            // 
-            this.textBoxLivreId.Location = new System.Drawing.Point(126, 95);
-            this.textBoxLivreId.Name = "textBoxLivreId";
-            this.textBoxLivreId.Size = new System.Drawing.Size(100, 20);
-            this.textBoxLivreId.TabIndex = 0;
-            // 
-            // textBoxLivreTitre
-            // 
-            this.textBoxLivreTitre.Location = new System.Drawing.Point(126, 140);
-            this.textBoxLivreTitre.Name = "textBoxLivreTitre";
-            this.textBoxLivreTitre.Size = new System.Drawing.Size(100, 20);
-            this.textBoxLivreTitre.TabIndex = 1;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(27, 102);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(16, 13);
-            this.label16.TabIndex = 3;
-            this.label16.Text = "Id";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(27, 147);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(28, 13);
-            this.label17.TabIndex = 4;
-            this.label17.Text = "Titre";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(27, 185);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(80, 13);
-            this.label18.TabIndex = 5;
-            this.label18.Text = "Année Parution";
-            // 
-            // dateTimePickerLivreAnneeParution
-            // 
-            this.dateTimePickerLivreAnneeParution.CustomFormat = "dd/MM/yyyy";
-            this.dateTimePickerLivreAnneeParution.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePickerLivreAnneeParution.Location = new System.Drawing.Point(126, 178);
-            this.dateTimePickerLivreAnneeParution.Name = "dateTimePickerLivreAnneeParution";
-            this.dateTimePickerLivreAnneeParution.Size = new System.Drawing.Size(105, 20);
-            this.dateTimePickerLivreAnneeParution.TabIndex = 6;
-            // 
-            // buttonLivreCreation
-            // 
-            this.buttonLivreCreation.Location = new System.Drawing.Point(30, 263);
-            this.buttonLivreCreation.Name = "buttonLivreCreation";
-            this.buttonLivreCreation.Size = new System.Drawing.Size(75, 23);
-            this.buttonLivreCreation.TabIndex = 7;
-            this.buttonLivreCreation.Text = "Creation";
-            this.buttonLivreCreation.UseVisualStyleBackColor = true;
-            // 
-            // buttonLivreModification
-            // 
-            this.buttonLivreModification.Location = new System.Drawing.Point(30, 312);
-            this.buttonLivreModification.Name = "buttonLivreModification";
-            this.buttonLivreModification.Size = new System.Drawing.Size(75, 23);
-            this.buttonLivreModification.TabIndex = 8;
-            this.buttonLivreModification.Text = "Modification";
-            this.buttonLivreModification.UseVisualStyleBackColor = true;
-            // 
-            // buttonLivreSuppression
-            // 
-            this.buttonLivreSuppression.Location = new System.Drawing.Point(30, 364);
-            this.buttonLivreSuppression.Name = "buttonLivreSuppression";
-            this.buttonLivreSuppression.Size = new System.Drawing.Size(75, 23);
-            this.buttonLivreSuppression.TabIndex = 9;
-            this.buttonLivreSuppression.Text = "Suppression";
-            this.buttonLivreSuppression.UseVisualStyleBackColor = true;
-            // 
             // dataGridViewLivre
             // 
             this.dataGridViewLivre.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -753,15 +676,92 @@
             this.LivreAnneeParution.HeaderText = "Annee Parution";
             this.LivreAnneeParution.Name = "LivreAnneeParution";
             // 
+            // buttonLivreSuppression
+            // 
+            this.buttonLivreSuppression.Location = new System.Drawing.Point(30, 364);
+            this.buttonLivreSuppression.Name = "buttonLivreSuppression";
+            this.buttonLivreSuppression.Size = new System.Drawing.Size(75, 23);
+            this.buttonLivreSuppression.TabIndex = 9;
+            this.buttonLivreSuppression.Text = "Suppression";
+            this.buttonLivreSuppression.UseVisualStyleBackColor = true;
+            // 
+            // buttonLivreModification
+            // 
+            this.buttonLivreModification.Location = new System.Drawing.Point(30, 312);
+            this.buttonLivreModification.Name = "buttonLivreModification";
+            this.buttonLivreModification.Size = new System.Drawing.Size(75, 23);
+            this.buttonLivreModification.TabIndex = 8;
+            this.buttonLivreModification.Text = "Modification";
+            this.buttonLivreModification.UseVisualStyleBackColor = true;
+            // 
+            // buttonLivreCreation
+            // 
+            this.buttonLivreCreation.Location = new System.Drawing.Point(30, 263);
+            this.buttonLivreCreation.Name = "buttonLivreCreation";
+            this.buttonLivreCreation.Size = new System.Drawing.Size(75, 23);
+            this.buttonLivreCreation.TabIndex = 7;
+            this.buttonLivreCreation.Text = "Creation";
+            this.buttonLivreCreation.UseVisualStyleBackColor = true;
+            // 
+            // dateTimePickerLivreAnneeParution
+            // 
+            this.dateTimePickerLivreAnneeParution.CustomFormat = "dd/MM/yyyy";
+            this.dateTimePickerLivreAnneeParution.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePickerLivreAnneeParution.Location = new System.Drawing.Point(126, 178);
+            this.dateTimePickerLivreAnneeParution.Name = "dateTimePickerLivreAnneeParution";
+            this.dateTimePickerLivreAnneeParution.Size = new System.Drawing.Size(105, 20);
+            this.dateTimePickerLivreAnneeParution.TabIndex = 6;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(27, 185);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(80, 13);
+            this.label18.TabIndex = 5;
+            this.label18.Text = "Année Parution";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(27, 147);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(28, 13);
+            this.label17.TabIndex = 4;
+            this.label17.Text = "Titre";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(27, 102);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(16, 13);
+            this.label16.TabIndex = 3;
+            this.label16.Text = "Id";
+            // 
+            // textBoxLivreTitre
+            // 
+            this.textBoxLivreTitre.Location = new System.Drawing.Point(126, 140);
+            this.textBoxLivreTitre.Name = "textBoxLivreTitre";
+            this.textBoxLivreTitre.Size = new System.Drawing.Size(100, 20);
+            this.textBoxLivreTitre.TabIndex = 1;
+            // 
+            // textBoxLivreId
+            // 
+            this.textBoxLivreId.Location = new System.Drawing.Point(126, 95);
+            this.textBoxLivreId.Name = "textBoxLivreId";
+            this.textBoxLivreId.Size = new System.Drawing.Size(100, 20);
+            this.textBoxLivreId.TabIndex = 0;
+            // 
             // FormBiBliotheque
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(748, 539);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tabControlBibliotheque);
             this.Name = "FormBiBliotheque";
             this.Text = "Bienvenue à la bibliothèque";
-            this.tabControl1.ResumeLayout(false);
+            this.tabControlBibliotheque.ResumeLayout(false);
             this.tabPageIdentification.ResumeLayout(false);
             this.tabPageIdentification.PerformLayout();
             this.tabPageBibliothecaire.ResumeLayout(false);
@@ -769,9 +769,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBibliothecaire)).EndInit();
             this.tabPageAdherent.ResumeLayout(false);
             this.tabPageAdherent.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAdherent)).EndInit();
             this.tabPageLivre.ResumeLayout(false);
             this.tabPageLivre.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAdherent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLivre)).EndInit();
             this.ResumeLayout(false);
 
@@ -785,7 +785,7 @@
         private System.Windows.Forms.TextBox TextBoxPass;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button ButtonIdentificationValidate;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tabControlBibliotheque;
         private System.Windows.Forms.TabPage tabPageIdentification;
         private System.Windows.Forms.TabPage tabPageBibliothecaire;
         private System.Windows.Forms.TabPage tabPageAdherent;
