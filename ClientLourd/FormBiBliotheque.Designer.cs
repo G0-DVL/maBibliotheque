@@ -178,7 +178,7 @@
             this.tabControlBibliotheque.Location = new System.Drawing.Point(2, 1);
             this.tabControlBibliotheque.Name = "tabControlBibliotheque";
             this.tabControlBibliotheque.SelectedIndex = 0;
-            this.tabControlBibliotheque.Size = new System.Drawing.Size(629, 490);
+            this.tabControlBibliotheque.Size = new System.Drawing.Size(744, 537);
             this.tabControlBibliotheque.TabIndex = 9;
             // 
             // tabPageIdentification
@@ -386,7 +386,7 @@
             this.tabPageAdherent.Controls.Add(this.label11);
             this.tabPageAdherent.Location = new System.Drawing.Point(4, 22);
             this.tabPageAdherent.Name = "tabPageAdherent";
-            this.tabPageAdherent.Size = new System.Drawing.Size(621, 464);
+            this.tabPageAdherent.Size = new System.Drawing.Size(736, 511);
             this.tabPageAdherent.TabIndex = 2;
             this.tabPageAdherent.Text = "Adhérent";
             this.tabPageAdherent.UseVisualStyleBackColor = true;
@@ -564,6 +564,7 @@
             this.buttonAdherentCreation.TabIndex = 26;
             this.buttonAdherentCreation.Text = "Creation";
             this.buttonAdherentCreation.UseVisualStyleBackColor = true;
+            this.buttonAdherentCreation.Click += new System.EventHandler(this.buttonAdherentCreation_Click);
             // 
             // label7
             // 

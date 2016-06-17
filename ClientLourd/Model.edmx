@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="adherent_ID" />
           </Key>
-          <Property Name="adherent_ID" Type="int" Nullable="false" />
+          <Property Name="adherent_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="adherent_nom" Type="varchar" MaxLength="25" />
           <Property Name="adherent_prenom" Type="varchar" MaxLength="25" />
           <Property Name="adherent_date_naissance" Type="date" />
@@ -23,7 +23,7 @@
           <Key>
             <PropertyRef Name="auteur_ID" />
           </Key>
-          <Property Name="auteur_ID" Type="int" Nullable="false" />
+          <Property Name="auteur_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="auteur_nom" Type="varchar" MaxLength="25" />
           <Property Name="auteur_prenom" Type="varchar" MaxLength="25" />
         </EntityType>
@@ -31,7 +31,7 @@
           <Key>
             <PropertyRef Name="bibliothecaire_ID" />
           </Key>
-          <Property Name="bibliothecaire_ID" Type="int" Nullable="false" />
+          <Property Name="bibliothecaire_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="bibliothecaire_login" Type="varchar" MaxLength="25" />
           <Property Name="bibliothecaire_password" Type="varchar" MaxLength="25" />
           <Property Name="bibliothecaire_nom" Type="varchar" MaxLength="25" />
@@ -41,7 +41,7 @@
           <Key>
             <PropertyRef Name="emplacement_ID" />
           </Key>
-          <Property Name="emplacement_ID" Type="int" Nullable="false" />
+          <Property Name="emplacement_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="emplacement_libelle" Type="varchar" MaxLength="25" />
         </EntityType>
         <EntityType Name="emprunter">
@@ -58,14 +58,14 @@
           <Key>
             <PropertyRef Name="genre_ID" />
           </Key>
-          <Property Name="genre_ID" Type="int" Nullable="false" />
+          <Property Name="genre_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="genre_libelle" Type="int" />
         </EntityType>
         <EntityType Name="livre">
           <Key>
             <PropertyRef Name="livre_ID" />
           </Key>
-          <Property Name="livre_ID" Type="int" Nullable="false" />
+          <Property Name="livre_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="livre_titre" Type="varchar" MaxLength="25" />
           <Property Name="livre_annee_parution" Type="date" />
           <Property Name="genre_ID" Type="int" />
@@ -170,7 +170,7 @@
           <Key>
             <PropertyRef Name="adherent_ID" />
           </Key>
-          <Property Name="adherent_ID" Type="Int32" Nullable="false" />
+          <Property Name="adherent_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="adherent_nom" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="adherent_prenom" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="adherent_date_naissance" Type="DateTime" Precision="0" />
@@ -185,7 +185,7 @@
           <Key>
             <PropertyRef Name="auteur_ID" />
           </Key>
-          <Property Name="auteur_ID" Type="Int32" Nullable="false" />
+          <Property Name="auteur_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="auteur_nom" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="auteur_prenom" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="livres" Relationship="Self.FK_livre_auteur_ID" FromRole="auteur" ToRole="livre" />
@@ -194,7 +194,7 @@
           <Key>
             <PropertyRef Name="bibliothecaire_ID" />
           </Key>
-          <Property Name="bibliothecaire_ID" Type="Int32" Nullable="false" />
+          <Property Name="bibliothecaire_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="bibliothecaire_login" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="bibliothecaire_password" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="bibliothecaire_nom" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
@@ -204,7 +204,7 @@
           <Key>
             <PropertyRef Name="emplacement_ID" />
           </Key>
-          <Property Name="emplacement_ID" Type="Int32" Nullable="false" />
+          <Property Name="emplacement_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="emplacement_libelle" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="livres" Relationship="Self.FK_livre_emplacement_ID" FromRole="emplacement" ToRole="livre" />
         </EntityType>
@@ -224,7 +224,7 @@
           <Key>
             <PropertyRef Name="genre_ID" />
           </Key>
-          <Property Name="genre_ID" Type="Int32" Nullable="false" />
+          <Property Name="genre_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="genre_libelle" Type="Int32" />
           <NavigationProperty Name="livres" Relationship="Self.FK_livre_genre_ID" FromRole="genre" ToRole="livre" />
         </EntityType>
@@ -232,7 +232,7 @@
           <Key>
             <PropertyRef Name="livre_ID" />
           </Key>
-          <Property Name="livre_ID" Type="Int32" Nullable="false" />
+          <Property Name="livre_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="livre_titre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="livre_annee_parution" Type="DateTime" Precision="0" />
           <Property Name="genre_ID" Type="Int32" />

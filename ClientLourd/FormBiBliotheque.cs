@@ -45,7 +45,6 @@ namespace ClientLourd
                     //  Nous en créeons un nouveau
                     var monNouveauBibliothecaire = new bibliothecaire
                     {
-                        bibliothecaire_ID = 1,
                         bibliothecaire_login = "admin",
                         bibliothecaire_password = "admin",
                         bibliothecaire_nom = "par défaut",
@@ -157,6 +156,28 @@ namespace ClientLourd
         private void dataGridViewLivre_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void buttonAdherentCreation_Click(object sender, EventArgs e)
+        {
+            if("" == textBoxAdherentNom.Text
+            || "" == textBoxAdherentPrenom.Text
+            //  || "" == dateTimePickerAdherentDateNaiss.Text
+            || "" == textBoxAdherentAdresse.Text
+            || "" == textBoxAdherentCodePostal.Text
+            || "" == textBoxAdherentTelephone.Text
+            || "" == textBoxAdherentEmail.Text
+            //  || "" == dateTimePickerAdherentDateInscr.Text
+                )
+            {
+                MessageBox.Show("Tous les champs saisis doivent être obligatoires");
+                return;
+            }
+
+            using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+            {
+                //  var oAdherent = new adherent { ad };
+            }
         }
     }
 }
