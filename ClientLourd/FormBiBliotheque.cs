@@ -150,7 +150,37 @@ namespace ClientLourd
         }
         private void buttonBibliothecaireCreation_Click(object sender, EventArgs e)
         {
-
+            if ("" == textBoxBibliothecaireLogin.Text
+              || "" == textBoxBibliothecairePassword.Text
+              || "" == textBoxBibliothecaireNom.Text
+              || "" == textBoxBibliothecairePrenom.Text
+                             )
+            {
+                MessageBox.Show("Tous les champs saisis doivent être obligatoires");
+                return;
+            }
+            using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+            {
+                try
+                { // Nous en créeons un nouveau
+                    var monNouveauBibliothecaire = new bibliothecaire
+                    {
+                        bibliothecaire_login = textBoxBibliothecaireLogin.Text,
+                        bibliothecaire_password = textBoxBibliothecairePassword.Text,
+                        bibliothecaire_nom = textBoxBibliothecaireNom.Text,
+                        bibliothecaire_prenom = textBoxBibliothecairePrenom.Text
+                    };
+                    //  Nous l'ajoutons à la base
+                    monContext.bibliothecaires.Add(monNouveauBibliothecaire);
+                    monContext.SaveChanges();
+                    MessageBox.Show("creation du bibliothecaire OK !! ");
+                }
+                catch (Exception eException)
+                {
+                    MessageBox.Show("Erreur dans la creation du bibliothecaire " + eException.Message);
+                }          
+            }
+            
         }
 
         private void dataGridViewLivre_CellContentClick(object sender, DataGridViewCellEventArgs e)
