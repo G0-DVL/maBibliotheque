@@ -37,26 +37,25 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageIdentification = new System.Windows.Forms.TabPage();
             this.tabPageBibliothecaire = new System.Windows.Forms.TabPage();
-            this.tabPageAdherent = new System.Windows.Forms.TabPage();
-            this.tabPageLivre = new System.Windows.Forms.TabPage();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBoxBibliothecaireId = new System.Windows.Forms.TextBox();
-            this.textBoxBibliothecaireLogin = new System.Windows.Forms.TextBox();
-            this.textBoxBibliothecairePassword = new System.Windows.Forms.TextBox();
-            this.textBoxBibliothecaireNom = new System.Windows.Forms.TextBox();
-            this.textBoxBibliothecairePrenom = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.buttonBibliothecaireCreation = new System.Windows.Forms.Button();
-            this.buttonBibliothecaireModification = new System.Windows.Forms.Button();
-            this.buttonBibliothecaireSuppression = new System.Windows.Forms.Button();
             this.dataGridViewBibliothecaire = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Login = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nom = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Prenom = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonBibliothecaireSuppression = new System.Windows.Forms.Button();
+            this.buttonBibliothecaireModification = new System.Windows.Forms.Button();
+            this.buttonBibliothecaireCreation = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBoxBibliothecairePrenom = new System.Windows.Forms.TextBox();
+            this.textBoxBibliothecaireNom = new System.Windows.Forms.TextBox();
+            this.textBoxBibliothecairePassword = new System.Windows.Forms.TextBox();
+            this.textBoxBibliothecaireLogin = new System.Windows.Forms.TextBox();
+            this.textBoxBibliothecaireId = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tabPageAdherent = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -75,11 +74,12 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.tabPageLivre = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabPageIdentification.SuspendLayout();
             this.tabPageBibliothecaire.SuspendLayout();
-            this.tabPageAdherent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBibliothecaire)).BeginInit();
+            this.tabPageAdherent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -150,7 +150,7 @@
             this.tabControl1.Location = new System.Drawing.Point(2, 1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(629, 490);
+            this.tabControl1.Size = new System.Drawing.Size(814, 577);
             this.tabControl1.TabIndex = 9;
             // 
             // tabPageIdentification
@@ -163,7 +163,7 @@
             this.tabPageIdentification.Controls.Add(this.LabelPass);
             this.tabPageIdentification.Location = new System.Drawing.Point(4, 22);
             this.tabPageIdentification.Name = "tabPageIdentification";
-            this.tabPageIdentification.Size = new System.Drawing.Size(596, 464);
+            this.tabPageIdentification.Size = new System.Drawing.Size(806, 551);
             this.tabPageIdentification.TabIndex = 0;
             this.tabPageIdentification.Text = "Identification";
             this.tabPageIdentification.UseVisualStyleBackColor = true;
@@ -190,146 +190,6 @@
             this.tabPageBibliothecaire.TabIndex = 1;
             this.tabPageBibliothecaire.Text = "Bibliothécaire";
             this.tabPageBibliothecaire.UseVisualStyleBackColor = true;
-            // 
-            // tabPageAdherent
-            // 
-            this.tabPageAdherent.Controls.Add(this.dataGridView1);
-            this.tabPageAdherent.Controls.Add(this.button1);
-            this.tabPageAdherent.Controls.Add(this.button2);
-            this.tabPageAdherent.Controls.Add(this.button3);
-            this.tabPageAdherent.Controls.Add(this.label7);
-            this.tabPageAdherent.Controls.Add(this.label8);
-            this.tabPageAdherent.Controls.Add(this.textBox1);
-            this.tabPageAdherent.Controls.Add(this.textBox2);
-            this.tabPageAdherent.Controls.Add(this.textBox3);
-            this.tabPageAdherent.Controls.Add(this.textBox4);
-            this.tabPageAdherent.Controls.Add(this.textBox5);
-            this.tabPageAdherent.Controls.Add(this.label9);
-            this.tabPageAdherent.Controls.Add(this.label10);
-            this.tabPageAdherent.Controls.Add(this.label11);
-            this.tabPageAdherent.Location = new System.Drawing.Point(4, 22);
-            this.tabPageAdherent.Name = "tabPageAdherent";
-            this.tabPageAdherent.Size = new System.Drawing.Size(621, 464);
-            this.tabPageAdherent.TabIndex = 2;
-            this.tabPageAdherent.Text = "Adhérent";
-            this.tabPageAdherent.UseVisualStyleBackColor = true;
-            // 
-            // tabPageLivre
-            // 
-            this.tabPageLivre.Location = new System.Drawing.Point(4, 22);
-            this.tabPageLivre.Name = "tabPageLivre";
-            this.tabPageLivre.Size = new System.Drawing.Size(596, 464);
-            this.tabPageLivre.TabIndex = 3;
-            this.tabPageLivre.Text = "Livre";
-            this.tabPageLivre.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(25, 55);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(16, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Id";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(25, 87);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(33, 13);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Login";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(25, 128);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 13);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Password";
-            // 
-            // textBoxBibliothecaireId
-            // 
-            this.textBoxBibliothecaireId.Location = new System.Drawing.Point(101, 55);
-            this.textBoxBibliothecaireId.Name = "textBoxBibliothecaireId";
-            this.textBoxBibliothecaireId.Size = new System.Drawing.Size(100, 20);
-            this.textBoxBibliothecaireId.TabIndex = 3;
-            // 
-            // textBoxBibliothecaireLogin
-            // 
-            this.textBoxBibliothecaireLogin.Location = new System.Drawing.Point(101, 87);
-            this.textBoxBibliothecaireLogin.Name = "textBoxBibliothecaireLogin";
-            this.textBoxBibliothecaireLogin.Size = new System.Drawing.Size(100, 20);
-            this.textBoxBibliothecaireLogin.TabIndex = 4;
-            // 
-            // textBoxBibliothecairePassword
-            // 
-            this.textBoxBibliothecairePassword.Location = new System.Drawing.Point(101, 121);
-            this.textBoxBibliothecairePassword.Name = "textBoxBibliothecairePassword";
-            this.textBoxBibliothecairePassword.Size = new System.Drawing.Size(100, 20);
-            this.textBoxBibliothecairePassword.TabIndex = 5;
-            // 
-            // textBoxBibliothecaireNom
-            // 
-            this.textBoxBibliothecaireNom.Location = new System.Drawing.Point(101, 166);
-            this.textBoxBibliothecaireNom.Name = "textBoxBibliothecaireNom";
-            this.textBoxBibliothecaireNom.Size = new System.Drawing.Size(100, 20);
-            this.textBoxBibliothecaireNom.TabIndex = 6;
-            // 
-            // textBoxBibliothecairePrenom
-            // 
-            this.textBoxBibliothecairePrenom.Location = new System.Drawing.Point(101, 204);
-            this.textBoxBibliothecairePrenom.Name = "textBoxBibliothecairePrenom";
-            this.textBoxBibliothecairePrenom.Size = new System.Drawing.Size(100, 20);
-            this.textBoxBibliothecairePrenom.TabIndex = 7;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(25, 166);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(29, 13);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Nom";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(25, 204);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(43, 13);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "Prenom";
-            // 
-            // buttonBibliothecaireCreation
-            // 
-            this.buttonBibliothecaireCreation.Location = new System.Drawing.Point(28, 265);
-            this.buttonBibliothecaireCreation.Name = "buttonBibliothecaireCreation";
-            this.buttonBibliothecaireCreation.Size = new System.Drawing.Size(75, 23);
-            this.buttonBibliothecaireCreation.TabIndex = 12;
-            this.buttonBibliothecaireCreation.Text = "Creation";
-            this.buttonBibliothecaireCreation.UseVisualStyleBackColor = true;
-            this.buttonBibliothecaireCreation.Click += new System.EventHandler(this.buttonBibliothecaireCreation_Click);
-            // 
-            // buttonBibliothecaireModification
-            // 
-            this.buttonBibliothecaireModification.Location = new System.Drawing.Point(28, 305);
-            this.buttonBibliothecaireModification.Name = "buttonBibliothecaireModification";
-            this.buttonBibliothecaireModification.Size = new System.Drawing.Size(75, 23);
-            this.buttonBibliothecaireModification.TabIndex = 13;
-            this.buttonBibliothecaireModification.Text = "Modification";
-            this.buttonBibliothecaireModification.UseVisualStyleBackColor = true;
-            // 
-            // buttonBibliothecaireSuppression
-            // 
-            this.buttonBibliothecaireSuppression.Location = new System.Drawing.Point(28, 347);
-            this.buttonBibliothecaireSuppression.Name = "buttonBibliothecaireSuppression";
-            this.buttonBibliothecaireSuppression.Size = new System.Drawing.Size(75, 23);
-            this.buttonBibliothecaireSuppression.TabIndex = 14;
-            this.buttonBibliothecaireSuppression.Text = "Suppression";
-            this.buttonBibliothecaireSuppression.UseVisualStyleBackColor = true;
             // 
             // dataGridViewBibliothecaire
             // 
@@ -363,6 +223,137 @@
             // 
             this.Prenom.HeaderText = "Prenom";
             this.Prenom.Name = "Prenom";
+            // 
+            // buttonBibliothecaireSuppression
+            // 
+            this.buttonBibliothecaireSuppression.Location = new System.Drawing.Point(28, 347);
+            this.buttonBibliothecaireSuppression.Name = "buttonBibliothecaireSuppression";
+            this.buttonBibliothecaireSuppression.Size = new System.Drawing.Size(75, 23);
+            this.buttonBibliothecaireSuppression.TabIndex = 14;
+            this.buttonBibliothecaireSuppression.Text = "Suppression";
+            this.buttonBibliothecaireSuppression.UseVisualStyleBackColor = true;
+            // 
+            // buttonBibliothecaireModification
+            // 
+            this.buttonBibliothecaireModification.Location = new System.Drawing.Point(28, 305);
+            this.buttonBibliothecaireModification.Name = "buttonBibliothecaireModification";
+            this.buttonBibliothecaireModification.Size = new System.Drawing.Size(75, 23);
+            this.buttonBibliothecaireModification.TabIndex = 13;
+            this.buttonBibliothecaireModification.Text = "Modification";
+            this.buttonBibliothecaireModification.UseVisualStyleBackColor = true;
+            // 
+            // buttonBibliothecaireCreation
+            // 
+            this.buttonBibliothecaireCreation.Location = new System.Drawing.Point(28, 265);
+            this.buttonBibliothecaireCreation.Name = "buttonBibliothecaireCreation";
+            this.buttonBibliothecaireCreation.Size = new System.Drawing.Size(75, 23);
+            this.buttonBibliothecaireCreation.TabIndex = 12;
+            this.buttonBibliothecaireCreation.Text = "Creation";
+            this.buttonBibliothecaireCreation.UseVisualStyleBackColor = true;
+            this.buttonBibliothecaireCreation.Click += new System.EventHandler(this.buttonBibliothecaireCreation_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(25, 204);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(43, 13);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Prenom";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(25, 166);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(29, 13);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Nom";
+            // 
+            // textBoxBibliothecairePrenom
+            // 
+            this.textBoxBibliothecairePrenom.Location = new System.Drawing.Point(101, 204);
+            this.textBoxBibliothecairePrenom.Name = "textBoxBibliothecairePrenom";
+            this.textBoxBibliothecairePrenom.Size = new System.Drawing.Size(100, 20);
+            this.textBoxBibliothecairePrenom.TabIndex = 7;
+            // 
+            // textBoxBibliothecaireNom
+            // 
+            this.textBoxBibliothecaireNom.Location = new System.Drawing.Point(101, 166);
+            this.textBoxBibliothecaireNom.Name = "textBoxBibliothecaireNom";
+            this.textBoxBibliothecaireNom.Size = new System.Drawing.Size(100, 20);
+            this.textBoxBibliothecaireNom.TabIndex = 6;
+            // 
+            // textBoxBibliothecairePassword
+            // 
+            this.textBoxBibliothecairePassword.Location = new System.Drawing.Point(101, 121);
+            this.textBoxBibliothecairePassword.Name = "textBoxBibliothecairePassword";
+            this.textBoxBibliothecairePassword.Size = new System.Drawing.Size(100, 20);
+            this.textBoxBibliothecairePassword.TabIndex = 5;
+            // 
+            // textBoxBibliothecaireLogin
+            // 
+            this.textBoxBibliothecaireLogin.Location = new System.Drawing.Point(101, 87);
+            this.textBoxBibliothecaireLogin.Name = "textBoxBibliothecaireLogin";
+            this.textBoxBibliothecaireLogin.Size = new System.Drawing.Size(100, 20);
+            this.textBoxBibliothecaireLogin.TabIndex = 4;
+            // 
+            // textBoxBibliothecaireId
+            // 
+            this.textBoxBibliothecaireId.Location = new System.Drawing.Point(101, 55);
+            this.textBoxBibliothecaireId.Name = "textBoxBibliothecaireId";
+            this.textBoxBibliothecaireId.Size = new System.Drawing.Size(100, 20);
+            this.textBoxBibliothecaireId.TabIndex = 3;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(25, 128);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 13);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Password";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(25, 87);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(33, 13);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Login";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(25, 55);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(16, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Id";
+            // 
+            // tabPageAdherent
+            // 
+            this.tabPageAdherent.Controls.Add(this.dataGridView1);
+            this.tabPageAdherent.Controls.Add(this.button1);
+            this.tabPageAdherent.Controls.Add(this.button2);
+            this.tabPageAdherent.Controls.Add(this.button3);
+            this.tabPageAdherent.Controls.Add(this.label7);
+            this.tabPageAdherent.Controls.Add(this.label8);
+            this.tabPageAdherent.Controls.Add(this.textBox1);
+            this.tabPageAdherent.Controls.Add(this.textBox2);
+            this.tabPageAdherent.Controls.Add(this.textBox3);
+            this.tabPageAdherent.Controls.Add(this.textBox4);
+            this.tabPageAdherent.Controls.Add(this.textBox5);
+            this.tabPageAdherent.Controls.Add(this.label9);
+            this.tabPageAdherent.Controls.Add(this.label10);
+            this.tabPageAdherent.Controls.Add(this.label11);
+            this.tabPageAdherent.Location = new System.Drawing.Point(4, 22);
+            this.tabPageAdherent.Name = "tabPageAdherent";
+            this.tabPageAdherent.Size = new System.Drawing.Size(621, 464);
+            this.tabPageAdherent.TabIndex = 2;
+            this.tabPageAdherent.Text = "Adhérent";
+            this.tabPageAdherent.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
             // 
@@ -504,11 +495,20 @@
             this.label11.TabIndex = 16;
             this.label11.Text = "Id";
             // 
+            // tabPageLivre
+            // 
+            this.tabPageLivre.Location = new System.Drawing.Point(4, 22);
+            this.tabPageLivre.Name = "tabPageLivre";
+            this.tabPageLivre.Size = new System.Drawing.Size(621, 464);
+            this.tabPageLivre.TabIndex = 3;
+            this.tabPageLivre.Text = "Livre";
+            this.tabPageLivre.UseVisualStyleBackColor = true;
+            // 
             // FormBiBliotheque
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(748, 503);
+            this.ClientSize = new System.Drawing.Size(816, 578);
             this.Controls.Add(this.tabControl1);
             this.Name = "FormBiBliotheque";
             this.Text = "Bienvenue à la bibliothèque";
@@ -517,9 +517,9 @@
             this.tabPageIdentification.PerformLayout();
             this.tabPageBibliothecaire.ResumeLayout(false);
             this.tabPageBibliothecaire.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBibliothecaire)).EndInit();
             this.tabPageAdherent.ResumeLayout(false);
             this.tabPageAdherent.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBibliothecaire)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 

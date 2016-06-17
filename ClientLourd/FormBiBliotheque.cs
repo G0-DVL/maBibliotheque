@@ -64,6 +64,10 @@ namespace ClientLourd
             tabControl1.TabPages.Remove(tabPageBibliothecaire);
             tabControl1.TabPages.Remove(tabPageAdherent);
             tabControl1.TabPages.Remove(tabPageLivre);
+
+            //  Pour notre tabControl, nous voulons qu'il soit redimensionné à la taille de notre fenêtre
+            //  Pour cela, nous utilisons des ancres (Anchor) en haut, à gauche
+            tabControl1.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right);
         }
 
         //  Fonction lancée au clic sur le label "Login :" dans le tab d'identification
