@@ -66,7 +66,7 @@ namespace ClientLourd
                 }
                 else
                 {
-                    identificationToolStripMenuItem.Text = oBibliothecaire.bibliothecaire_nom + " " + oBibliothecaire.bibliothecaire_prenom;
+                    identificationToolStripMenuItem.Text = oBibliothecaire.bibliothecaire_prenom + " " + oBibliothecaire.bibliothecaire_nom;
                     adherentToolStripMenuItem.Visible = true;
                     bibliothécaireToolStripMenuItem.Visible = true;
                     livreToolStripMenuItem.Visible = true;
