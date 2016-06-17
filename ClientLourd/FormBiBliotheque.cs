@@ -92,5 +92,10 @@ namespace ClientLourd
         {
             ((TextBox)sender).SelectAll();
         }
+
+        private void buttonBibliothecaireCreation_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
