@@ -43,16 +43,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.PanelLivre = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.bibliothécaireToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seDéconnecterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.menuStrip1.SuspendLayout();
             this.PanelIdentification.SuspendLayout();
             this.PanelAdherent.SuspendLayout();
             this.PanelLivre.SuspendLayout();
-            this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // TextBoxLogin
@@ -200,26 +196,6 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Ici on affiche des bouquins";
             // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(66, 219);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(374, 226);
-            this.tabControl1.TabIndex = 9;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(366, 200);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
             // bibliothécaireToolStripMenuItem
             // 
             this.bibliothécaireToolStripMenuItem.Name = "bibliothécaireToolStripMenuItem";
@@ -233,22 +209,11 @@
             this.seDéconnecterToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.seDéconnecterToolStripMenuItem.Text = "Se déconnecter";
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(366, 200);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
             // FormBiBliotheque
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(618, 503);
-            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.PanelLivre);
             this.Controls.Add(this.PanelAdherent);
             this.Controls.Add(this.PanelIdentification);
@@ -264,7 +229,6 @@
             this.PanelAdherent.PerformLayout();
             this.PanelLivre.ResumeLayout(false);
             this.PanelLivre.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -288,10 +252,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolStripMenuItem livreToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bibliothécaireToolStripMenuItem;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.ToolStripMenuItem seDéconnecterToolStripMenuItem;
-        private System.Windows.Forms.TabPage tabPage2;
     }
 }
 
