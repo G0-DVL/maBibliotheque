@@ -14,8 +14,8 @@
           <Property Name="adherent_prenom" Type="varchar" MaxLength="25" />
           <Property Name="adherent_date_naissance" Type="date" />
           <Property Name="adherent_adresse" Type="varchar" MaxLength="25" />
-          <Property Name="adherent_code_postal" Type="int" />
-          <Property Name="adherent_telephone" Type="int" />
+          <Property Name="adherent_code_postal" Type="varchar" MaxLength="5" />
+          <Property Name="adherent_telephone" Type="varchar" MaxLength="10" />
           <Property Name="adherent_email" Type="varchar" MaxLength="25" />
           <Property Name="adherent_date_inscription" Type="date" />
         </EntityType>
@@ -175,8 +175,8 @@
           <Property Name="adherent_prenom" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="adherent_date_naissance" Type="DateTime" Precision="0" />
           <Property Name="adherent_adresse" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="adherent_code_postal" Type="Int32" />
-          <Property Name="adherent_telephone" Type="Int32" />
+          <Property Name="adherent_code_postal" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="adherent_telephone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="adherent_email" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="adherent_date_inscription" Type="DateTime" Precision="0" />
           <NavigationProperty Name="emprunters" Relationship="Self.FK_emprunter_adherent_ID" FromRole="adherent" ToRole="emprunter" />
