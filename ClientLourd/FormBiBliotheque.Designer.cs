@@ -45,9 +45,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.bibliothécaireToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seDéconnecterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.menuStrip1.SuspendLayout();
             this.PanelIdentification.SuspendLayout();
             this.PanelAdherent.SuspendLayout();
@@ -220,16 +220,6 @@
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(366, 200);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
             // bibliothécaireToolStripMenuItem
             // 
             this.bibliothécaireToolStripMenuItem.Name = "bibliothécaireToolStripMenuItem";
@@ -242,6 +232,16 @@
             this.seDéconnecterToolStripMenuItem.Name = "seDéconnecterToolStripMenuItem";
             this.seDéconnecterToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.seDéconnecterToolStripMenuItem.Text = "Se déconnecter";
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(366, 200);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // FormBiBliotheque
             // 
@@ -290,8 +290,8 @@
         private System.Windows.Forms.ToolStripMenuItem bibliothécaireToolStripMenuItem;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ToolStripMenuItem seDéconnecterToolStripMenuItem;
+        private System.Windows.Forms.TabPage tabPage2;
     }
 }
 

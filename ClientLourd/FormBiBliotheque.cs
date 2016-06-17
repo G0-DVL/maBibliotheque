@@ -25,8 +25,16 @@ namespace ClientLourd
                 if (iCount == 0)
                 {
                     //  MessageBox.Show("On a personne dans la base (y'a quelqu'un ?)");
-                    var monNouveauBibliothecaire = new bibliothecaire { bibliothecaire_ID = 1, bibliothecaire_login = "pouet" }; //  { bibliothecaire_ID = 1, bibliothecaire_login = "pouet" };
+                    var monNouveauBibliothecaire = new bibliothecaire {
+                        bibliothecaire_ID = 1,
+                        bibliothecaire_login = "admin",
+                        bibliothecaire_password = "admin",
+                        bibliothecaire_nom = "par défaut",
+                        bibliothecaire_prenom = "Administrateur"
+                    };
+                    monContext.bibliothecaires.Add(monNouveauBibliothecaire);
                 }
+                monContext.SaveChanges();
             }
         }
 
@@ -42,69 +50,29 @@ namespace ClientLourd
 
         private void ButtonIdentificationValidate_Click(object sender, EventArgs e)
         {
-            //  Pour insérer le premier utilisateur
-            //    insert into bibliothecaire
-            //    (
-            //        bibliothecaire_login,
-            //        bibliothecaire_password,
-            //        bibliothecaire_nom,
-            //        bibliothecaire_prenom
-            //    )
-            //    values
-            //    (
-            //        'admin',
-            //        'admin',
-            //        'admin',
-            //        'admin'
-            //    )
-
-
-            // 127.0.01 est l'adresse localhost du serveur Apache XAMPP
-            // Nous avons créer une base de données nommée "mli"
-            // L'utilisateur par défaut lors de l'installation de XAMPP est "root" sans mot de passe.
-            string connectionString = "SERVER=127.0.0.1; DATABASE=bibliotheque; UID=root; PASSWORD=";
-
-            try
+            using (maBibliothequeEntities cContext = new maBibliothequeEntities())
             {
-                SqlConnection maConnexionSQL = new SqlConnection(connectionString);
+                var oQuery = from bibliothecaire in cContext.bibliothecaires
+                             where
+                                bibliothecaire.bibliothecaire_login == TextBoxLogin.Text
+                                &&
+                                bibliothecaire.bibliothecaire_password == TextBoxPass.Text
+                             select bibliothecaire;
+                var oBibliothecaire = oQuery.FirstOrDefault();
 
-                // Ouverture de la connexion SQL
-                maConnexionSQL.Open();
-
-               // Création d'une commande SQL en fonction de l'objet connection
-               SqlCommand maCommandeSQL = maConnexionSQL.CreateCommand();
-               
-               // Requête SQL
-               maCommandeSQL.CommandText =
-                    "SELECT "+
-                        "bibliothecaire_nom, " +
-                        "bibliothecaire_prenom  " +
-                    "FROM bibliothecaire " +
-                    "WHERE " +
-                         "bibliothecaire_login = '" + TextBoxLogin.Text + "' " +
-                         "AND bibliothecaire_password = '" + TextBoxPass.Text + "'";
-
-                // Exécution de la commande SQL
-                SqlDataReader monReaderSQL = maCommandeSQL.ExecuteReader();
-                if(monReaderSQL.Read())
-                {
-                    adherentToolStripMenuItem.Visible = true;
-                    livreToolStripMenuItem.Visible = true;
-                    PanelIdentification.Visible = false;
-
-                }
-                else
+                if (oBibliothecaire == null)
                 {
                     MessageBox.Show("ACCES REFUSE");
                 }
+                else
+                {
+                    identificationToolStripMenuItem.Text = oBibliothecaire.bibliothecaire_nom + " " + oBibliothecaire.bibliothecaire_prenom;
+                    adherentToolStripMenuItem.Visible = true;
+                    bibliothécaireToolStripMenuItem.Visible = true;
+                    livreToolStripMenuItem.Visible = true;
+                    PanelIdentification.Visible = false;
+                }
 
-                // Fermeture de la connexion
-                maConnexionSQL.Close();
-
-            }
-            catch(Exception eException)
-            {
-                MessageBox.Show("Impossible de se connecter à la base ! ("+eException.Message+")");
             }
         }
 
