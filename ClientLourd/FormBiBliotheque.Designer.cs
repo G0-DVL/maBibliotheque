@@ -43,10 +43,16 @@
             this.label3 = new System.Windows.Forms.Label();
             this.PanelLivre = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.bibliothécaireToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.seDéconnecterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.PanelIdentification.SuspendLayout();
             this.PanelAdherent.SuspendLayout();
             this.PanelLivre.SuspendLayout();
+            this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // TextBoxLogin
@@ -109,6 +115,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.identificationToolStripMenuItem,
+            this.bibliothécaireToolStripMenuItem,
             this.adherentToolStripMenuItem,
             this.livreToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -119,7 +126,10 @@
             // 
             // identificationToolStripMenuItem
             // 
+            this.identificationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.seDéconnecterToolStripMenuItem});
             this.identificationToolStripMenuItem.Name = "identificationToolStripMenuItem";
+            this.identificationToolStripMenuItem.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.identificationToolStripMenuItem.Size = new System.Drawing.Size(89, 20);
             this.identificationToolStripMenuItem.Text = "Identification";
             this.identificationToolStripMenuItem.Click += new System.EventHandler(this.identificationToolStripMenuItem_Click);
@@ -190,11 +200,55 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Ici on affiche des bouquins";
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(66, 219);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(374, 226);
+            this.tabControl1.TabIndex = 9;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(366, 200);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(366, 200);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // bibliothécaireToolStripMenuItem
+            // 
+            this.bibliothécaireToolStripMenuItem.Name = "bibliothécaireToolStripMenuItem";
+            this.bibliothécaireToolStripMenuItem.Size = new System.Drawing.Size(91, 20);
+            this.bibliothécaireToolStripMenuItem.Text = "Bibliothécaire";
+            this.bibliothécaireToolStripMenuItem.Visible = false;
+            // 
+            // seDéconnecterToolStripMenuItem
+            // 
+            this.seDéconnecterToolStripMenuItem.Name = "seDéconnecterToolStripMenuItem";
+            this.seDéconnecterToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.seDéconnecterToolStripMenuItem.Text = "Se déconnecter";
+            // 
             // FormBiBliotheque
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(618, 503);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.PanelLivre);
             this.Controls.Add(this.PanelAdherent);
             this.Controls.Add(this.PanelIdentification);
@@ -210,6 +264,7 @@
             this.PanelAdherent.PerformLayout();
             this.PanelLivre.ResumeLayout(false);
             this.PanelLivre.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -232,6 +287,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolStripMenuItem livreToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bibliothécaireToolStripMenuItem;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.ToolStripMenuItem seDéconnecterToolStripMenuItem;
     }
 }
 
