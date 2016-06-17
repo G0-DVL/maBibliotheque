@@ -176,7 +176,16 @@ namespace ClientLourd
 
             using (maBibliothequeEntities monContext = new maBibliothequeEntities())
             {
-                //  var oAdherent = new adherent { ad };
+                var oAdherent = new adherent {
+                    adherent_nom              = textBoxAdherentNom.Text
+                  , adherent_prenom           = textBoxAdherentPrenom.Text
+                  , adherent_date_naissance   = dateTimePickerAdherentDateNaiss.Value
+                  , adherent_adresse          = textBoxAdherentAdresse.Text
+                  , adherent_code_postal      = textBoxAdherentCodePostal.Text
+                  , adherent_telephone        = textBoxAdherentTelephone.Text
+                  , adherent_email            = textBoxAdherentEmail.Text
+                  , adherent_date_inscription = dateTimePickerAdherentDateInscr.Value
+                };
             }
         }
     }
