@@ -114,10 +114,13 @@ namespace ClientLourd
                 }
                 else
                 {   //  Si le bibliothécaire éxiste dans la base, on lui souhaite le bonjour :)
-                    MessageBox.Show("Bonjour " + oBibliothecaire.bibliothecaire_prenom + " " + oBibliothecaire.bibliothecaire_nom);
+                    tabControlBibliotheque.TabPages[0].Text = oBibliothecaire.bibliothecaire_prenom + " " + oBibliothecaire.bibliothecaire_nom;
                     tabControlBibliotheque.TabPages.Add(oTabPageBibliothecaire);
                     tabControlBibliotheque.TabPages.Add(oTabPageAdherent);
                     tabControlBibliotheque.TabPages.Add(oTabPageLivre);
+                    TextBoxLogin.Enabled = false;
+                    TextBoxPass.Enabled = false;
+                    ButtonIdentificationValidate.Enabled = false;
                 }
 
             }
@@ -160,52 +163,130 @@ namespace ClientLourd
 
         private void buttonAdherentCreation_Click(object sender, EventArgs e)
         {
-            if("" == textBoxAdherentNom.Text
-            || "" == textBoxAdherentPrenom.Text
-            || "" == textBoxAdherentAdresse.Text
-            || "" == textBoxAdherentCodePostal.Text
-            || "" == textBoxAdherentTelephone.Text
-            || "" == textBoxAdherentEmail.Text
-            
-                )
+            string sMessageDErreur = "";
+            try
             {
-                MessageBox.Show("Tous les champs saisis doivent être obligatoires");
-                return;
-            }
-            else if (dateTimePickerAdherentDateInscr.Value >= DateTime.Now)
-            {
-                MessageBox.Show("Vous ne pouvez pas inscrire un adhérent à l'avance !");
-                return;
-            }
-            else if (dateTimePickerAdherentDateNaiss.Value >= DateTime.Now)
-            {
-                MessageBox.Show("Vous ne pouvez pas faire naître un adhérent à l'avance !");
-                return;
-            }
+                if ("" == textBoxAdherentId.Text)
+                {
+                    sMessageDErreur += "\n" + "- Vous devez saisir l'ID de l'adhérent à modifier";
+                }
+                if (dateTimePickerAdherentDateInscr.Value > DateTime.Now)
+                {
+                    sMessageDErreur += "\n" + "- Vous ne pouvez pas inscrire un adhérent à l'avance !";
+                }
+                if (dateTimePickerAdherentDateNaiss.Value > DateTime.Now)
+                {
+                    sMessageDErreur += "\n" + "- Vous ne pouvez pas faire naître un adhérent à l'avance !";
+                }
+                if (dateTimePickerAdherentDateNaiss.Value > dateTimePickerAdherentDateInscr.Value)
+                {
+                    sMessageDErreur += "\n" + "- Vous ne pouvez pas inscrire un adhérent qui n'est pas né !";
+                }
 
-            using (maBibliothequeEntities monContext = new maBibliothequeEntities())
-            {
-                try
+                if ("" != sMessageDErreur)
                 {
-                    var oAdherent = new adherent {
-                        adherent_nom              = textBoxAdherentNom.Text
-                      , adherent_prenom           = textBoxAdherentPrenom.Text
-                      , adherent_date_naissance   = dateTimePickerAdherentDateNaiss.Value
-                      , adherent_adresse          = textBoxAdherentAdresse.Text
-                      , adherent_code_postal      = textBoxAdherentCodePostal.Text
-                      , adherent_telephone        = textBoxAdherentTelephone.Text
-                      , adherent_email            = textBoxAdherentEmail.Text
-                      , adherent_date_inscription = dateTimePickerAdherentDateInscr.Value
-                    };
-                    monContext.adherents.Add(oAdherent);
-                    monContext.SaveChanges();
-                    MessageBox.Show("L'adhérent a bien été crée");
+                    throw new Exception(sMessageDErreur);
                 }
-                catch(Exception eException)
+
+                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
                 {
-                    MessageBox.Show("Impossible de créer l'adhérent !\n"+eException.Message);
+                    var oAdherent = monContext.adherents.Find(int.Parse(textBoxAdherentId.Text));
+                    if (oAdherent == null)
+                    {
+                        throw new Exception("L'adhérent avec un ID " + textBoxAdherentId.Text + " n'éxiste pas !");
+                    }
+
+                    if ("" != textBoxAdherentNom.Text)
+                    {
+                        oAdherent.adherent_nom = textBoxAdherentNom.Text;
+                    }
+                    if ("" != textBoxAdherentPrenom.Text)
+                    {
+                        oAdherent.adherent_prenom = textBoxAdherentPrenom.Text;
+                    }
+                    if (oAdherent.adherent_date_naissance != dateTimePickerAdherentDateNaiss.Value)
+                    {
+                        oAdherent.adherent_date_naissance = dateTimePickerAdherentDateNaiss.Value;
+                    }
+                    if ("" != textBoxAdherentAdresse.Text)
+                    {
+                        oAdherent.adherent_adresse = textBoxAdherentAdresse.Text;
+                    }
+                    if ("" != textBoxAdherentCodePostal.Text)
+                    {
+                        oAdherent.adherent_code_postal = textBoxAdherentCodePostal.Text;
+                    }
+                    if ("" != textBoxAdherentTelephone.Text)
+                    {
+                        oAdherent.adherent_telephone = textBoxAdherentTelephone.Text;
+                    }
+                    if ("" != textBoxAdherentEmail.Text)
+                    {
+                        oAdherent.adherent_email = textBoxAdherentEmail.Text;
+                    }
+                    if (oAdherent.adherent_date_inscription != dateTimePickerAdherentDateInscr.Value)
+                    {
+                        oAdherent.adherent_date_inscription = dateTimePickerAdherentDateInscr.Value;
+                    }
+
+                    monContext.SaveChanges();
+                    MessageBox.Show("L'adhérent a bien été modifié");
+                }
+
+                if ("" == textBoxAdherentNom.Text
+                || "" == textBoxAdherentPrenom.Text
+                || "" == textBoxAdherentAdresse.Text
+                || "" == textBoxAdherentCodePostal.Text
+                || "" == textBoxAdherentTelephone.Text
+                || "" == textBoxAdherentEmail.Text
+
+                    )
+                {
+                    sMessageDErreur += "\n" + "- Tous les champs saisis doivent être obligatoires";
+                }
+                else if (dateTimePickerAdherentDateInscr.Value >= DateTime.Now)
+                {
+                    sMessageDErreur += "\n" + "- Vous ne pouvez pas inscrire un adhérent à l'avance !";
+                }
+                else if (dateTimePickerAdherentDateNaiss.Value >= DateTime.Now)
+                {
+                    sMessageDErreur += "\n" + "- Vous ne pouvez pas faire naître un adhérent à l'avance !";
+                }
+
+                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+                {
+                    try
+                    {
+                        var oAdherent = new adherent
+                        {
+                            adherent_nom = textBoxAdherentNom.Text
+                          , adherent_prenom = textBoxAdherentPrenom.Text
+                          , adherent_date_naissance = dateTimePickerAdherentDateNaiss.Value
+                          , adherent_adresse = textBoxAdherentAdresse.Text
+                          , adherent_code_postal = textBoxAdherentCodePostal.Text
+                          , adherent_telephone = textBoxAdherentTelephone.Text
+                          , adherent_email = textBoxAdherentEmail.Text
+                          , adherent_date_inscription = dateTimePickerAdherentDateInscr.Value
+                        };
+                        monContext.adherents.Add(oAdherent);
+                        monContext.SaveChanges();
+                        MessageBox.Show("L'adhérent a bien été crée");
+                    }
+                    catch (Exception eException)
+                    {
+                        MessageBox.Show("Impossible de créer l'adhérent !\n" + eException.Message);
+                    }
                 }
             }
+            catch (Exception eException)
+            {
+                MessageBox.Show("Impossible de modifier l'adhérent !\n" + eException.Message);
+            }
+        }
+
+        private void buttonAdherentModif_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

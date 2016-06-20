@@ -101,6 +101,7 @@
             this.label16 = new System.Windows.Forms.Label();
             this.textBoxLivreTitre = new System.Windows.Forms.TextBox();
             this.textBoxLivreId = new System.Windows.Forms.TextBox();
+            this.panelIdentification = new System.Windows.Forms.Panel();
             this.tabControlBibliotheque.SuspendLayout();
             this.tabPageIdentification.SuspendLayout();
             this.tabPageBibliothecaire.SuspendLayout();
@@ -109,11 +110,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAdherent)).BeginInit();
             this.tabPageLivre.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLivre)).BeginInit();
+            this.panelIdentification.SuspendLayout();
             this.SuspendLayout();
             // 
             // TextBoxLogin
             // 
-            this.TextBoxLogin.Location = new System.Drawing.Point(261, 183);
+            this.TextBoxLogin.Location = new System.Drawing.Point(48, 31);
             this.TextBoxLogin.Name = "TextBoxLogin";
             this.TextBoxLogin.Size = new System.Drawing.Size(100, 20);
             this.TextBoxLogin.TabIndex = 0;
@@ -123,7 +125,7 @@
             // LabelLogin
             // 
             this.LabelLogin.AutoSize = true;
-            this.LabelLogin.Location = new System.Drawing.Point(216, 186);
+            this.LabelLogin.Location = new System.Drawing.Point(3, 34);
             this.LabelLogin.Name = "LabelLogin";
             this.LabelLogin.Size = new System.Drawing.Size(39, 13);
             this.LabelLogin.TabIndex = 1;
@@ -133,7 +135,7 @@
             // LabelPass
             // 
             this.LabelPass.AutoSize = true;
-            this.LabelPass.Location = new System.Drawing.Point(216, 225);
+            this.LabelPass.Location = new System.Drawing.Point(3, 73);
             this.LabelPass.Name = "LabelPass";
             this.LabelPass.Size = new System.Drawing.Size(36, 13);
             this.LabelPass.TabIndex = 3;
@@ -142,7 +144,7 @@
             // 
             // TextBoxPass
             // 
-            this.TextBoxPass.Location = new System.Drawing.Point(261, 222);
+            this.TextBoxPass.Location = new System.Drawing.Point(48, 70);
             this.TextBoxPass.Name = "TextBoxPass";
             this.TextBoxPass.PasswordChar = '*';
             this.TextBoxPass.Size = new System.Drawing.Size(100, 20);
@@ -153,7 +155,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(216, 152);
+            this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(148, 13);
             this.label1.TabIndex = 4;
@@ -161,7 +163,7 @@
             // 
             // ButtonIdentificationValidate
             // 
-            this.ButtonIdentificationValidate.Location = new System.Drawing.Point(261, 249);
+            this.ButtonIdentificationValidate.Location = new System.Drawing.Point(48, 97);
             this.ButtonIdentificationValidate.Name = "ButtonIdentificationValidate";
             this.ButtonIdentificationValidate.Size = new System.Drawing.Size(75, 23);
             this.ButtonIdentificationValidate.TabIndex = 5;
@@ -183,15 +185,10 @@
             // 
             // tabPageIdentification
             // 
-            this.tabPageIdentification.Controls.Add(this.label1);
-            this.tabPageIdentification.Controls.Add(this.ButtonIdentificationValidate);
-            this.tabPageIdentification.Controls.Add(this.TextBoxLogin);
-            this.tabPageIdentification.Controls.Add(this.TextBoxPass);
-            this.tabPageIdentification.Controls.Add(this.LabelLogin);
-            this.tabPageIdentification.Controls.Add(this.LabelPass);
+            this.tabPageIdentification.Controls.Add(this.panelIdentification);
             this.tabPageIdentification.Location = new System.Drawing.Point(4, 22);
             this.tabPageIdentification.Name = "tabPageIdentification";
-            this.tabPageIdentification.Size = new System.Drawing.Size(621, 464);
+            this.tabPageIdentification.Size = new System.Drawing.Size(736, 511);
             this.tabPageIdentification.TabIndex = 0;
             this.tabPageIdentification.Text = "Identification";
             this.tabPageIdentification.UseVisualStyleBackColor = true;
@@ -214,22 +211,25 @@
             this.tabPageBibliothecaire.Controls.Add(this.label2);
             this.tabPageBibliothecaire.Location = new System.Drawing.Point(4, 22);
             this.tabPageBibliothecaire.Name = "tabPageBibliothecaire";
-            this.tabPageBibliothecaire.Size = new System.Drawing.Size(621, 464);
+            this.tabPageBibliothecaire.Size = new System.Drawing.Size(736, 511);
             this.tabPageBibliothecaire.TabIndex = 1;
             this.tabPageBibliothecaire.Text = "Bibliothécaire";
             this.tabPageBibliothecaire.UseVisualStyleBackColor = true;
             // 
             // dataGridViewBibliothecaire
             // 
+            this.dataGridViewBibliothecaire.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewBibliothecaire.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewBibliothecaire.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
             this.Login,
             this.Nom,
             this.Prenom});
-            this.dataGridViewBibliothecaire.Location = new System.Drawing.Point(226, 64);
+            this.dataGridViewBibliothecaire.Location = new System.Drawing.Point(207, 55);
             this.dataGridViewBibliothecaire.Name = "dataGridViewBibliothecaire";
-            this.dataGridViewBibliothecaire.Size = new System.Drawing.Size(406, 315);
+            this.dataGridViewBibliothecaire.Size = new System.Drawing.Size(526, 453);
             this.dataGridViewBibliothecaire.TabIndex = 15;
             // 
             // Id
@@ -411,6 +411,9 @@
             // 
             // dataGridViewAdherent
             // 
+            this.dataGridViewAdherent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewAdherent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewAdherent.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.AdherentId,
@@ -424,7 +427,7 @@
             this.AdherentDateInscr});
             this.dataGridViewAdherent.Location = new System.Drawing.Point(222, 70);
             this.dataGridViewAdherent.Name = "dataGridViewAdherent";
-            this.dataGridViewAdherent.Size = new System.Drawing.Size(573, 150);
+            this.dataGridViewAdherent.Size = new System.Drawing.Size(508, 434);
             this.dataGridViewAdherent.TabIndex = 39;
             // 
             // AdherentId
@@ -555,6 +558,7 @@
             this.buttonAdherentModif.TabIndex = 27;
             this.buttonAdherentModif.Text = "Modification";
             this.buttonAdherentModif.UseVisualStyleBackColor = true;
+            this.buttonAdherentModif.Click += new System.EventHandler(this.buttonAdherentModif_Click);
             // 
             // buttonAdherentCreation
             // 
@@ -644,21 +648,24 @@
             this.tabPageLivre.Controls.Add(this.textBoxLivreId);
             this.tabPageLivre.Location = new System.Drawing.Point(4, 22);
             this.tabPageLivre.Name = "tabPageLivre";
-            this.tabPageLivre.Size = new System.Drawing.Size(621, 464);
+            this.tabPageLivre.Size = new System.Drawing.Size(736, 511);
             this.tabPageLivre.TabIndex = 3;
             this.tabPageLivre.Text = "Livre";
             this.tabPageLivre.UseVisualStyleBackColor = true;
             // 
             // dataGridViewLivre
             // 
+            this.dataGridViewLivre.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewLivre.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewLivre.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.LivreId,
             this.LivreTitre,
             this.LivreAnneeParution});
-            this.dataGridViewLivre.Location = new System.Drawing.Point(289, 95);
+            this.dataGridViewLivre.Location = new System.Drawing.Point(237, 95);
             this.dataGridViewLivre.Name = "dataGridViewLivre";
-            this.dataGridViewLivre.Size = new System.Drawing.Size(309, 150);
+            this.dataGridViewLivre.Size = new System.Drawing.Size(493, 409);
             this.dataGridViewLivre.TabIndex = 10;
             this.dataGridViewLivre.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewLivre_CellContentClick);
             // 
@@ -754,6 +761,20 @@
             this.textBoxLivreId.Size = new System.Drawing.Size(100, 20);
             this.textBoxLivreId.TabIndex = 0;
             // 
+            // panelIdentification
+            // 
+            this.panelIdentification.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panelIdentification.Controls.Add(this.TextBoxPass);
+            this.panelIdentification.Controls.Add(this.label1);
+            this.panelIdentification.Controls.Add(this.LabelPass);
+            this.panelIdentification.Controls.Add(this.ButtonIdentificationValidate);
+            this.panelIdentification.Controls.Add(this.LabelLogin);
+            this.panelIdentification.Controls.Add(this.TextBoxLogin);
+            this.panelIdentification.Location = new System.Drawing.Point(292, 179);
+            this.panelIdentification.Name = "panelIdentification";
+            this.panelIdentification.Size = new System.Drawing.Size(155, 122);
+            this.panelIdentification.TabIndex = 6;
+            // 
             // FormBiBliotheque
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -764,7 +785,6 @@
             this.Text = "Bienvenue à la bibliothèque";
             this.tabControlBibliotheque.ResumeLayout(false);
             this.tabPageIdentification.ResumeLayout(false);
-            this.tabPageIdentification.PerformLayout();
             this.tabPageBibliothecaire.ResumeLayout(false);
             this.tabPageBibliothecaire.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBibliothecaire)).EndInit();
@@ -774,6 +794,8 @@
             this.tabPageLivre.ResumeLayout(false);
             this.tabPageLivre.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLivre)).EndInit();
+            this.panelIdentification.ResumeLayout(false);
+            this.panelIdentification.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -853,6 +875,7 @@
         private System.Windows.Forms.Button buttonLivreSuppression;
         private System.Windows.Forms.Button buttonLivreModification;
         private System.Windows.Forms.Button buttonLivreCreation;
+        private System.Windows.Forms.Panel panelIdentification;
     }
 }
 
