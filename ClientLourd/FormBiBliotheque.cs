@@ -151,6 +151,8 @@ namespace ClientLourd
         {   //  Nous sélectionnons tout le texte du TextBox
             ((TextBoxBase)sender).SelectAll();
         }
+
+        //  Fonction appellée au clic sur le bouton Création dans le tabPage Bibliothécaire
         private void buttonBibliothecaireCreation_Click(object sender, EventArgs e)
         {
             if ("" == textBoxBibliothecaireLogin.Text
@@ -186,46 +188,96 @@ namespace ClientLourd
             
         }
 
-        private void dataGridViewLivre_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
+        //  Fonction appellée au clic sur le bouton Création dans le tabPage Adhérent
         private void buttonAdherentCreation_Click(object sender, EventArgs e)
-        {
+        {   //  On initialise une variable message d'erreur. Si le message d'erreur reste vide, alors on n'a pas d'erreur
             string sMessageDErreur = "";
             try
             {
-                if ("" == textBoxAdherentId.Text)
-                {
-                    sMessageDErreur += "\n" + "- Vous devez saisir l'ID de l'adhérent à modifier";
+                if ("" == textBoxAdherentNom.Text
+                 || "" == textBoxAdherentPrenom.Text
+                 || "" == textBoxAdherentAdresse.Text
+                 || "" == textBoxAdherentCodePostal.Text
+                 || "" == textBoxAdherentTelephone.Text
+                 || "" == textBoxAdherentEmail.Text
+                    )
+                {   //  Si le moindre de nos controle est vide (hormis ID)
+                    sMessageDErreur += "\n" + "- Tous les champs saisis doivent être obligatoires";
                 }
-                if (dateTimePickerAdherentDateInscr.Value > DateTime.Now)
-                {
+                else if (dateTimePickerAdherentDateInscr.Value > DateTime.Now)
+                {   //  Si la date d'inscription est supérieure à la date du jour
                     sMessageDErreur += "\n" + "- Vous ne pouvez pas inscrire un adhérent à l'avance !";
                 }
-                if (dateTimePickerAdherentDateNaiss.Value > DateTime.Now)
-                {
+                else if (dateTimePickerAdherentDateNaiss.Value > DateTime.Now)
+                {   //  Si la date de naissance est supérieure à la date du jour
                     sMessageDErreur += "\n" + "- Vous ne pouvez pas faire naître un adhérent à l'avance !";
-                }
-                if (dateTimePickerAdherentDateNaiss.Value > dateTimePickerAdherentDateInscr.Value)
-                {
-                    sMessageDErreur += "\n" + "- Vous ne pouvez pas inscrire un adhérent qui n'est pas né !";
                 }
 
                 if ("" != sMessageDErreur)
-                {
+                {   //  Pour le moindre motif d'erreur, nous levons une exception et on interrompt l'éxécution du code
                     throw new Exception(sMessageDErreur);
                 }
 
                 using (maBibliothequeEntities monContext = new maBibliothequeEntities())
-                {
+                {   //  Nous créeons un nouvel adhérent, et utilisons nos TextBox pour alimenter chacune des valeurs
+                    var oAdherent = new adherent
+                    {
+                        adherent_nom = textBoxAdherentNom.Text
+                        , adherent_prenom = textBoxAdherentPrenom.Text
+                        , adherent_date_naissance = dateTimePickerAdherentDateNaiss.Value
+                        , adherent_adresse = textBoxAdherentAdresse.Text
+                        , adherent_code_postal = textBoxAdherentCodePostal.Text
+                        , adherent_telephone = textBoxAdherentTelephone.Text
+                        , adherent_email = textBoxAdherentEmail.Text
+                        , adherent_date_inscription = dateTimePickerAdherentDateInscr.Value
+                    };
+                    monContext.adherents.Add(oAdherent);    //  On ajoute le nouvel adhérent à notre table dans le contexte
+                    monContext.SaveChanges();   //  puis nous sauvegardons le tout dans la base
+                    MessageBox.Show("L'adhérent a bien été crée");
+                }
+            }
+            catch (Exception eException)
+            {
+                MessageBox.Show("Impossible de créer l'adhérent !\n" + eException.Message);
+            }
+        }
+
+        private void buttonAdherentModif_Click(object sender, EventArgs e)
+        {   //  On initialise une variable message d'erreur. Si le message d'erreur reste vide, alors on n'a pas d'erreur
+            string sMessageDErreur = "";
+            try
+            {
+                if ("" == textBoxAdherentId.Text)
+                {   //  Il nous faut obligatoirement l'ID pour continuer
+                    sMessageDErreur += "\n" + "- Vous devez saisir l'ID de l'adhérent à modifier";
+                }
+                if (dateTimePickerAdherentDateInscr.Value > DateTime.Now)
+                {   //  On empêche des valeurs impossibles d'être saisies
+                    sMessageDErreur += "\n" + "- Vous ne pouvez pas modifier la date d'inscription d'un adhérent au delà de la date du jour !";
+                }
+                if (dateTimePickerAdherentDateNaiss.Value > DateTime.Now)
+                {   //  On empêche des valeurs impossibles d'être saisies
+                    sMessageDErreur += "\n" + "- Vous ne pouvez pas faire naître un adhérent à l'avance !";
+                }
+                if (dateTimePickerAdherentDateNaiss.Value > dateTimePickerAdherentDateInscr.Value)
+                {   //  On empêche des valeurs impossibles d'être saisies
+                    sMessageDErreur += "\n" + "- Vous ne pouvez pas inscrire un adhérent qui n'est pas né !";
+                }
+
+                if ("" != sMessageDErreur)
+                {   //  Pour le moindre motif d'erreur, nous levons une exception et on interrompt l'éxécution du code
+                    throw new Exception(sMessageDErreur);
+                }
+
+                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+                {   //  On va rechercher en base si l'ID de notre adhérent éxiste toujours
                     var oAdherent = monContext.adherents.Find(int.Parse(textBoxAdherentId.Text));
                     if (oAdherent == null)
-                    {
+                    {   //  Si on le trouve pas, l'objet est null et on ne modifie rien !
                         throw new Exception("L'adhérent avec un ID " + textBoxAdherentId.Text + " n'éxiste pas !");
                     }
 
+                    //  Pour chacun des champs, on vérifie s'il est vide. S'il ne l'est pas, on me modifie pas sa valeur !
                     if ("" != textBoxAdherentNom.Text)
                     {
                         oAdherent.adherent_nom = textBoxAdherentNom.Text;
@@ -259,64 +311,15 @@ namespace ClientLourd
                         oAdherent.adherent_date_inscription = dateTimePickerAdherentDateInscr.Value;
                     }
 
+                    //  Une fois qu'on a mis à jour toutes les propriétés de l'objet, on n'a plus qu'à sauvegarder le contexte
                     monContext.SaveChanges();
                     MessageBox.Show("L'adhérent a bien été modifié");
                 }
-
-                if ("" == textBoxAdherentNom.Text
-                || "" == textBoxAdherentPrenom.Text
-                || "" == textBoxAdherentAdresse.Text
-                || "" == textBoxAdherentCodePostal.Text
-                || "" == textBoxAdherentTelephone.Text
-                || "" == textBoxAdherentEmail.Text
-
-                    )
-                {
-                    sMessageDErreur += "\n" + "- Tous les champs saisis doivent être obligatoires";
-                }
-                else if (dateTimePickerAdherentDateInscr.Value >= DateTime.Now)
-                {
-                    sMessageDErreur += "\n" + "- Vous ne pouvez pas inscrire un adhérent à l'avance !";
-                }
-                else if (dateTimePickerAdherentDateNaiss.Value >= DateTime.Now)
-                {
-                    sMessageDErreur += "\n" + "- Vous ne pouvez pas faire naître un adhérent à l'avance !";
-                }
-
-                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
-                {
-                    try
-                    {
-                        var oAdherent = new adherent
-                        {
-                            adherent_nom = textBoxAdherentNom.Text
-                          , adherent_prenom = textBoxAdherentPrenom.Text
-                          , adherent_date_naissance = dateTimePickerAdherentDateNaiss.Value
-                          , adherent_adresse = textBoxAdherentAdresse.Text
-                          , adherent_code_postal = textBoxAdherentCodePostal.Text
-                          , adherent_telephone = textBoxAdherentTelephone.Text
-                          , adherent_email = textBoxAdherentEmail.Text
-                          , adherent_date_inscription = dateTimePickerAdherentDateInscr.Value
-                        };
-                        monContext.adherents.Add(oAdherent);
-                        monContext.SaveChanges();
-                        MessageBox.Show("L'adhérent a bien été crée");
-                    }
-                    catch (Exception eException)
-                    {
-                        MessageBox.Show("Impossible de créer l'adhérent !\n" + eException.Message);
-                    }
-                }
             }
-            catch (Exception eException)
+            catch(Exception eException)
             {
                 MessageBox.Show("Impossible de modifier l'adhérent !\n" + eException.Message);
             }
-        }
-
-        private void buttonAdherentModif_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

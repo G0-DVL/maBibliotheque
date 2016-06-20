@@ -36,6 +36,7 @@
             this.ButtonIdentificationValidate = new System.Windows.Forms.Button();
             this.tabControlBibliotheque = new System.Windows.Forms.TabControl();
             this.tabPageIdentification = new System.Windows.Forms.TabPage();
+            this.panelIdentification = new System.Windows.Forms.Panel();
             this.tabPageBibliothecaire = new System.Windows.Forms.TabPage();
             this.dataGridViewBibliothecaire = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -101,16 +102,15 @@
             this.label16 = new System.Windows.Forms.Label();
             this.textBoxLivreTitre = new System.Windows.Forms.TextBox();
             this.textBoxLivreId = new System.Windows.Forms.TextBox();
-            this.panelIdentification = new System.Windows.Forms.Panel();
             this.tabControlBibliotheque.SuspendLayout();
             this.tabPageIdentification.SuspendLayout();
+            this.panelIdentification.SuspendLayout();
             this.tabPageBibliothecaire.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBibliothecaire)).BeginInit();
             this.tabPageAdherent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAdherent)).BeginInit();
             this.tabPageLivre.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLivre)).BeginInit();
-            this.panelIdentification.SuspendLayout();
             this.SuspendLayout();
             // 
             // TextBoxLogin
@@ -192,6 +192,20 @@
             this.tabPageIdentification.TabIndex = 0;
             this.tabPageIdentification.Text = "Identification";
             this.tabPageIdentification.UseVisualStyleBackColor = true;
+            // 
+            // panelIdentification
+            // 
+            this.panelIdentification.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panelIdentification.Controls.Add(this.TextBoxPass);
+            this.panelIdentification.Controls.Add(this.label1);
+            this.panelIdentification.Controls.Add(this.LabelPass);
+            this.panelIdentification.Controls.Add(this.ButtonIdentificationValidate);
+            this.panelIdentification.Controls.Add(this.LabelLogin);
+            this.panelIdentification.Controls.Add(this.TextBoxLogin);
+            this.panelIdentification.Location = new System.Drawing.Point(292, 179);
+            this.panelIdentification.Name = "panelIdentification";
+            this.panelIdentification.Size = new System.Drawing.Size(155, 122);
+            this.panelIdentification.TabIndex = 6;
             // 
             // tabPageBibliothecaire
             // 
@@ -667,7 +681,6 @@
             this.dataGridViewLivre.Name = "dataGridViewLivre";
             this.dataGridViewLivre.Size = new System.Drawing.Size(493, 409);
             this.dataGridViewLivre.TabIndex = 10;
-            this.dataGridViewLivre.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewLivre_CellContentClick);
             // 
             // LivreId
             // 
@@ -761,20 +774,6 @@
             this.textBoxLivreId.Size = new System.Drawing.Size(100, 20);
             this.textBoxLivreId.TabIndex = 0;
             // 
-            // panelIdentification
-            // 
-            this.panelIdentification.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.panelIdentification.Controls.Add(this.TextBoxPass);
-            this.panelIdentification.Controls.Add(this.label1);
-            this.panelIdentification.Controls.Add(this.LabelPass);
-            this.panelIdentification.Controls.Add(this.ButtonIdentificationValidate);
-            this.panelIdentification.Controls.Add(this.LabelLogin);
-            this.panelIdentification.Controls.Add(this.TextBoxLogin);
-            this.panelIdentification.Location = new System.Drawing.Point(292, 179);
-            this.panelIdentification.Name = "panelIdentification";
-            this.panelIdentification.Size = new System.Drawing.Size(155, 122);
-            this.panelIdentification.TabIndex = 6;
-            // 
             // FormBiBliotheque
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -785,6 +784,8 @@
             this.Text = "Bienvenue à la bibliothèque";
             this.tabControlBibliotheque.ResumeLayout(false);
             this.tabPageIdentification.ResumeLayout(false);
+            this.panelIdentification.ResumeLayout(false);
+            this.panelIdentification.PerformLayout();
             this.tabPageBibliothecaire.ResumeLayout(false);
             this.tabPageBibliothecaire.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBibliothecaire)).EndInit();
@@ -794,8 +795,6 @@
             this.tabPageLivre.ResumeLayout(false);
             this.tabPageLivre.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLivre)).EndInit();
-            this.panelIdentification.ResumeLayout(false);
-            this.panelIdentification.PerformLayout();
             this.ResumeLayout(false);
 
         }
