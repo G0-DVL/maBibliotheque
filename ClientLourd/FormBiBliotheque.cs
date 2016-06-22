@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.Entity.Infrastructure;
 
 namespace ClientLourd
 {
@@ -234,7 +235,18 @@ namespace ClientLourd
                     };
                     monContext.adherents.Add(oAdherent);    //  On ajoute le nouvel adhérent à notre table dans le contexte
                     monContext.SaveChanges();   //  puis nous sauvegardons le tout dans la base
-                    MessageBox.Show("L'adhérent a bien été crée");
+
+                    dataGridViewAdherent.Rows.Add(
+                        oAdherent.adherent_ID,
+                        oAdherent.adherent_nom,
+                        oAdherent.adherent_prenom,
+                        oAdherent.adherent_date_naissance,
+                        oAdherent.adherent_adresse,
+                        oAdherent.adherent_code_postal,
+                        oAdherent.adherent_telephone,
+                        oAdherent.adherent_email,
+                        oAdherent.adherent_date_inscription
+                    );
                 }
             }
             catch (Exception eException)
@@ -315,7 +327,26 @@ namespace ClientLourd
 
                     //  Une fois qu'on a mis à jour toutes les propriétés de l'objet, on n'a plus qu'à sauvegarder le contexte
                     monContext.SaveChanges();
-                    MessageBox.Show("L'adhérent a bien été modifié");
+
+                    foreach(DataGridViewRow oDataGridViewRow in dataGridViewAdherent.Rows)
+                    {
+                        if(textBoxAdherentId.Text == oDataGridViewRow.Cells[0].Value.ToString())
+                        {
+                            //  oDataGridViewRow.Cells[0] = textBoxAdherentId.Text;
+                            oDataGridViewRow.SetValues(
+                                oAdherent.adherent_ID.ToString(),
+                                oAdherent.adherent_nom,
+                                oAdherent.adherent_prenom,
+                                oAdherent.adherent_date_naissance,
+                                oAdherent.adherent_adresse,
+                                oAdherent.adherent_code_postal,
+                                oAdherent.adherent_telephone,
+                                oAdherent.adherent_email,
+                                oAdherent.adherent_date_inscription
+                            );
+                            break;
+                        }
+                    }
                 }
             }
             catch(Exception eException)
@@ -349,7 +380,16 @@ namespace ClientLourd
 
                     monContext.adherents.Remove(oAdherent); //  On supprime l'adhérent
                     monContext.SaveChanges();   //  On sauvegarde les données
-                    MessageBox.Show("L'adhérent a bien été supprimé");
+
+                    foreach (DataGridViewRow oDataGridViewRow in dataGridViewAdherent.Rows)
+                    {
+                        if (textBoxAdherentId.Text == oDataGridViewRow.Cells[0].Value.ToString())
+                        {
+                            //  oDataGridViewRow.Cells[0] = textBoxAdherentId.Text;
+                            dataGridViewAdherent.Rows.Remove(oDataGridViewRow);
+                            break;
+                        }
+                    }
                 }
             }
             catch (Exception eException)
@@ -357,7 +397,62 @@ namespace ClientLourd
                 MessageBox.Show("Impossible de supprimer l'adhérent !\n" + eException.Message);
             }
         }
+
+        private void tabPageAdherent_Enter(object sender, EventArgs e)
+        {
+            if ( 0 == dataGridViewAdherent.Rows.Count )
+            {
+                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+                {
+                    var oQuery = from nimportequoi in monContext.adherents select nimportequoi;
+                    var oListResultats = oQuery.ToList();
+                    foreach (adherent oAdherent in oListResultats)
+                    {
+                        dataGridViewAdherent.Rows.Add(
+                            oAdherent.adherent_ID,
+                            oAdherent.adherent_nom,
+                            oAdherent.adherent_prenom,
+                            oAdherent.adherent_date_naissance,
+                            oAdherent.adherent_adresse,
+                            oAdherent.adherent_code_postal,
+                            oAdherent.adherent_telephone,
+                            oAdherent.adherent_email,
+                            oAdherent.adherent_date_inscription
+                        );
+                    }
+                }
+            }
+        }
         #endregion adherent
 
+        private void dataGridViewAdherent_CellStateChanged(object sender, DataGridViewCellStateChangedEventArgs e)
+        {
+            dataGridViewAdherent_StateChanged();
+        }
+
+        private void dataGridViewAdherent_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
+        {
+            dataGridViewAdherent_StateChanged();
+        }
+
+        private void dataGridViewAdherent_StateChanged()
+        {
+            DataGridViewSelectedCellCollection oCellCollection = dataGridViewAdherent.SelectedCells;
+            if (0 == oCellCollection.Count)
+            {
+                return;
+            }
+            DataGridViewCellCollection oRowCells = oCellCollection[0].OwningRow.Cells;
+
+            textBoxAdherentId.Text = oRowCells[0].Value.ToString();
+            textBoxAdherentNom.Text = oRowCells[1].Value.ToString();
+            textBoxAdherentPrenom.Text = oRowCells[2].Value.ToString();
+            dateTimePickerAdherentDateNaiss.Value = (DateTime)oRowCells[3].Value;
+            textBoxAdherentAdresse.Text = oRowCells[4].Value.ToString();
+            textBoxAdherentCodePostal.Text = oRowCells[5].Value.ToString();
+            textBoxAdherentTelephone.Text = oRowCells[6].Value.ToString();
+            textBoxAdherentEmail.Text = oRowCells[7].Value.ToString();
+            dateTimePickerAdherentDateInscr.Value = (DateTime)oRowCells[8].Value;
+        }
     }
 }
