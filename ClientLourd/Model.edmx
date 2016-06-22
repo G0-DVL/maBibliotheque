@@ -72,6 +72,16 @@
           <Property Name="auteur_ID" Type="int" />
           <Property Name="emplacement_ID" Type="int" />
         </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'maBibliotheque.dbo.test' ; en outre, aucune clé primaire valide n'a pu être déduite. Cette table/vue a été exclue. Pour utiliser l'entité, vous devez passer en revue votre schéma, ajouter les clés appropriées et supprimer le commentaire associé.
+        <EntityType Name="test">
+          <Property Name="id" Type="tinyint" />
+        </EntityType>-->
+        <!--Erreurs détectées durant la génération :
+avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'maBibliotheque.dbo.test2' ; en outre, aucune clé primaire valide n'a pu être déduite. Cette table/vue a été exclue. Pour utiliser l'entité, vous devez passer en revue votre schéma, ajouter les clés appropriées et supprimer le commentaire associé.
+        <EntityType Name="test2">
+          <Property Name="id" Type="tinyint" />
+        </EntityType>-->
         <Association Name="FK_emprunter_adherent_ID">
           <End Role="adherent" Type="Self.adherent" Multiplicity="1" />
           <End Role="emprunter" Type="Self.emprunter" Multiplicity="*" />

@@ -563,6 +563,7 @@
             this.buttonAdherentSupp.TabIndex = 28;
             this.buttonAdherentSupp.Text = "Suppression";
             this.buttonAdherentSupp.UseVisualStyleBackColor = true;
+            this.buttonAdherentSupp.Click += new System.EventHandler(this.buttonAdherentSupp_Click);
             // 
             // buttonAdherentModif
             // 

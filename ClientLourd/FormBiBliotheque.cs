@@ -242,6 +242,7 @@ namespace ClientLourd
             }
         }
 
+        //  Fonction appellée au clic sur le bouton Modification dans le tabPage Adhérent
         private void buttonAdherentModif_Click(object sender, EventArgs e)
         {   //  On initialise une variable message d'erreur. Si le message d'erreur reste vide, alors on n'a pas d'erreur
             string sMessageDErreur = "";
@@ -319,6 +320,40 @@ namespace ClientLourd
             catch(Exception eException)
             {
                 MessageBox.Show("Impossible de modifier l'adhérent !\n" + eException.Message);
+            }
+        }
+
+        private void buttonAdherentSupp_Click(object sender, EventArgs e)
+        {   //  On initialise une variable message d'erreur. Si le message d'erreur reste vide, alors on n'a pas d'erreur
+            string sMessageDErreur = "";
+            try
+            {
+                if ("" == textBoxAdherentId.Text)
+                {   //  Il nous faut obligatoirement l'ID pour continuer
+                    sMessageDErreur += "\n" + "- Vous devez saisir l'ID de l'adhérent à supprimer";
+                }
+
+                if ("" != sMessageDErreur)
+                {   //  Pour le moindre motif d'erreur, nous levons une exception et on interrompt l'éxécution du code
+                    throw new Exception(sMessageDErreur);
+                }
+
+                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+                {   //  On va rechercher en base si l'ID de notre adhérent éxiste toujours
+                    var oAdherent = monContext.adherents.Find(int.Parse(textBoxAdherentId.Text));
+                    if (oAdherent == null)
+                    {   //  Si on le trouve pas, l'objet est null et on a rien à supprimer !
+                        throw new Exception("L'adhérent avec un ID " + textBoxAdherentId.Text + " n'éxiste pas !");
+                    }
+
+                    monContext.adherents.Remove(oAdherent); //  On supprime l'adhérent
+                    monContext.SaveChanges();   //  On sauvegarde les données
+                    MessageBox.Show("L'adhérent a bien été supprimé");
+                }
+            }
+            catch (Exception eException)
+            {
+                MessageBox.Show("Impossible de supprimer l'adhérent !\n" + eException.Message);
             }
         }
     }
