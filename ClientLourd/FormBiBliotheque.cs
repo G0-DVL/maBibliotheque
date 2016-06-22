@@ -509,7 +509,6 @@ namespace ClientLourd
                 }
             }
         }
-        #endregion adherent
 
         private void dataGridViewAdherent_CellStateChanged(object sender, DataGridViewCellStateChangedEventArgs e)
         {
@@ -540,5 +539,6 @@ namespace ClientLourd
             textBoxAdherentEmail.Text = oRowCells[7].Value.ToString();
             dateTimePickerAdherentDateInscr.Value = (DateTime)oRowCells[8].Value;
         }
+        #endregion adherent
     }
 }
