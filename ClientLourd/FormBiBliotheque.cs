@@ -356,5 +356,93 @@ namespace ClientLourd
                 MessageBox.Show("Impossible de supprimer l'adhérent !\n" + eException.Message);
             }
         }
+
+        private void buttonBibliothecaireModification_Click(object sender, EventArgs e)
+        {
+            string sMessageDErreur = "";
+            try
+            {
+                if ("" == textBoxBibliothecaireId.Text)
+                {   //  Il nous faut obligatoirement l'ID pour continuer
+                    sMessageDErreur += "\n" + "- Vous devez saisir l'ID du bibliothecaire à modifier";
+                }
+               
+                
+                if ("" != sMessageDErreur)
+                {   //  Pour le moindre motif d'erreur, nous levons une exception et on interrompt l'éxécution du code
+                    throw new Exception(sMessageDErreur);
+                }
+
+                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+                {   //  On va rechercher en base si l'ID de notre bibliothecaire éxiste toujours
+                    var oBibliothecaires = monContext.bibliothecaires.Find(int.Parse(textBoxBibliothecaireId.Text));
+                    if (oBibliothecaires == null)
+                    {   //  Si on le trouve pas, l'objet est null et on ne modifie rien !
+                        throw new Exception("Le bibliothecaire avec un ID " + textBoxBibliothecaireId.Text + " n'éxiste pas !");
+                    }
+
+                    //  Pour chacun des champs, on vérifie s'il est vide. S'il ne l'est pas, on me modifie pas sa valeur !
+                    if ("" != textBoxBibliothecaireNom.Text)
+                    {
+                        oBibliothecaires.bibliothecaire_nom = textBoxBibliothecaireNom.Text;
+                    }
+                    if ("" != textBoxBibliothecairePrenom.Text)
+                    {
+                        oBibliothecaires.bibliothecaire_prenom = textBoxBibliothecairePrenom.Text;
+                    }
+                    if ("" != textBoxBibliothecaireLogin.Text)
+                    {
+                        oBibliothecaires.bibliothecaire_login = textBoxBibliothecaireLogin.Text;
+                    }
+                    if ("" != textBoxBibliothecairePassword.Text)
+                    {
+                        oBibliothecaires.bibliothecaire_password = textBoxBibliothecairePassword.Text;
+                    }
+                    //  Une fois qu'on a mis à jour toutes les propriétés de l'objet, on n'a plus qu'à sauvegarder le contexte
+                    monContext.SaveChanges();
+                    MessageBox.Show("Le bibliothecaire a bien été modifié");
+                }
+            }
+            catch (Exception eException)
+            {
+                MessageBox.Show("Impossible de modifier le bibliothecaire !\n" + eException.Message);
+            }
+        }
+
+        private void buttonBibliothecaireSuppression_Click(object sender, EventArgs e)
+        {
+            string sMessageDErreur = "";
+            try
+            {
+                if ("" == textBoxBibliothecaireId.Text)
+                {   //  Il nous faut obligatoirement l'ID pour continuer
+                    sMessageDErreur += "\n" + "- Vous devez saisir l'ID du bibliothequaire à supprimer";
+                }
+
+                if ("" != sMessageDErreur)
+                {   //  Pour le moindre motif d'erreur, nous levons une exception et on interrompt l'éxécution du code
+                    throw new Exception(sMessageDErreur);
+                }
+
+                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+                {   //  On va rechercher en base si l'ID de notre bibliothecaire éxiste toujours
+                    var oBibliothecaires = monContext.bibliothecaires.Find(int.Parse(textBoxBibliothecaireId.Text));
+                    if (oBibliothecaires == null)
+                    {   //  Si on le trouve pas, l'objet est null et on a rien à supprimer !
+                        throw new Exception("Le bibliothecaire avec un ID " + textBoxBibliothecaireId.Text + " n'éxiste pas !");
+                    }
+
+                    monContext.bibliothecaires.Remove(oBibliothecaires); //  On supprime l'adhérent
+                    monContext.SaveChanges();   //  On sauvegarde les données
+                    MessageBox.Show("Le bibliothecaire a bien été supprimé");
+                }
+            }
+            catch (Exception eException)
+            {
+                MessageBox.Show("Impossible de supprimer le bibliothecaire !\n" + eException.Message);
+            }
+        }
+
     }
 }
+ 

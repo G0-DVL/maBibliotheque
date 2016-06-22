@@ -274,6 +274,7 @@
             this.buttonBibliothecaireSuppression.TabIndex = 14;
             this.buttonBibliothecaireSuppression.Text = "Suppression";
             this.buttonBibliothecaireSuppression.UseVisualStyleBackColor = true;
+            this.buttonBibliothecaireSuppression.Click += new System.EventHandler(this.buttonBibliothecaireSuppression_Click);
             // 
             // buttonBibliothecaireModification
             // 
@@ -283,6 +284,7 @@
             this.buttonBibliothecaireModification.TabIndex = 13;
             this.buttonBibliothecaireModification.Text = "Modification";
             this.buttonBibliothecaireModification.UseVisualStyleBackColor = true;
+            this.buttonBibliothecaireModification.Click += new System.EventHandler(this.buttonBibliothecaireModification_Click);
             // 
             // buttonBibliothecaireCreation
             // 
@@ -439,7 +441,7 @@
             this.AdherentTel,
             this.AdherentEmail,
             this.AdherentDateInscr});
-            this.dataGridViewAdherent.Location = new System.Drawing.Point(222, 70);
+            this.dataGridViewAdherent.Location = new System.Drawing.Point(228, 70);
             this.dataGridViewAdherent.Name = "dataGridViewAdherent";
             this.dataGridViewAdherent.Size = new System.Drawing.Size(508, 434);
             this.dataGridViewAdherent.TabIndex = 39;
