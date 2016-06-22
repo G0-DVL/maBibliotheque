@@ -188,6 +188,7 @@ namespace ClientLourd
             
         }
 
+        #region adherent
         //  Fonction appellée au clic sur le bouton Création dans le tabPage Adhérent
         private void buttonAdherentCreation_Click(object sender, EventArgs e)
         {   //  On initialise une variable message d'erreur. Si le message d'erreur reste vide, alors on n'a pas d'erreur
@@ -356,5 +357,7 @@ namespace ClientLourd
                 MessageBox.Show("Impossible de supprimer l'adhérent !\n" + eException.Message);
             }
         }
+        #endregion adherent
+
     }
 }
