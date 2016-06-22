@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.Entity.Infrastructure;
 
 namespace ClientLourd
 {
@@ -185,9 +186,96 @@ namespace ClientLourd
                     MessageBox.Show("Erreur dans la creation du bibliothecaire " + eException.Message);
                 }          
             }
-            
+
         }
 
+        private void buttonBibliothecaireModification_Click(object sender, EventArgs e)
+        {
+            string sMessageDErreur = "";
+            try
+            {
+                if ("" == textBoxBibliothecaireId.Text)
+                {   //  Il nous faut obligatoirement l'ID pour continuer
+                    sMessageDErreur += "\n" + "- Vous devez saisir l'ID du bibliothecaire à modifier";
+                }
+
+
+                if ("" != sMessageDErreur)
+                {   //  Pour le moindre motif d'erreur, nous levons une exception et on interrompt l'éxécution du code
+                    throw new Exception(sMessageDErreur);
+                }
+
+                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+                {   //  On va rechercher en base si l'ID de notre bibliothecaire éxiste toujours
+                    var oBibliothecaires = monContext.bibliothecaires.Find(int.Parse(textBoxBibliothecaireId.Text));
+                    if (oBibliothecaires == null)
+                    {   //  Si on le trouve pas, l'objet est null et on ne modifie rien !
+                        throw new Exception("Le bibliothecaire avec un ID " + textBoxBibliothecaireId.Text + " n'éxiste pas !");
+                    }
+
+                    //  Pour chacun des champs, on vérifie s'il est vide. S'il ne l'est pas, on me modifie pas sa valeur !
+                    if ("" != textBoxBibliothecaireNom.Text)
+                    {
+                        oBibliothecaires.bibliothecaire_nom = textBoxBibliothecaireNom.Text;
+                    }
+                    if ("" != textBoxBibliothecairePrenom.Text)
+                    {
+                        oBibliothecaires.bibliothecaire_prenom = textBoxBibliothecairePrenom.Text;
+                    }
+                    if ("" != textBoxBibliothecaireLogin.Text)
+                    {
+                        oBibliothecaires.bibliothecaire_login = textBoxBibliothecaireLogin.Text;
+                    }
+                    if ("" != textBoxBibliothecairePassword.Text)
+                    {
+                        oBibliothecaires.bibliothecaire_password = textBoxBibliothecairePassword.Text;
+                    }
+                    //  Une fois qu'on a mis à jour toutes les propriétés de l'objet, on n'a plus qu'à sauvegarder le contexte
+                    monContext.SaveChanges();
+                    MessageBox.Show("Le bibliothecaire a bien été modifié");
+                }
+            }
+            catch (Exception eException)
+            {
+                MessageBox.Show("Impossible de modifier le bibliothecaire !\n" + eException.Message);
+            }
+        }
+
+        private void buttonBibliothecaireSuppression_Click(object sender, EventArgs e)
+        {
+            string sMessageDErreur = "";
+            try
+            {
+                if ("" == textBoxBibliothecaireId.Text)
+                {   //  Il nous faut obligatoirement l'ID pour continuer
+                    sMessageDErreur += "\n" + "- Vous devez saisir l'ID du bibliothequaire à supprimer";
+                }
+
+                if ("" != sMessageDErreur)
+                {   //  Pour le moindre motif d'erreur, nous levons une exception et on interrompt l'éxécution du code
+                    throw new Exception(sMessageDErreur);
+                }
+
+                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+                {   //  On va rechercher en base si l'ID de notre bibliothecaire éxiste toujours
+                    var oBibliothecaires = monContext.bibliothecaires.Find(int.Parse(textBoxBibliothecaireId.Text));
+                    if (oBibliothecaires == null)
+                    {   //  Si on le trouve pas, l'objet est null et on a rien à supprimer !
+                        throw new Exception("Le bibliothecaire avec un ID " + textBoxBibliothecaireId.Text + " n'éxiste pas !");
+                    }
+
+                    monContext.bibliothecaires.Remove(oBibliothecaires); //  On supprime l'adhérent
+                    monContext.SaveChanges();   //  On sauvegarde les données
+                    MessageBox.Show("Le bibliothecaire a bien été supprimé");
+                }
+            }
+            catch (Exception eException)
+            {
+                MessageBox.Show("Impossible de supprimer le bibliothecaire !\n" + eException.Message);
+            }
+        }
+
+        #region adherent
         //  Fonction appellée au clic sur le bouton Création dans le tabPage Adhérent
         private void buttonAdherentCreation_Click(object sender, EventArgs e)
         {   //  On initialise une variable message d'erreur. Si le message d'erreur reste vide, alors on n'a pas d'erreur
@@ -233,7 +321,18 @@ namespace ClientLourd
                     };
                     monContext.adherents.Add(oAdherent);    //  On ajoute le nouvel adhérent à notre table dans le contexte
                     monContext.SaveChanges();   //  puis nous sauvegardons le tout dans la base
-                    MessageBox.Show("L'adhérent a bien été crée");
+
+                    dataGridViewAdherent.Rows.Add(
+                        oAdherent.adherent_ID,
+                        oAdherent.adherent_nom,
+                        oAdherent.adherent_prenom,
+                        oAdherent.adherent_date_naissance,
+                        oAdherent.adherent_adresse,
+                        oAdherent.adherent_code_postal,
+                        oAdherent.adherent_telephone,
+                        oAdherent.adherent_email,
+                        oAdherent.adherent_date_inscription
+                    );
                 }
             }
             catch (Exception eException)
@@ -314,7 +413,26 @@ namespace ClientLourd
 
                     //  Une fois qu'on a mis à jour toutes les propriétés de l'objet, on n'a plus qu'à sauvegarder le contexte
                     monContext.SaveChanges();
-                    MessageBox.Show("L'adhérent a bien été modifié");
+
+                    foreach(DataGridViewRow oDataGridViewRow in dataGridViewAdherent.Rows)
+                    {
+                        if(textBoxAdherentId.Text == oDataGridViewRow.Cells[0].Value.ToString())
+                        {
+                            //  oDataGridViewRow.Cells[0] = textBoxAdherentId.Text;
+                            oDataGridViewRow.SetValues(
+                                oAdherent.adherent_ID.ToString(),
+                                oAdherent.adherent_nom,
+                                oAdherent.adherent_prenom,
+                                oAdherent.adherent_date_naissance,
+                                oAdherent.adherent_adresse,
+                                oAdherent.adherent_code_postal,
+                                oAdherent.adherent_telephone,
+                                oAdherent.adherent_email,
+                                oAdherent.adherent_date_inscription
+                            );
+                            break;
+                        }
+                    }
                 }
             }
             catch(Exception eException)
@@ -348,7 +466,16 @@ namespace ClientLourd
 
                     monContext.adherents.Remove(oAdherent); //  On supprime l'adhérent
                     monContext.SaveChanges();   //  On sauvegarde les données
-                    MessageBox.Show("L'adhérent a bien été supprimé");
+
+                    foreach (DataGridViewRow oDataGridViewRow in dataGridViewAdherent.Rows)
+                    {
+                        if (textBoxAdherentId.Text == oDataGridViewRow.Cells[0].Value.ToString())
+                        {
+                            //  oDataGridViewRow.Cells[0] = textBoxAdherentId.Text;
+                            dataGridViewAdherent.Rows.Remove(oDataGridViewRow);
+                            break;
+                        }
+                    }
                 }
             }
             catch (Exception eException)
@@ -357,92 +484,61 @@ namespace ClientLourd
             }
         }
 
-        private void buttonBibliothecaireModification_Click(object sender, EventArgs e)
+        private void tabPageAdherent_Enter(object sender, EventArgs e)
         {
-            string sMessageDErreur = "";
-            try
+            if ( 0 == dataGridViewAdherent.Rows.Count )
             {
-                if ("" == textBoxBibliothecaireId.Text)
-                {   //  Il nous faut obligatoirement l'ID pour continuer
-                    sMessageDErreur += "\n" + "- Vous devez saisir l'ID du bibliothecaire à modifier";
-                }
-               
-                
-                if ("" != sMessageDErreur)
-                {   //  Pour le moindre motif d'erreur, nous levons une exception et on interrompt l'éxécution du code
-                    throw new Exception(sMessageDErreur);
-                }
-
                 using (maBibliothequeEntities monContext = new maBibliothequeEntities())
-                {   //  On va rechercher en base si l'ID de notre bibliothecaire éxiste toujours
-                    var oBibliothecaires = monContext.bibliothecaires.Find(int.Parse(textBoxBibliothecaireId.Text));
-                    if (oBibliothecaires == null)
-                    {   //  Si on le trouve pas, l'objet est null et on ne modifie rien !
-                        throw new Exception("Le bibliothecaire avec un ID " + textBoxBibliothecaireId.Text + " n'éxiste pas !");
-                    }
-
-                    //  Pour chacun des champs, on vérifie s'il est vide. S'il ne l'est pas, on me modifie pas sa valeur !
-                    if ("" != textBoxBibliothecaireNom.Text)
+                {
+                    var oQuery = from nimportequoi in monContext.adherents select nimportequoi;
+                    var oListResultats = oQuery.ToList();
+                    foreach (adherent oAdherent in oListResultats)
                     {
-                        oBibliothecaires.bibliothecaire_nom = textBoxBibliothecaireNom.Text;
+                        dataGridViewAdherent.Rows.Add(
+                            oAdherent.adherent_ID,
+                            oAdherent.adherent_nom,
+                            oAdherent.adherent_prenom,
+                            oAdherent.adherent_date_naissance,
+                            oAdherent.adherent_adresse,
+                            oAdherent.adherent_code_postal,
+                            oAdherent.adherent_telephone,
+                            oAdherent.adherent_email,
+                            oAdherent.adherent_date_inscription
+                        );
                     }
-                    if ("" != textBoxBibliothecairePrenom.Text)
-                    {
-                        oBibliothecaires.bibliothecaire_prenom = textBoxBibliothecairePrenom.Text;
-                    }
-                    if ("" != textBoxBibliothecaireLogin.Text)
-                    {
-                        oBibliothecaires.bibliothecaire_login = textBoxBibliothecaireLogin.Text;
-                    }
-                    if ("" != textBoxBibliothecairePassword.Text)
-                    {
-                        oBibliothecaires.bibliothecaire_password = textBoxBibliothecairePassword.Text;
-                    }
-                    //  Une fois qu'on a mis à jour toutes les propriétés de l'objet, on n'a plus qu'à sauvegarder le contexte
-                    monContext.SaveChanges();
-                    MessageBox.Show("Le bibliothecaire a bien été modifié");
                 }
-            }
-            catch (Exception eException)
-            {
-                MessageBox.Show("Impossible de modifier le bibliothecaire !\n" + eException.Message);
             }
         }
+        #endregion adherent
 
-        private void buttonBibliothecaireSuppression_Click(object sender, EventArgs e)
+        private void dataGridViewAdherent_CellStateChanged(object sender, DataGridViewCellStateChangedEventArgs e)
         {
-            string sMessageDErreur = "";
-            try
-            {
-                if ("" == textBoxBibliothecaireId.Text)
-                {   //  Il nous faut obligatoirement l'ID pour continuer
-                    sMessageDErreur += "\n" + "- Vous devez saisir l'ID du bibliothequaire à supprimer";
-                }
-
-                if ("" != sMessageDErreur)
-                {   //  Pour le moindre motif d'erreur, nous levons une exception et on interrompt l'éxécution du code
-                    throw new Exception(sMessageDErreur);
-                }
-
-                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
-                {   //  On va rechercher en base si l'ID de notre bibliothecaire éxiste toujours
-                    var oBibliothecaires = monContext.bibliothecaires.Find(int.Parse(textBoxBibliothecaireId.Text));
-                    if (oBibliothecaires == null)
-                    {   //  Si on le trouve pas, l'objet est null et on a rien à supprimer !
-                        throw new Exception("Le bibliothecaire avec un ID " + textBoxBibliothecaireId.Text + " n'éxiste pas !");
-                    }
-
-                    monContext.bibliothecaires.Remove(oBibliothecaires); //  On supprime l'adhérent
-                    monContext.SaveChanges();   //  On sauvegarde les données
-                    MessageBox.Show("Le bibliothecaire a bien été supprimé");
-                }
-            }
-            catch (Exception eException)
-            {
-                MessageBox.Show("Impossible de supprimer le bibliothecaire !\n" + eException.Message);
-            }
+            dataGridViewAdherent_StateChanged();
         }
 
+        private void dataGridViewAdherent_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
+        {
+            dataGridViewAdherent_StateChanged();
+        }
+
+        private void dataGridViewAdherent_StateChanged()
+        {
+            DataGridViewSelectedCellCollection oCellCollection = dataGridViewAdherent.SelectedCells;
+            if (0 == oCellCollection.Count)
+            {
+                return;
+            }
+            DataGridViewCellCollection oRowCells = oCellCollection[0].OwningRow.Cells;
+
+            textBoxAdherentId.Text = oRowCells[0].Value.ToString();
+            textBoxAdherentNom.Text = oRowCells[1].Value.ToString();
+            textBoxAdherentPrenom.Text = oRowCells[2].Value.ToString();
+            dateTimePickerAdherentDateNaiss.Value = (DateTime)oRowCells[3].Value;
+            textBoxAdherentAdresse.Text = oRowCells[4].Value.ToString();
+            textBoxAdherentCodePostal.Text = oRowCells[5].Value.ToString();
+            textBoxAdherentTelephone.Text = oRowCells[6].Value.ToString();
+            textBoxAdherentEmail.Text = oRowCells[7].Value.ToString();
+            dateTimePickerAdherentDateInscr.Value = (DateTime)oRowCells[8].Value;
+        }
     }
 }
- 

@@ -274,7 +274,6 @@
             this.buttonBibliothecaireSuppression.TabIndex = 14;
             this.buttonBibliothecaireSuppression.Text = "Suppression";
             this.buttonBibliothecaireSuppression.UseVisualStyleBackColor = true;
-            this.buttonBibliothecaireSuppression.Click += new System.EventHandler(this.buttonBibliothecaireSuppression_Click);
             // 
             // buttonBibliothecaireModification
             // 
@@ -284,7 +283,6 @@
             this.buttonBibliothecaireModification.TabIndex = 13;
             this.buttonBibliothecaireModification.Text = "Modification";
             this.buttonBibliothecaireModification.UseVisualStyleBackColor = true;
-            this.buttonBibliothecaireModification.Click += new System.EventHandler(this.buttonBibliothecaireModification_Click);
             // 
             // buttonBibliothecaireCreation
             // 
@@ -406,6 +404,7 @@
             this.tabPageAdherent.TabIndex = 2;
             this.tabPageAdherent.Text = "Adhérent";
             this.tabPageAdherent.UseVisualStyleBackColor = true;
+            this.tabPageAdherent.Enter += new System.EventHandler(this.tabPageAdherent_Enter);
             // 
             // dateTimePickerAdherentDateInscr
             // 
@@ -427,6 +426,8 @@
             // 
             // dataGridViewAdherent
             // 
+            this.dataGridViewAdherent.AllowUserToAddRows = false;
+            this.dataGridViewAdherent.AllowUserToDeleteRows = false;
             this.dataGridViewAdherent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -441,10 +442,12 @@
             this.AdherentTel,
             this.AdherentEmail,
             this.AdherentDateInscr});
-            this.dataGridViewAdherent.Location = new System.Drawing.Point(228, 70);
+            this.dataGridViewAdherent.Location = new System.Drawing.Point(207, 70);
             this.dataGridViewAdherent.Name = "dataGridViewAdherent";
             this.dataGridViewAdherent.Size = new System.Drawing.Size(508, 434);
             this.dataGridViewAdherent.TabIndex = 39;
+            this.dataGridViewAdherent.CellStateChanged += new System.Windows.Forms.DataGridViewCellStateChangedEventHandler(this.dataGridViewAdherent_CellStateChanged);
+            this.dataGridViewAdherent.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dataGridViewAdherent_RowStateChanged);
             // 
             // AdherentId
             // 
@@ -458,12 +461,12 @@
             // 
             // AdherentPrenom
             // 
-            this.AdherentPrenom.HeaderText = "Prenom";
+            this.AdherentPrenom.HeaderText = "Prénom";
             this.AdherentPrenom.Name = "AdherentPrenom";
             // 
             // AdherentDateNaiss
             // 
-            this.AdherentDateNaiss.HeaderText = "Date Naissance";
+            this.AdherentDateNaiss.HeaderText = "Date de naissance";
             this.AdherentDateNaiss.Name = "AdherentDateNaiss";
             // 
             // AdherentAdresse
@@ -478,7 +481,7 @@
             // 
             // AdherentTel
             // 
-            this.AdherentTel.HeaderText = "Telephone";
+            this.AdherentTel.HeaderText = "Téléphone";
             this.AdherentTel.Name = "AdherentTel";
             // 
             // AdherentEmail
@@ -488,7 +491,7 @@
             // 
             // AdherentDateInscr
             // 
-            this.AdherentDateInscr.HeaderText = "Date Inscription";
+            this.AdherentDateInscr.HeaderText = "Date d\'inscription";
             this.AdherentDateInscr.Name = "AdherentDateInscr";
             // 
             // textBoxAdherentEmail
@@ -853,15 +856,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DataGridView dataGridViewAdherent;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AdherentId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AdherentNom;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AdherentPrenom;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AdherentDateNaiss;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AdherentAdresse;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AdherentCodePostal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AdherentTel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AdherentEmail;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AdherentDateInscr;
         private System.Windows.Forms.DateTimePicker dateTimePickerAdherentDateInscr;
         private System.Windows.Forms.DateTimePicker dateTimePickerAdherentDateNaiss;
         private System.Windows.Forms.DateTimePicker dateTimePickerLivreAnneeParution;
@@ -878,6 +872,15 @@
         private System.Windows.Forms.Button buttonLivreModification;
         private System.Windows.Forms.Button buttonLivreCreation;
         private System.Windows.Forms.Panel panelIdentification;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AdherentId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AdherentNom;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AdherentPrenom;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AdherentDateNaiss;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AdherentAdresse;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AdherentCodePostal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AdherentTel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AdherentEmail;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AdherentDateInscr;
     }
 }
 
