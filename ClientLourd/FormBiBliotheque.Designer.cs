@@ -229,9 +229,12 @@
             this.tabPageBibliothecaire.TabIndex = 1;
             this.tabPageBibliothecaire.Text = "Bibliothécaire";
             this.tabPageBibliothecaire.UseVisualStyleBackColor = true;
+            this.tabPageBibliothecaire.Enter += new System.EventHandler(this.tabPageBibliothecaire_Enter);
             // 
             // dataGridViewBibliothecaire
             // 
+            this.dataGridViewBibliothecaire.AllowUserToAddRows = false;
+            this.dataGridViewBibliothecaire.AllowUserToDeleteRows = false;
             this.dataGridViewBibliothecaire.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -245,6 +248,8 @@
             this.dataGridViewBibliothecaire.Name = "dataGridViewBibliothecaire";
             this.dataGridViewBibliothecaire.Size = new System.Drawing.Size(526, 453);
             this.dataGridViewBibliothecaire.TabIndex = 15;
+            this.dataGridViewBibliothecaire.CellStateChanged += new System.Windows.Forms.DataGridViewCellStateChangedEventHandler(this.dataGridViewBibliothecaire_CellStateChanged);
+            this.dataGridViewBibliothecaire.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dataGridViewBibliothecaire_RowStateChanged);
             // 
             // Id
             // 
@@ -274,6 +279,7 @@
             this.buttonBibliothecaireSuppression.TabIndex = 14;
             this.buttonBibliothecaireSuppression.Text = "Suppression";
             this.buttonBibliothecaireSuppression.UseVisualStyleBackColor = true;
+            this.buttonBibliothecaireSuppression.Click += new System.EventHandler(this.buttonBibliothecaireSuppression_Click);
             // 
             // buttonBibliothecaireModification
             // 
@@ -283,6 +289,7 @@
             this.buttonBibliothecaireModification.TabIndex = 13;
             this.buttonBibliothecaireModification.Text = "Modification";
             this.buttonBibliothecaireModification.UseVisualStyleBackColor = true;
+            this.buttonBibliothecaireModification.Click += new System.EventHandler(this.buttonBibliothecaireModification_Click);
             // 
             // buttonBibliothecaireCreation
             // 
