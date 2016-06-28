@@ -109,7 +109,7 @@
             this.label16 = new System.Windows.Forms.Label();
             this.textBoxLivreTitre = new System.Windows.Forms.TextBox();
             this.textBoxLivreId = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxLivreEmplacement = new System.Windows.Forms.ComboBox();
             this.label21 = new System.Windows.Forms.Label();
             this.tabControlBibliotheque.SuspendLayout();
             this.tabPageIdentification.SuspendLayout();
@@ -666,7 +666,7 @@
             // tabPageLivre
             // 
             this.tabPageLivre.Controls.Add(this.label21);
-            this.tabPageLivre.Controls.Add(this.comboBox1);
+            this.tabPageLivre.Controls.Add(this.comboBoxLivreEmplacement);
             this.tabPageLivre.Controls.Add(this.comboBoxLivreGenre);
             this.tabPageLivre.Controls.Add(this.comboBoxLivreAuteur);
             this.tabPageLivre.Controls.Add(this.label20);
@@ -694,7 +694,7 @@
             this.comboBoxLivreGenre.Location = new System.Drawing.Point(126, 267);
             this.comboBoxLivreGenre.Name = "comboBoxLivreGenre";
             this.comboBoxLivreGenre.Size = new System.Drawing.Size(105, 21);
-            this.comboBoxLivreGenre.TabIndex = 5;
+            this.comboBoxLivreGenre.TabIndex = 4;
             // 
             // comboBoxLivreAuteur
             // 
@@ -702,16 +702,16 @@
             this.comboBoxLivreAuteur.Location = new System.Drawing.Point(126, 227);
             this.comboBoxLivreAuteur.Name = "comboBoxLivreAuteur";
             this.comboBoxLivreAuteur.Size = new System.Drawing.Size(105, 21);
-            this.comboBoxLivreAuteur.TabIndex = 4;
+            this.comboBoxLivreAuteur.TabIndex = 3;
             // 
             // label20
             // 
             this.label20.AutoSize = true;
             this.label20.Location = new System.Drawing.Point(27, 267);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(71, 13);
+            this.label20.Size = new System.Drawing.Size(36, 13);
             this.label20.TabIndex = 12;
-            this.label20.Text = "Emplacement";
+            this.label20.Text = "Genre";
             // 
             // label19
             // 
@@ -735,10 +735,10 @@
             this.LivreGenreId,
             this.LivreAuteurId,
             this.LivreEmplacementId});
-            this.dataGridViewLivre.Location = new System.Drawing.Point(237, 95);
+            this.dataGridViewLivre.Location = new System.Drawing.Point(253, 95);
             this.dataGridViewLivre.Name = "dataGridViewLivre";
             this.dataGridViewLivre.Size = new System.Drawing.Size(511, 409);
-            this.dataGridViewLivre.TabIndex = 10;
+            this.dataGridViewLivre.TabIndex = 9;
             // 
             // LivreId
             // 
@@ -775,7 +775,7 @@
             this.buttonLivreSuppression.Location = new System.Drawing.Point(32, 440);
             this.buttonLivreSuppression.Name = "buttonLivreSuppression";
             this.buttonLivreSuppression.Size = new System.Drawing.Size(75, 23);
-            this.buttonLivreSuppression.TabIndex = 9;
+            this.buttonLivreSuppression.TabIndex = 8;
             this.buttonLivreSuppression.Text = "Suppression";
             this.buttonLivreSuppression.UseVisualStyleBackColor = true;
             // 
@@ -784,7 +784,7 @@
             this.buttonLivreModification.Location = new System.Drawing.Point(32, 395);
             this.buttonLivreModification.Name = "buttonLivreModification";
             this.buttonLivreModification.Size = new System.Drawing.Size(75, 23);
-            this.buttonLivreModification.TabIndex = 8;
+            this.buttonLivreModification.TabIndex = 7;
             this.buttonLivreModification.Text = "Modification";
             this.buttonLivreModification.UseVisualStyleBackColor = true;
             // 
@@ -793,7 +793,7 @@
             this.buttonLivreCreation.Location = new System.Drawing.Point(32, 352);
             this.buttonLivreCreation.Name = "buttonLivreCreation";
             this.buttonLivreCreation.Size = new System.Drawing.Size(75, 23);
-            this.buttonLivreCreation.TabIndex = 7;
+            this.buttonLivreCreation.TabIndex = 6;
             this.buttonLivreCreation.Text = "Creation";
             this.buttonLivreCreation.UseVisualStyleBackColor = true;
             // 
@@ -804,7 +804,7 @@
             this.dateTimePickerLivreAnneeParution.Location = new System.Drawing.Point(126, 178);
             this.dateTimePickerLivreAnneeParution.Name = "dateTimePickerLivreAnneeParution";
             this.dateTimePickerLivreAnneeParution.Size = new System.Drawing.Size(105, 20);
-            this.dateTimePickerLivreAnneeParution.TabIndex = 3;
+            this.dateTimePickerLivreAnneeParution.TabIndex = 2;
             // 
             // label18
             // 
@@ -847,28 +847,28 @@
             this.textBoxLivreId.Size = new System.Drawing.Size(100, 20);
             this.textBoxLivreId.TabIndex = 0;
             // 
-            // comboBox1
+            // comboBoxLivreEmplacement
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(126, 311);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(105, 21);
-            this.comboBox1.TabIndex = 6;
+            this.comboBoxLivreEmplacement.FormattingEnabled = true;
+            this.comboBoxLivreEmplacement.Location = new System.Drawing.Point(126, 311);
+            this.comboBoxLivreEmplacement.Name = "comboBoxLivreEmplacement";
+            this.comboBoxLivreEmplacement.Size = new System.Drawing.Size(105, 21);
+            this.comboBoxLivreEmplacement.TabIndex = 5;
             // 
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(32, 318);
+            this.label21.Location = new System.Drawing.Point(27, 314);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(36, 13);
+            this.label21.Size = new System.Drawing.Size(71, 13);
             this.label21.TabIndex = 16;
-            this.label21.Text = "Genre";
+            this.label21.Text = "Emplacement";
             // 
             // FormBiBliotheque
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(748, 539);
+            this.ClientSize = new System.Drawing.Size(836, 539);
             this.Controls.Add(this.tabControlBibliotheque);
             this.Name = "FormBiBliotheque";
             this.Text = "Bienvenue à la bibliothèque";
@@ -973,7 +973,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn LivreAuteurId;
         private System.Windows.Forms.DataGridViewTextBoxColumn LivreEmplacementId;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxLivreEmplacement;
     }
 }
 
