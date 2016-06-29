@@ -630,6 +630,61 @@ namespace ClientLourd
         }
         #endregion tabPageAdherent
 
+        #region tabPageLivre
+        private void comboBoxLivreEmplacement_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+            {
+
+            }
+        }
+
+        private void tabPageLivre_Enter(object sender, EventArgs e)
+        {
+            if (0 == dataGridViewLivre.Rows.Count)
+            {
+                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+                {
+                    //  Remplir le dataGrid des livres
+                    var oQuery = from nimportequoi in monContext.livres select nimportequoi;
+                    var oListResultats = oQuery.ToList();
+                    foreach (livre oLivre in oListResultats)
+                    {
+                        dataGridViewLivre.Rows.Add(
+                            oLivre.livre_ID,
+                            oLivre.livre_titre,
+                            oLivre.livre_annee_parution,
+                            oLivre.genre_ID,        //  ça va pas le faire... On est censé retrouver le libellé. pas l'ID !
+                            oLivre.auteur_ID,       //  ça va pas le faire... On est censé retrouver le libellé. pas l'ID !
+                            oLivre.emplacement_ID   //  ça va pas le faire... On est censé retrouver le libellé. pas l'ID !
+                        );
+                    }
+                    //  Remplir les valeurs des combobox
+                }
+            }
+
+            if (0 == comboBoxLivreGenre.Items.Count)
+            {//  On remplit le ComboBox des genres
+
+            }
+
+            if (0 == comboBoxLivreEmplacement.Items.Count)
+            {//  On remplit le ComboBox des emplacements
+                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+                {
+                    var oQuery = from nimportequoi in monContext.emplacements select nimportequoi;
+                    var oListResultats = oQuery.ToList();
+                    foreach (emplacement oEmplacement in oListResultats)
+                    {
+                        comboBoxLivreEmplacement.Items.Add(
+                            oEmplacement.emplacement_libelle
+                        );
+                    }
+                }
+            }
+        }
+        #endregion tabPageLivre
+
         #region tabPageAuteur
 
         //  Fonction appellée au clic sur le bouton Création dans le tabPage Auteur
