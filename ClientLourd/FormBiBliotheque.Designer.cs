@@ -89,6 +89,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.tabPageLivre = new System.Windows.Forms.TabPage();
+            this.label21 = new System.Windows.Forms.Label();
+            this.comboBoxLivreEmplacement = new System.Windows.Forms.ComboBox();
             this.comboBoxLivreGenre = new System.Windows.Forms.ComboBox();
             this.comboBoxLivreAuteur = new System.Windows.Forms.ComboBox();
             this.label20 = new System.Windows.Forms.Label();
@@ -109,8 +111,20 @@
             this.label16 = new System.Windows.Forms.Label();
             this.textBoxLivreTitre = new System.Windows.Forms.TextBox();
             this.textBoxLivreId = new System.Windows.Forms.TextBox();
-            this.comboBoxLivreEmplacement = new System.Windows.Forms.ComboBox();
-            this.label21 = new System.Windows.Forms.Label();
+            this.tabPageAuteur = new System.Windows.Forms.TabPage();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.textBoxAuteurId = new System.Windows.Forms.TextBox();
+            this.textBoxAuteurNom = new System.Windows.Forms.TextBox();
+            this.textBoxAuteurPrenom = new System.Windows.Forms.TextBox();
+            this.buttonAuteurCreation = new System.Windows.Forms.Button();
+            this.buttonAuteurModification = new System.Windows.Forms.Button();
+            this.buttonAuteurSuppression = new System.Windows.Forms.Button();
+            this.dataGridViewAuteur = new System.Windows.Forms.DataGridView();
+            this.AuteurID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AuteurNom = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AuteurPrenom = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControlBibliotheque.SuspendLayout();
             this.tabPageIdentification.SuspendLayout();
             this.panelIdentification.SuspendLayout();
@@ -120,6 +134,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAdherent)).BeginInit();
             this.tabPageLivre.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLivre)).BeginInit();
+            this.tabPageAuteur.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAuteur)).BeginInit();
             this.SuspendLayout();
             // 
             // TextBoxLogin
@@ -186,6 +202,7 @@
             this.tabControlBibliotheque.Controls.Add(this.tabPageBibliothecaire);
             this.tabControlBibliotheque.Controls.Add(this.tabPageAdherent);
             this.tabControlBibliotheque.Controls.Add(this.tabPageLivre);
+            this.tabControlBibliotheque.Controls.Add(this.tabPageAuteur);
             this.tabControlBibliotheque.Location = new System.Drawing.Point(2, 1);
             this.tabControlBibliotheque.Name = "tabControlBibliotheque";
             this.tabControlBibliotheque.SelectedIndex = 0;
@@ -695,6 +712,23 @@
             this.tabPageLivre.Text = "Livre";
             this.tabPageLivre.UseVisualStyleBackColor = true;
             // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(27, 314);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(71, 13);
+            this.label21.TabIndex = 16;
+            this.label21.Text = "Emplacement";
+            // 
+            // comboBoxLivreEmplacement
+            // 
+            this.comboBoxLivreEmplacement.FormattingEnabled = true;
+            this.comboBoxLivreEmplacement.Location = new System.Drawing.Point(126, 311);
+            this.comboBoxLivreEmplacement.Name = "comboBoxLivreEmplacement";
+            this.comboBoxLivreEmplacement.Size = new System.Drawing.Size(105, 21);
+            this.comboBoxLivreEmplacement.TabIndex = 5;
+            // 
             // comboBoxLivreGenre
             // 
             this.comboBoxLivreGenre.FormattingEnabled = true;
@@ -854,22 +888,133 @@
             this.textBoxLivreId.Size = new System.Drawing.Size(100, 20);
             this.textBoxLivreId.TabIndex = 0;
             // 
-            // comboBoxLivreEmplacement
+            // tabPageAuteur
             // 
-            this.comboBoxLivreEmplacement.FormattingEnabled = true;
-            this.comboBoxLivreEmplacement.Location = new System.Drawing.Point(126, 311);
-            this.comboBoxLivreEmplacement.Name = "comboBoxLivreEmplacement";
-            this.comboBoxLivreEmplacement.Size = new System.Drawing.Size(105, 21);
-            this.comboBoxLivreEmplacement.TabIndex = 5;
+            this.tabPageAuteur.Controls.Add(this.dataGridViewAuteur);
+            this.tabPageAuteur.Controls.Add(this.buttonAuteurSuppression);
+            this.tabPageAuteur.Controls.Add(this.buttonAuteurModification);
+            this.tabPageAuteur.Controls.Add(this.buttonAuteurCreation);
+            this.tabPageAuteur.Controls.Add(this.textBoxAuteurPrenom);
+            this.tabPageAuteur.Controls.Add(this.textBoxAuteurNom);
+            this.tabPageAuteur.Controls.Add(this.textBoxAuteurId);
+            this.tabPageAuteur.Controls.Add(this.label24);
+            this.tabPageAuteur.Controls.Add(this.label23);
+            this.tabPageAuteur.Controls.Add(this.label22);
+            this.tabPageAuteur.Location = new System.Drawing.Point(4, 22);
+            this.tabPageAuteur.Name = "tabPageAuteur";
+            this.tabPageAuteur.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageAuteur.Size = new System.Drawing.Size(736, 511);
+            this.tabPageAuteur.TabIndex = 4;
+            this.tabPageAuteur.Text = "Auteur";
+            this.tabPageAuteur.UseVisualStyleBackColor = true;
+            this.tabPageAuteur.Enter += new System.EventHandler(this.tabPageAuteur_Enter);
             // 
-            // label21
+            // label22
             // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(27, 314);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(71, 13);
-            this.label21.TabIndex = 16;
-            this.label21.Text = "Emplacement";
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(42, 67);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(15, 13);
+            this.label22.TabIndex = 0;
+            this.label22.Text = "id";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(42, 104);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(27, 13);
+            this.label23.TabIndex = 1;
+            this.label23.Text = "nom";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(42, 146);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(42, 13);
+            this.label24.TabIndex = 2;
+            this.label24.Text = "prenom";
+            // 
+            // textBoxAuteurId
+            // 
+            this.textBoxAuteurId.Location = new System.Drawing.Point(116, 64);
+            this.textBoxAuteurId.Name = "textBoxAuteurId";
+            this.textBoxAuteurId.Size = new System.Drawing.Size(100, 20);
+            this.textBoxAuteurId.TabIndex = 3;
+            // 
+            // textBoxAuteurNom
+            // 
+            this.textBoxAuteurNom.Location = new System.Drawing.Point(116, 101);
+            this.textBoxAuteurNom.Name = "textBoxAuteurNom";
+            this.textBoxAuteurNom.Size = new System.Drawing.Size(100, 20);
+            this.textBoxAuteurNom.TabIndex = 4;
+            // 
+            // textBoxAuteurPrenom
+            // 
+            this.textBoxAuteurPrenom.Location = new System.Drawing.Point(116, 139);
+            this.textBoxAuteurPrenom.Name = "textBoxAuteurPrenom";
+            this.textBoxAuteurPrenom.Size = new System.Drawing.Size(100, 20);
+            this.textBoxAuteurPrenom.TabIndex = 5;
+            // 
+            // buttonAuteurCreation
+            // 
+            this.buttonAuteurCreation.Location = new System.Drawing.Point(45, 202);
+            this.buttonAuteurCreation.Name = "buttonAuteurCreation";
+            this.buttonAuteurCreation.Size = new System.Drawing.Size(75, 23);
+            this.buttonAuteurCreation.TabIndex = 6;
+            this.buttonAuteurCreation.Text = "Creation";
+            this.buttonAuteurCreation.UseVisualStyleBackColor = true;
+            this.buttonAuteurCreation.Click += new System.EventHandler(this.buttonAuteurCreation_Click);
+            // 
+            // buttonAuteurModification
+            // 
+            this.buttonAuteurModification.Location = new System.Drawing.Point(45, 246);
+            this.buttonAuteurModification.Name = "buttonAuteurModification";
+            this.buttonAuteurModification.Size = new System.Drawing.Size(75, 23);
+            this.buttonAuteurModification.TabIndex = 7;
+            this.buttonAuteurModification.Text = "Modification";
+            this.buttonAuteurModification.UseVisualStyleBackColor = true;
+            this.buttonAuteurModification.Click += new System.EventHandler(this.buttonAuteurModification_Click);
+            // 
+            // buttonAuteurSuppression
+            // 
+            this.buttonAuteurSuppression.Location = new System.Drawing.Point(45, 288);
+            this.buttonAuteurSuppression.Name = "buttonAuteurSuppression";
+            this.buttonAuteurSuppression.Size = new System.Drawing.Size(75, 23);
+            this.buttonAuteurSuppression.TabIndex = 8;
+            this.buttonAuteurSuppression.Text = "Suppression";
+            this.buttonAuteurSuppression.UseVisualStyleBackColor = true;
+            this.buttonAuteurSuppression.Click += new System.EventHandler(this.buttonAuteurSuppression_Click);
+            // 
+            // dataGridViewAuteur
+            // 
+            this.dataGridViewAuteur.AllowUserToAddRows = false;
+            this.dataGridViewAuteur.AllowUserToDeleteRows = false;
+            this.dataGridViewAuteur.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewAuteur.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.AuteurID,
+            this.AuteurNom,
+            this.AuteurPrenom});
+            this.dataGridViewAuteur.Location = new System.Drawing.Point(276, 67);
+            this.dataGridViewAuteur.Name = "dataGridViewAuteur";
+            this.dataGridViewAuteur.Size = new System.Drawing.Size(418, 304);
+            this.dataGridViewAuteur.TabIndex = 9;
+            // 
+            // AuteurID
+            // 
+            this.AuteurID.HeaderText = "ID";
+            this.AuteurID.Name = "AuteurID";
+            // 
+            // AuteurNom
+            // 
+            this.AuteurNom.HeaderText = "Nom";
+            this.AuteurNom.Name = "AuteurNom";
+            // 
+            // AuteurPrenom
+            // 
+            this.AuteurPrenom.HeaderText = "Prenom";
+            this.AuteurPrenom.Name = "AuteurPrenom";
             // 
             // FormBiBliotheque
             // 
@@ -892,6 +1037,9 @@
             this.tabPageLivre.ResumeLayout(false);
             this.tabPageLivre.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLivre)).EndInit();
+            this.tabPageAuteur.ResumeLayout(false);
+            this.tabPageAuteur.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAuteur)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -981,6 +1129,20 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn LivreEmplacementId;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.ComboBox comboBoxLivreEmplacement;
+        private System.Windows.Forms.TabPage tabPageAuteur;
+        private System.Windows.Forms.DataGridView dataGridViewAuteur;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AuteurID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AuteurNom;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AuteurPrenom;
+        private System.Windows.Forms.Button buttonAuteurSuppression;
+        private System.Windows.Forms.Button buttonAuteurModification;
+        private System.Windows.Forms.Button buttonAuteurCreation;
+        private System.Windows.Forms.TextBox textBoxAuteurPrenom;
+        private System.Windows.Forms.TextBox textBoxAuteurNom;
+        private System.Windows.Forms.TextBox textBoxAuteurId;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label22;
     }
 }
 

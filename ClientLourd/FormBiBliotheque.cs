@@ -29,6 +29,7 @@ namespace ClientLourd
         private TabPage oTabPageBibliothecaire;
         private TabPage oTabPageAdherent;
         private TabPage oTabPageLivre;
+        private TabPage oTabPageAuteur;
 
         //  Fonction lancée à la création de la fenêtre (constructeur)
         public FormBiBliotheque()
@@ -62,9 +63,11 @@ namespace ClientLourd
             oTabPageBibliothecaire = tabPageBibliothecaire;
             oTabPageAdherent       = tabPageAdherent;
             oTabPageLivre          = tabPageLivre;
+            oTabPageAuteur         = tabPageAuteur;
             tabControlBibliotheque.TabPages.Remove(tabPageBibliothecaire);
             tabControlBibliotheque.TabPages.Remove(tabPageAdherent);
-            tabControlBibliotheque.TabPages.Remove(tabPageLivre);
+             tabControlBibliotheque.TabPages.Remove(tabPageLivre);
+            tabControlBibliotheque.TabPages.Remove(tabPageAuteur);
 
             //  Pour notre tabControl, nous voulons qu'il soit redimensionné à la taille de notre fenêtre
             //  Pour cela, nous utilisons des ancres (Anchor) en haut, à gauche
@@ -119,6 +122,8 @@ namespace ClientLourd
                     tabControlBibliotheque.TabPages.Add(oTabPageBibliothecaire);
                     tabControlBibliotheque.TabPages.Add(oTabPageAdherent);
                     tabControlBibliotheque.TabPages.Add(oTabPageLivre);
+                    tabControlBibliotheque.TabPages.Add(oTabPageAuteur);
+
                     TextBoxLogin.Enabled = false;
                     TextBoxPass.Enabled = false;
                     ButtonIdentificationValidate.Enabled = false;
@@ -624,5 +629,194 @@ namespace ClientLourd
             dateTimePickerAdherentDateInscr.Value = (DateTime)oRowCells[8].Value;
         }
         #endregion tabPageAdherent
+
+        #region tabPageAuteur
+
+        //  Fonction appellée au clic sur le bouton Création dans le tabPage Auteur
+        private void buttonAuteurCreation_Click(object sender, EventArgs e)
+        {
+            
+            if  ( "" == textBoxAuteurNom.Text
+              || "" == textBoxAuteurPrenom.Text
+                             )
+            {
+                MessageBox.Show("Tous les champs saisis doivent être obligatoires");
+                return;
+            }
+            using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+            {
+                try
+                { // Nous en créeons un nouveau
+                    var monNouveauAuteur = new auteur
+                    {
+                        auteur_nom = textBoxAuteurNom.Text,
+                        auteur_prenom = textBoxAuteurPrenom.Text
+                    };
+                    //  Nous l'ajoutons à la base
+                    monContext.auteurs.Add(monNouveauAuteur);
+                    monContext.SaveChanges();
+
+                    //  Nous rajoutons le nouveau auteur à la DataGridView
+                    dataGridViewAuteur.Rows.Add(
+                        monNouveauAuteur.auteur_ID,
+                        monNouveauAuteur.auteur_nom,
+                        monNouveauAuteur.auteur_prenom
+                    );
+                }
+                catch (Exception eException)
+                {
+                    MessageBox.Show("Erreur dans la creation de l'auteur" + eException.Message);
+                }
+            }
+
+        }
+
+        private void buttonAuteurModification_Click(object sender, EventArgs e)
+        {
+            string sMessageDErreur = "";
+            try
+            {
+                if ("" == textBoxAuteurId.Text)
+                {   //  Il nous faut obligatoirement l'ID pour continuer
+                    sMessageDErreur += "\n" + "- Vous devez saisir l'ID l'auteur à modifier";
+                }
+
+
+                if ("" != sMessageDErreur)
+                {   //  Pour le moindre motif d'erreur, nous levons une exception et on interrompt l'éxécution du code
+                    throw new Exception(sMessageDErreur);
+                }
+
+                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+                {   //  On va rechercher en base si l'ID de notre auteur éxiste toujours
+                    var oAuteurs = monContext.auteurs.Find(int.Parse(textBoxAuteurId.Text));
+                    if (oAuteurs == null)
+                    {   //  Si on le trouve pas, l'objet est null et on ne modifie rien !
+                        throw new Exception("L'auteur avec un ID " + textBoxAuteurId.Text + " n'éxiste pas !");
+                    }
+
+                    //  Pour chacun des champs, on vérifie s'il est vide. S'il ne l'est pas, on me modifie pas sa valeur !
+                    if ("" != textBoxAuteurNom.Text)
+                    {
+                        oAuteurs.auteur_nom = textBoxAuteurNom.Text;
+                    }
+                    if ("" != textBoxAuteurPrenom.Text)
+                    {
+                        oAuteurs.auteur_prenom = textBoxAuteurPrenom.Text;
+                    }
+                    
+                    //  Une fois qu'on a mis à jour toutes les propriétés de l'objet, on n'a plus qu'à sauvegarder le contexte
+                    monContext.SaveChanges();
+
+                    //  Nous recherchons dans la DataGridView le bibliothécaire modifié et nous mettons à jour les cellules
+                    foreach (DataGridViewRow oDataGridViewRow in dataGridViewAuteur.Rows)
+                    {
+                        if (textBoxAuteurId.Text == oDataGridViewRow.Cells[0].Value.ToString())
+                        {
+                            oDataGridViewRow.SetValues(
+                                oAuteurs.auteur_ID.ToString(),
+                                oAuteurs.auteur_nom,
+                                oAuteurs.auteur_prenom
+                            );
+                            break;
+                        }
+                    }
+                }
+            }
+            catch (Exception eException)
+            {
+                MessageBox.Show("Impossible de modifier l'auteur !\n" + eException.Message);
+            }
+        }
+
+        private void buttonAuteurSuppression_Click(object sender, EventArgs e)
+        {
+            string sMessageDErreur = "";
+            try
+            {
+                if ("" == textBoxAuteurId.Text)
+                {   //  Il nous faut obligatoirement l'ID pour continuer
+                    sMessageDErreur += "\n" + "- Vous devez saisir l'ID de l'auteur à supprimer";
+                }
+
+                if ("" != sMessageDErreur)
+                {   //  Pour le moindre motif d'erreur, nous levons une exception et on interrompt l'éxécution du code
+                    throw new Exception(sMessageDErreur);
+                }
+
+                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+                {   //  On va rechercher en base si l'ID de l'auteur éxiste toujours
+                    var oAuteurs = monContext.auteurs.Find(int.Parse(textBoxAuteurId.Text));
+                    if (oAuteurs == null)
+                    {   //  Si on le trouve pas, l'objet est null et on a rien à supprimer !
+                        throw new Exception("L'auteur avec un ID " + textBoxAuteurId.Text + " n'éxiste pas !");
+                    }
+
+                    monContext.auteurs.Remove(oAuteurs); //  On supprime l'adhérent
+                    monContext.SaveChanges();   //  On sauvegarde les données
+
+                    //  Nous recherchons dans la DataGridView l'auteur supprimé et nous l'enlevons du DataGridView
+                    foreach (DataGridViewRow oDataGridViewRow in dataGridViewAuteur.Rows)
+                    {
+                        if (textBoxAuteurId.Text == oDataGridViewRow.Cells[0].Value.ToString())
+                        {
+                            //  oDataGridViewRow.Cells[0] = textBoxAuteurId.Text;
+                            dataGridViewAuteur.Rows.Remove(oDataGridViewRow);
+                            break;
+                        }
+                    }
+                }
+            }
+            catch (Exception eException)
+            {
+                MessageBox.Show("Impossible de supprimer l'auteur !\n" + eException.Message);
+            }
+        }
+
+        private void tabPageAuteur_Enter(object sender, EventArgs e)
+        {
+            if (0 == dataGridViewAuteur.Rows.Count)
+            {
+                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+                {
+                    var oQuery = from nimportequoi in monContext.auteurs select nimportequoi;
+                    var oListResultats = oQuery.ToList();
+                    foreach (auteur oAuteur in oListResultats)
+                    {
+                        dataGridViewAuteur.Rows.Add(
+                            oAuteur.auteur_ID,
+                            oAuteur.auteur_nom,
+                            oAuteur.auteur_prenom
+                        );
+                    }
+                }
+            }
+        }
+
+        private void dataGridViewAuteur_CellStateChanged(object sender, DataGridViewCellStateChangedEventArgs e)
+        {
+            dataGridViewAuteur_StateChanged();
+        }
+
+        private void dataGridViewAuteur_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
+        {
+            dataGridViewAuteur_StateChanged();
+        }
+
+        private void dataGridViewAuteur_StateChanged()
+        {
+            DataGridViewSelectedCellCollection oCellCollection = dataGridViewAuteur.SelectedCells;
+            if (0 == oCellCollection.Count)
+            {
+                return;
+            }
+            DataGridViewCellCollection oRowCells = oCellCollection[0].OwningRow.Cells;
+
+            textBoxAuteurId.Text = oRowCells[0].Value.ToString();
+            textBoxAuteurNom.Text = oRowCells[1].Value.ToString();
+            textBoxAuteurPrenom.Text = oRowCells[2].Value.ToString();
+        }
+
+        #endregion tabPageAuteur
     }
 }
