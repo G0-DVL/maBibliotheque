@@ -21,7 +21,7 @@ namespace ClientLourd
         }
     
         public int genre_ID { get; set; }
-        public Nullable<int> genre_libelle { get; set; }
+        public string genre_libelle { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<livre> livres { get; set; }

@@ -665,6 +665,17 @@ namespace ClientLourd
 
             if (0 == comboBoxLivreGenre.Items.Count)
             {//  On remplit le ComboBox des genres
+                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+                {
+                    var oQuery = from nimportequoi in monContext.genres select nimportequoi;
+                    var oListResultats = oQuery.ToList();
+                    foreach (genre oGenre in oListResultats)
+                    {
+                        comboBoxLivreGenre.Items.Add(
+                            oGenre.genre_libelle
+                        );
+                    }
+                }
 
             }
 

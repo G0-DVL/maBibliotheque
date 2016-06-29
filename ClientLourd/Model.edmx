@@ -10,13 +10,13 @@
             <PropertyRef Name="adherent_ID" />
           </Key>
           <Property Name="adherent_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="adherent_nom" Type="varchar" MaxLength="25" />
-          <Property Name="adherent_prenom" Type="varchar" MaxLength="25" />
+          <Property Name="adherent_nom" Type="varchar" MaxLength="32" />
+          <Property Name="adherent_prenom" Type="varchar" MaxLength="32" />
           <Property Name="adherent_date_naissance" Type="date" />
-          <Property Name="adherent_adresse" Type="varchar" MaxLength="25" />
+          <Property Name="adherent_adresse" Type="varchar" MaxLength="32" />
           <Property Name="adherent_code_postal" Type="varchar" MaxLength="5" />
           <Property Name="adherent_telephone" Type="varchar" MaxLength="10" />
-          <Property Name="adherent_email" Type="varchar" MaxLength="25" />
+          <Property Name="adherent_email" Type="varchar" MaxLength="32" />
           <Property Name="adherent_date_inscription" Type="date" />
         </EntityType>
         <EntityType Name="auteur">
@@ -24,25 +24,25 @@
             <PropertyRef Name="auteur_ID" />
           </Key>
           <Property Name="auteur_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="auteur_nom" Type="varchar" MaxLength="25" />
-          <Property Name="auteur_prenom" Type="varchar" MaxLength="25" />
+          <Property Name="auteur_nom" Type="varchar" MaxLength="32" />
+          <Property Name="auteur_prenom" Type="varchar" MaxLength="32" />
         </EntityType>
         <EntityType Name="bibliothecaire">
           <Key>
             <PropertyRef Name="bibliothecaire_ID" />
           </Key>
           <Property Name="bibliothecaire_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="bibliothecaire_login" Type="varchar" MaxLength="25" />
-          <Property Name="bibliothecaire_password" Type="varchar" MaxLength="25" />
-          <Property Name="bibliothecaire_nom" Type="varchar" MaxLength="25" />
-          <Property Name="bibliothecaire_prenom" Type="varchar" MaxLength="25" />
+          <Property Name="bibliothecaire_login" Type="varchar" MaxLength="32" />
+          <Property Name="bibliothecaire_password" Type="varchar" MaxLength="32" />
+          <Property Name="bibliothecaire_nom" Type="varchar" MaxLength="32" />
+          <Property Name="bibliothecaire_prenom" Type="varchar" MaxLength="32" />
         </EntityType>
         <EntityType Name="emplacement">
           <Key>
             <PropertyRef Name="emplacement_ID" />
           </Key>
           <Property Name="emplacement_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="emplacement_libelle" Type="varchar" MaxLength="25" />
+          <Property Name="emplacement_libelle" Type="varchar" MaxLength="32" />
         </EntityType>
         <EntityType Name="emprunter">
           <Key>
@@ -59,29 +59,19 @@
             <PropertyRef Name="genre_ID" />
           </Key>
           <Property Name="genre_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="genre_libelle" Type="int" />
+          <Property Name="genre_libelle" Type="varchar" MaxLength="32" />
         </EntityType>
         <EntityType Name="livre">
           <Key>
             <PropertyRef Name="livre_ID" />
           </Key>
           <Property Name="livre_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="livre_titre" Type="varchar" MaxLength="25" />
+          <Property Name="livre_titre" Type="varchar" MaxLength="32" />
           <Property Name="livre_annee_parution" Type="date" />
           <Property Name="genre_ID" Type="int" />
           <Property Name="auteur_ID" Type="int" />
           <Property Name="emplacement_ID" Type="int" />
         </EntityType>
-        <!--Erreurs détectées durant la génération :
-avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'maBibliotheque.dbo.test' ; en outre, aucune clé primaire valide n'a pu être déduite. Cette table/vue a été exclue. Pour utiliser l'entité, vous devez passer en revue votre schéma, ajouter les clés appropriées et supprimer le commentaire associé.
-        <EntityType Name="test">
-          <Property Name="id" Type="tinyint" />
-        </EntityType>-->
-        <!--Erreurs détectées durant la génération :
-avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'maBibliotheque.dbo.test2' ; en outre, aucune clé primaire valide n'a pu être déduite. Cette table/vue a été exclue. Pour utiliser l'entité, vous devez passer en revue votre schéma, ajouter les clés appropriées et supprimer le commentaire associé.
-        <EntityType Name="test2">
-          <Property Name="id" Type="tinyint" />
-        </EntityType>-->
         <Association Name="FK_emprunter_adherent_ID">
           <End Role="adherent" Type="Self.adherent" Multiplicity="1" />
           <End Role="emprunter" Type="Self.emprunter" Multiplicity="*" />
@@ -181,13 +171,13 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'maBib
             <PropertyRef Name="adherent_ID" />
           </Key>
           <Property Name="adherent_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="adherent_nom" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="adherent_prenom" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="adherent_nom" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="adherent_prenom" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="adherent_date_naissance" Type="DateTime" Precision="0" />
-          <Property Name="adherent_adresse" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="adherent_adresse" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="adherent_code_postal" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="adherent_telephone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="adherent_email" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="adherent_email" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="adherent_date_inscription" Type="DateTime" Precision="0" />
           <NavigationProperty Name="emprunters" Relationship="Self.FK_emprunter_adherent_ID" FromRole="adherent" ToRole="emprunter" />
         </EntityType>
@@ -196,8 +186,8 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'maBib
             <PropertyRef Name="auteur_ID" />
           </Key>
           <Property Name="auteur_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="auteur_nom" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="auteur_prenom" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="auteur_nom" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="auteur_prenom" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="livres" Relationship="Self.FK_livre_auteur_ID" FromRole="auteur" ToRole="livre" />
         </EntityType>
         <EntityType Name="bibliothecaire">
@@ -205,17 +195,17 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'maBib
             <PropertyRef Name="bibliothecaire_ID" />
           </Key>
           <Property Name="bibliothecaire_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="bibliothecaire_login" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="bibliothecaire_password" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="bibliothecaire_nom" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="bibliothecaire_prenom" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="bibliothecaire_login" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="bibliothecaire_password" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="bibliothecaire_nom" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="bibliothecaire_prenom" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="emplacement">
           <Key>
             <PropertyRef Name="emplacement_ID" />
           </Key>
           <Property Name="emplacement_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="emplacement_libelle" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="emplacement_libelle" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="livres" Relationship="Self.FK_livre_emplacement_ID" FromRole="emplacement" ToRole="livre" />
         </EntityType>
         <EntityType Name="emprunter">
@@ -235,7 +225,7 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'maBib
             <PropertyRef Name="genre_ID" />
           </Key>
           <Property Name="genre_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="genre_libelle" Type="Int32" />
+          <Property Name="genre_libelle" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="livres" Relationship="Self.FK_livre_genre_ID" FromRole="genre" ToRole="livre" />
         </EntityType>
         <EntityType Name="livre">
@@ -243,7 +233,7 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'maBib
             <PropertyRef Name="livre_ID" />
           </Key>
           <Property Name="livre_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="livre_titre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="livre_titre" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="livre_annee_parution" Type="DateTime" Precision="0" />
           <Property Name="genre_ID" Type="Int32" />
           <Property Name="auteur_ID" Type="Int32" />
