@@ -153,6 +153,7 @@ namespace ClientLourd
             ((TextBoxBase)sender).SelectAll();
         }
 
+        #region tabPageBibliothecaire
         //  Fonction appellée au clic sur le bouton Création dans le tabPage Bibliothécaire
         private void buttonBibliothecaireCreation_Click(object sender, EventArgs e)
         {
@@ -179,7 +180,15 @@ namespace ClientLourd
                     //  Nous l'ajoutons à la base
                     monContext.bibliothecaires.Add(monNouveauBibliothecaire);
                     monContext.SaveChanges();
-                    MessageBox.Show("creation du bibliothecaire OK !! ");
+
+                    //  Nous rajoutons le nouveau bibliothécaire à la DataGridView
+                    dataGridViewBibliothecaire.Rows.Add(
+                        monNouveauBibliothecaire.bibliothecaire_ID,
+                        monNouveauBibliothecaire.bibliothecaire_login,
+                        //  monNouveauBibliothecaire.bibliothecaire_password,   //  Nous n'affichons pas la colonne Password !
+                        monNouveauBibliothecaire.bibliothecaire_nom,
+                        monNouveauBibliothecaire.bibliothecaire_prenom
+                    );
                 }
                 catch (Exception eException)
                 {
@@ -232,7 +241,21 @@ namespace ClientLourd
                     }
                     //  Une fois qu'on a mis à jour toutes les propriétés de l'objet, on n'a plus qu'à sauvegarder le contexte
                     monContext.SaveChanges();
-                    MessageBox.Show("Le bibliothecaire a bien été modifié");
+
+                    //  Nous recherchons dans la DataGridView le bibliothécaire modifié et nous mettons à jour les cellules
+                    foreach (DataGridViewRow oDataGridViewRow in dataGridViewBibliothecaire.Rows)
+                    {
+                        if (textBoxBibliothecaireId.Text == oDataGridViewRow.Cells[0].Value.ToString())
+                        {
+                            oDataGridViewRow.SetValues(
+                                oBibliothecaires.bibliothecaire_ID.ToString(),
+                                oBibliothecaires.bibliothecaire_login,
+                                oBibliothecaires.bibliothecaire_nom,
+                                oBibliothecaires.bibliothecaire_prenom
+                            );
+                            break;
+                        }
+                    }
                 }
             }
             catch (Exception eException)
@@ -266,7 +289,17 @@ namespace ClientLourd
 
                     monContext.bibliothecaires.Remove(oBibliothecaires); //  On supprime l'adhérent
                     monContext.SaveChanges();   //  On sauvegarde les données
-                    MessageBox.Show("Le bibliothecaire a bien été supprimé");
+
+                    //  Nous recherchons dans la DataGridView le bibliothécaire supprimé et nous l'enlevons du DataGridView
+                    foreach (DataGridViewRow oDataGridViewRow in dataGridViewBibliothecaire.Rows)
+                    {
+                        if (textBoxBibliothecaireId.Text == oDataGridViewRow.Cells[0].Value.ToString())
+                        {
+                            //  oDataGridViewRow.Cells[0] = textBoxAdherentId.Text;
+                            dataGridViewBibliothecaire.Rows.Remove(oDataGridViewRow);
+                            break;
+                        }
+                    }
                 }
             }
             catch (Exception eException)
@@ -275,7 +308,55 @@ namespace ClientLourd
             }
         }
 
-        #region adherent
+        private void tabPageBibliothecaire_Enter(object sender, EventArgs e)
+        {
+            if (0 == dataGridViewBibliothecaire.Rows.Count)
+            {
+                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+                {
+                    var oQuery = from nimportequoi in monContext.bibliothecaires select nimportequoi;
+                    var oListResultats = oQuery.ToList();
+                    foreach (bibliothecaire oBibliothecaire in oListResultats)
+                    {
+                        dataGridViewBibliothecaire.Rows.Add(
+                            oBibliothecaire.bibliothecaire_ID,
+                            oBibliothecaire.bibliothecaire_login,
+                            oBibliothecaire.bibliothecaire_nom,
+                            oBibliothecaire.bibliothecaire_prenom
+                        );
+                    }
+                }
+            }
+        }
+
+        private void dataGridViewBibliothecaire_CellStateChanged(object sender, DataGridViewCellStateChangedEventArgs e)
+        {
+            dataGridViewBibliothecaire_StateChanged();
+        }
+
+        private void dataGridViewBibliothecaire_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
+        {
+            dataGridViewBibliothecaire_StateChanged();
+        }
+
+        private void dataGridViewBibliothecaire_StateChanged()
+        {
+            DataGridViewSelectedCellCollection oCellCollection = dataGridViewBibliothecaire.SelectedCells;
+            if (0 == oCellCollection.Count)
+            {
+                return;
+            }
+            DataGridViewCellCollection oRowCells = oCellCollection[0].OwningRow.Cells;
+
+            textBoxBibliothecaireId.Text = oRowCells[0].Value.ToString();
+            textBoxBibliothecaireLogin.Text = oRowCells[1].Value.ToString();
+            textBoxBibliothecairePassword.Text = "";    //  On ne récupère pas le mot de passe ! On le met donc à "vide"
+            textBoxBibliothecaireNom.Text = oRowCells[2].Value.ToString();
+            textBoxBibliothecairePrenom.Text = oRowCells[3].Value.ToString();
+        }
+        #endregion tabPageBibliothecaire
+
+        #region tabPageAdherent
         //  Fonction appellée au clic sur le bouton Création dans le tabPage Adhérent
         private void buttonAdherentCreation_Click(object sender, EventArgs e)
         {   //  On initialise une variable message d'erreur. Si le message d'erreur reste vide, alors on n'a pas d'erreur
@@ -322,6 +403,7 @@ namespace ClientLourd
                     monContext.adherents.Add(oAdherent);    //  On ajoute le nouvel adhérent à notre table dans le contexte
                     monContext.SaveChanges();   //  puis nous sauvegardons le tout dans la base
 
+                    //  Nous rajoutons le nouvel adhérent à la DataGridView
                     dataGridViewAdherent.Rows.Add(
                         oAdherent.adherent_ID,
                         oAdherent.adherent_nom,
@@ -414,7 +496,8 @@ namespace ClientLourd
                     //  Une fois qu'on a mis à jour toutes les propriétés de l'objet, on n'a plus qu'à sauvegarder le contexte
                     monContext.SaveChanges();
 
-                    foreach(DataGridViewRow oDataGridViewRow in dataGridViewAdherent.Rows)
+                    //  Nous recherchons dans la DataGridView l'adhérent modifié et nous mettons à jour les cellules
+                    foreach (DataGridViewRow oDataGridViewRow in dataGridViewAdherent.Rows)
                     {
                         if(textBoxAdherentId.Text == oDataGridViewRow.Cells[0].Value.ToString())
                         {
@@ -467,6 +550,7 @@ namespace ClientLourd
                     monContext.adherents.Remove(oAdherent); //  On supprime l'adhérent
                     monContext.SaveChanges();   //  On sauvegarde les données
 
+                    //  Nous recherchons dans la DataGridView l'adhérent supprimé et nous l'enlevons du DataGridView
                     foreach (DataGridViewRow oDataGridViewRow in dataGridViewAdherent.Rows)
                     {
                         if (textBoxAdherentId.Text == oDataGridViewRow.Cells[0].Value.ToString())
@@ -539,6 +623,6 @@ namespace ClientLourd
             textBoxAdherentEmail.Text = oRowCells[7].Value.ToString();
             dateTimePickerAdherentDateInscr.Value = (DateTime)oRowCells[8].Value;
         }
-        #endregion adherent
+        #endregion tabPageAdherent
     }
 }
