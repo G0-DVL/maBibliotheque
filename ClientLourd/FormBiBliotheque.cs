@@ -631,6 +631,52 @@ namespace ClientLourd
         #endregion tabPageAdherent
 
         #region tabPageLivre
+
+        
+                    
+        //  Se produit au clic du bouton suppression dans l'onglet tabPageLivre
+        private void buttonLivreSuppression_Click(object sender, EventArgs e)
+        {
+            string sMessageDErreur = "";
+            try
+            {
+                if ("" == textBoxLivreId.Text)
+                {   //  Il nous faut obligatoirement l'ID pour continuer
+                    sMessageDErreur += "\n" + "- Vous devez saisir l'ID du livre à supprimer";
+                }
+
+                if ("" != sMessageDErreur)
+                {   //  Pour le moindre motif d'erreur, nous levons une exception et on interrompt l'éxécution du code
+                    throw new Exception(sMessageDErreur);
+                }
+
+                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+                {   //  On va rechercher en base si l'ID de notre bibliothecaire éxiste toujours
+                    var oLivre = monContext.livres.Find(int.Parse(textBoxLivreId.Text));
+                    if (oLivre == null)
+                    {   //  Si on le trouve pas, l'objet est null et on a rien à supprimer !
+                        throw new Exception("Le livre avec un ID " + textBoxLivreId.Text + " n'éxiste pas !");
+                    }
+
+                    monContext.livres.Remove(oLivre); //  On supprime le livre
+                    monContext.SaveChanges();   //  On sauvegarde les données
+
+                    //  Nous recherchons dans la DataGridView le livre supprimé et nous l'enlevons du DataGridView
+                    foreach (DataGridViewRow oDataGridViewRow in dataGridViewLivre.Rows)
+                    {
+                        if (textBoxLivreId.Text == oDataGridViewRow.Cells[0].Value.ToString())
+                        {
+                            dataGridViewLivre.Rows.Remove(oDataGridViewRow);
+                            break;
+                        }
+                    }
+                }
+            }
+            catch (Exception eException)
+            {
+                MessageBox.Show("Impossible de supprimer le livre !\n" + eException.Message);
+            }
+        }
         //  Se produit au clic du bouton création dans l'onglet tabPageLivre
         private void buttonLivreCreation_Click(object sender, EventArgs e)
         {   //  On initialise une variable message d'erreur. Si le message d'erreur reste vide, alors on n'a pas d'erreur
