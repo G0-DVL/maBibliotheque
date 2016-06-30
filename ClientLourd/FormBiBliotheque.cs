@@ -631,6 +631,106 @@ namespace ClientLourd
         #endregion tabPageAdherent
 
         #region tabPageLivre
+        //  Se produit au clic du bouton création dans l'onglet tabPageLivre
+        private void buttonLivreCreation_Click(object sender, EventArgs e)
+        {   //  On initialise une variable message d'erreur. Si le message d'erreur reste vide, alors on n'a pas d'erreur
+            string sMessageDErreur = "";
+            try
+            {
+                if ("" == textBoxLivreTitre.Text
+                 || "" == comboBoxLivreAuteurNom.Text
+                 || "" == comboBoxLivreGenre.Text
+                 || "" == comboBoxLivreEmplacement.Text
+                    )
+                {   //  Si le moindre de nos controle est vide (hormis ID)
+                    sMessageDErreur += "\n" + "- Tous les champs saisis doivent être obligatoires";
+                }
+
+                if ("" != sMessageDErreur)
+                {   //  Pour le moindre motif d'erreur, nous levons une exception et on interrompt l'éxécution du code
+                    throw new Exception(sMessageDErreur);
+                }
+
+                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+                {   //  Nous créeons un nouveau livre à partir des données saisies, mais nous devons pour cela nous assurer
+                    //  que les auteurs, genres et emplacements éxistent
+                    var oAuteurQuery = from tableAuteur in monContext.auteurs
+                                 where tableAuteur.auteur_nom == comboBoxLivreAuteurNom.Text
+                                 && tableAuteur.auteur_prenom == comboBoxLivreAuteurPrenom.Text
+                                 select tableAuteur;
+                    auteur oAuteurTrouve = oAuteurQuery.FirstOrDefault();
+                    if (oAuteurTrouve == null)
+                    {
+                        oAuteurTrouve = new auteur
+                        {
+                            auteur_nom = comboBoxLivreAuteurNom.Text,
+                            auteur_prenom = comboBoxLivreAuteurPrenom.Text
+                        };
+                        monContext.auteurs.Add(oAuteurTrouve);
+                        monContext.SaveChanges();
+
+                        dataGridViewAuteur.Rows.Add(
+                            oAuteurTrouve.auteur_ID,
+                            oAuteurTrouve.auteur_nom,
+                            oAuteurTrouve.auteur_prenom
+                        );
+                    }
+
+                    var oGenreQuery = from tableGenre in monContext.genres
+                                      where tableGenre.genre_libelle == comboBoxLivreGenre.Text
+                                      select tableGenre;
+                    genre oGenreTrouve = oGenreQuery.FirstOrDefault();
+                    if (oGenreTrouve == null)
+                    {
+                        oGenreTrouve = new genre
+                        {
+                            genre_libelle = comboBoxLivreGenre.Text
+                        };
+                        monContext.genres.Add(oGenreTrouve);
+                        monContext.SaveChanges();
+                    }
+
+                    var oEmplacementQuery = from tableEmplacement in monContext.emplacements
+                                      where tableEmplacement.emplacement_libelle == comboBoxLivreEmplacement.Text
+                                      select tableEmplacement;
+                    emplacement oEmplacementTrouve = oEmplacementQuery.FirstOrDefault();
+                    if (oEmplacementTrouve == null)
+                    {
+                        oEmplacementTrouve = new emplacement
+                        {
+                            emplacement_libelle = comboBoxLivreEmplacement.Text
+                        };
+                        monContext.emplacements.Add(oEmplacementTrouve);
+                        monContext.SaveChanges();
+                    }
+
+                    var oLivre = new livre
+                    {
+                        livre_titre = textBoxLivreTitre.Text,
+                        livre_annee_parution = dateTimePickerLivreAnneeParution.Value,
+                        auteur_ID = oAuteurTrouve.auteur_ID,
+                        genre_ID = oGenreTrouve.genre_ID,
+                        emplacement_ID = oEmplacementTrouve.emplacement_ID
+                    };
+                    monContext.livres.Add(oLivre);    //  On ajoute le nouveau livre
+                    monContext.SaveChanges();   //  puis nous sauvegardons le tout dans la base
+
+                    //  Nous rajoutons le nouvel adhérent à la DataGridView
+                    dataGridViewLivre.Rows.Add(
+                        oLivre.livre_ID,
+                        oLivre.livre_titre,
+                        oLivre.livre_annee_parution,
+                        oGenreTrouve.genre_libelle,
+                        oAuteurTrouve.auteur_prenom + " " + oAuteurTrouve.auteur_nom,
+                        oEmplacementTrouve.emplacement_libelle
+                    );
+                }
+            }
+            catch (Exception eException)
+            {
+                MessageBox.Show("Impossible de créer le livre !\n" + eException.Message);
+            }
+        }
         private void comboBoxLivreEmplacement_SelectedIndexChanged(object sender, EventArgs e)
         {
             using (maBibliothequeEntities monContext = new maBibliothequeEntities())

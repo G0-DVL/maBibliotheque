@@ -92,7 +92,7 @@
             this.label21 = new System.Windows.Forms.Label();
             this.comboBoxLivreEmplacement = new System.Windows.Forms.ComboBox();
             this.comboBoxLivreGenre = new System.Windows.Forms.ComboBox();
-            this.comboBoxLivreAuteur = new System.Windows.Forms.ComboBox();
+            this.comboBoxLivreAuteurNom = new System.Windows.Forms.ComboBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.dataGridViewLivre = new System.Windows.Forms.DataGridView();
@@ -125,6 +125,7 @@
             this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
+            this.comboBoxLivreAuteurPrenom = new System.Windows.Forms.ComboBox();
             this.tabControlBibliotheque.SuspendLayout();
             this.tabPageIdentification.SuspendLayout();
             this.panelIdentification.SuspendLayout();
@@ -689,10 +690,11 @@
             // 
             // tabPageLivre
             // 
+            this.tabPageLivre.Controls.Add(this.comboBoxLivreAuteurPrenom);
             this.tabPageLivre.Controls.Add(this.label21);
             this.tabPageLivre.Controls.Add(this.comboBoxLivreEmplacement);
             this.tabPageLivre.Controls.Add(this.comboBoxLivreGenre);
-            this.tabPageLivre.Controls.Add(this.comboBoxLivreAuteur);
+            this.tabPageLivre.Controls.Add(this.comboBoxLivreAuteurNom);
             this.tabPageLivre.Controls.Add(this.label20);
             this.tabPageLivre.Controls.Add(this.label19);
             this.tabPageLivre.Controls.Add(this.dataGridViewLivre);
@@ -739,13 +741,13 @@
             this.comboBoxLivreGenre.Size = new System.Drawing.Size(105, 21);
             this.comboBoxLivreGenre.TabIndex = 4;
             // 
-            // comboBoxLivreAuteur
+            // comboBoxLivreAuteurNom
             // 
-            this.comboBoxLivreAuteur.FormattingEnabled = true;
-            this.comboBoxLivreAuteur.Location = new System.Drawing.Point(126, 227);
-            this.comboBoxLivreAuteur.Name = "comboBoxLivreAuteur";
-            this.comboBoxLivreAuteur.Size = new System.Drawing.Size(105, 21);
-            this.comboBoxLivreAuteur.TabIndex = 3;
+            this.comboBoxLivreAuteurNom.FormattingEnabled = true;
+            this.comboBoxLivreAuteurNom.Location = new System.Drawing.Point(89, 224);
+            this.comboBoxLivreAuteurNom.Name = "comboBoxLivreAuteurNom";
+            this.comboBoxLivreAuteurNom.Size = new System.Drawing.Size(70, 21);
+            this.comboBoxLivreAuteurNom.TabIndex = 3;
             // 
             // label20
             // 
@@ -839,6 +841,7 @@
             this.buttonLivreCreation.TabIndex = 7;
             this.buttonLivreCreation.Text = "Creation";
             this.buttonLivreCreation.UseVisualStyleBackColor = true;
+            this.buttonLivreCreation.Click += new System.EventHandler(this.buttonLivreCreation_Click);
             // 
             // dateTimePickerLivreAnneeParution
             // 
@@ -1018,6 +1021,14 @@
             this.label22.TabIndex = 0;
             this.label22.Text = "id";
             // 
+            // comboBoxLivreAuteurPrenom
+            // 
+            this.comboBoxLivreAuteurPrenom.FormattingEnabled = true;
+            this.comboBoxLivreAuteurPrenom.Location = new System.Drawing.Point(165, 224);
+            this.comboBoxLivreAuteurPrenom.Name = "comboBoxLivreAuteurPrenom";
+            this.comboBoxLivreAuteurPrenom.Size = new System.Drawing.Size(70, 21);
+            this.comboBoxLivreAuteurPrenom.TabIndex = 17;
+            // 
             // FormBiBliotheque
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1120,7 +1131,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn AdherentEmail;
         private System.Windows.Forms.DataGridViewTextBoxColumn AdherentDateInscr;
         private System.Windows.Forms.ComboBox comboBoxLivreGenre;
-        private System.Windows.Forms.ComboBox comboBoxLivreAuteur;
+        private System.Windows.Forms.ComboBox comboBoxLivreAuteurNom;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.DataGridViewTextBoxColumn LivreId;
@@ -1145,6 +1156,7 @@
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.ComboBox comboBoxLivreAuteurPrenom;
     }
 }
 
