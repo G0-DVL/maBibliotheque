@@ -632,8 +632,113 @@ namespace ClientLourd
 
         #region tabPageLivre
 
-        
-                    
+        //  Se produit au clic du bouton Modification dans l'onglet tabPageLivre
+
+        private void buttonLivreModification_Click(object sender, EventArgs e)
+        {
+            string sMessageDErreur = "";
+            try
+            {
+                if ("" == textBoxLivreId.Text)
+                {   //  Il nous faut obligatoirement l'ID pour continuer
+                    sMessageDErreur += "\n" + "- Vous devez saisir l'ID du livre à modifier";
+                }
+
+                if ("" != sMessageDErreur)
+                {   //  Pour le moindre motif d'erreur, nous levons une exception et on interrompt l'éxécution du code
+                    throw new Exception(sMessageDErreur);
+                }
+
+                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+                {   //  On va rechercher en base si l'ID de notre bibliothecaire éxiste toujours
+                    var oLivre = monContext.livres.Find(int.Parse(textBoxLivreId.Text));
+                    if (oLivre == null)
+                    {   //  Si on le trouve pas, l'objet est null et on a rien à supprimer !
+                        throw new Exception("Le livre avec un ID " + textBoxLivreId.Text + " n'éxiste pas !");
+                    }
+
+                    foreach(DataGridViewRow oDataGridViewRow in dataGridViewLivre.Rows)
+                    {
+                        if(textBoxLivreId.Text == oDataGridViewRow.Cells[0].Value.ToString())
+                        {
+                            if ("" != textBoxLivreTitre.Text)
+                            {
+                                oLivre.livre_titre = textBoxLivreTitre.Text;
+                                oDataGridViewRow.Cells[1].Value = textBoxLivreTitre.Text;
+                            }
+
+                            oLivre.livre_annee_parution = dateTimePickerLivreAnneeParution.Value;
+                            oDataGridViewRow.Cells[2].Value = dateTimePickerLivreAnneeParution.Value;
+
+                            var oAuteurQuery = from tableAuteur in monContext.auteurs
+                                               where tableAuteur.auteur_nom == comboBoxLivreAuteurNom.Text
+                                               && tableAuteur.auteur_prenom == comboBoxLivreAuteurPrenom.Text
+                                               select tableAuteur;
+                            auteur oAuteurTrouve = oAuteurQuery.FirstOrDefault();
+                            if (oAuteurTrouve == null)
+                            {
+                                oAuteurTrouve = new auteur
+                                {
+                                    auteur_nom = comboBoxLivreAuteurNom.Text,
+                                    auteur_prenom = comboBoxLivreAuteurPrenom.Text
+                                };
+                                monContext.auteurs.Add(oAuteurTrouve);
+                                monContext.SaveChanges();
+
+                                dataGridViewAuteur.Rows.Add(
+                                    oAuteurTrouve.auteur_ID,
+                                    oAuteurTrouve.auteur_nom,
+                                    oAuteurTrouve.auteur_prenom
+                                );
+                            }
+                            oLivre.auteur_ID = oAuteurTrouve.auteur_ID;
+                            oDataGridViewRow.Cells[4].Value = oAuteurTrouve.auteur_prenom + " " + oAuteurTrouve.auteur_nom;
+
+                            var oGenreQuery = from tableGenre in monContext.genres
+                                              where tableGenre.genre_libelle == comboBoxLivreGenre.Text
+                                              select tableGenre;
+                            genre oGenreTrouve = oGenreQuery.FirstOrDefault();
+                            if (oGenreTrouve == null)
+                            {
+                                oGenreTrouve = new genre
+                                {
+                                    genre_libelle = comboBoxLivreGenre.Text
+                                };
+                                monContext.genres.Add(oGenreTrouve);
+                                monContext.SaveChanges();
+                            }
+                            oLivre.genre_ID = oGenreTrouve.genre_ID;
+                            oDataGridViewRow.Cells[3].Value = oGenreTrouve.genre_libelle;
+
+                            var oEmplacementQuery = from tableEmplacement in monContext.emplacements
+                                                    where tableEmplacement.emplacement_libelle == comboBoxLivreEmplacement.Text
+                                                    select tableEmplacement;
+                            emplacement oEmplacementTrouve = oEmplacementQuery.FirstOrDefault();
+                            if (oEmplacementTrouve == null)
+                            {
+                                oEmplacementTrouve = new emplacement
+                                {
+                                    emplacement_libelle = comboBoxLivreEmplacement.Text
+                                };
+                                monContext.emplacements.Add(oEmplacementTrouve);
+                                monContext.SaveChanges();
+                            }
+                            oLivre.emplacement_ID = oEmplacementTrouve.emplacement_ID;
+                            oDataGridViewRow.Cells[5].Value = oEmplacementTrouve.emplacement_libelle;
+
+                            break;
+                        }
+                    }
+
+                    monContext.SaveChanges();   //  On sauvegarde les données
+                }
+            }
+            catch (Exception eException)
+            {
+                MessageBox.Show("Impossible de modifier le livre !\n" + eException.Message);
+            }
+        }
+
         //  Se produit au clic du bouton suppression dans l'onglet tabPageLivre
         private void buttonLivreSuppression_Click(object sender, EventArgs e)
         {
@@ -720,6 +825,8 @@ namespace ClientLourd
                             oAuteurTrouve.auteur_nom,
                             oAuteurTrouve.auteur_prenom
                         );
+                        comboBoxLivreAuteurNom.Items.Add(oAuteurTrouve.auteur_nom);
+                        comboBoxLivreAuteurPrenom.Items.Add(oAuteurTrouve.auteur_prenom);
                     }
 
                     var oGenreQuery = from tableGenre in monContext.genres
@@ -734,6 +841,9 @@ namespace ClientLourd
                         };
                         monContext.genres.Add(oGenreTrouve);
                         monContext.SaveChanges();
+                        comboBoxLivreGenre.Items.Add(
+                            oGenreTrouve.genre_libelle
+                        );
                     }
 
                     var oEmplacementQuery = from tableEmplacement in monContext.emplacements
@@ -748,6 +858,9 @@ namespace ClientLourd
                         };
                         monContext.emplacements.Add(oEmplacementTrouve);
                         monContext.SaveChanges();
+                        comboBoxLivreEmplacement.Items.Add(
+                            oEmplacementTrouve.emplacement_libelle
+                        );
                     }
 
                     var oLivre = new livre
@@ -800,9 +913,9 @@ namespace ClientLourd
                             oLivre.livre_ID,
                             oLivre.livre_titre,
                             oLivre.livre_annee_parution,
-                            oLivre.genre_ID,        //  ça va pas le faire... On est censé retrouver le libellé. pas l'ID !
-                            oLivre.auteur_ID,       //  ça va pas le faire... On est censé retrouver le libellé. pas l'ID !
-                            oLivre.emplacement_ID   //  ça va pas le faire... On est censé retrouver le libellé. pas l'ID !
+                            monContext.genres.Find(oLivre.genre_ID).genre_libelle,
+                            monContext.auteurs.Find(oLivre.auteur_ID).auteur_prenom + " " + monContext.auteurs.Find(oLivre.auteur_ID).auteur_nom,
+                            monContext.emplacements.Find(oLivre.emplacement_ID ).emplacement_libelle
                         );
                     }
                     //  Remplir les valeurs des combobox
@@ -1030,5 +1143,6 @@ namespace ClientLourd
         }
 
         #endregion tabPageAuteur
+
     }
 }
