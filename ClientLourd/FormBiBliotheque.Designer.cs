@@ -126,6 +126,7 @@
             this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.tabControlBibliotheque.SuspendLayout();
             this.tabPageIdentification.SuspendLayout();
             this.panelIdentification.SuspendLayout();
@@ -212,6 +213,7 @@
             // 
             // tabPageIdentification
             // 
+            this.tabPageIdentification.Controls.Add(this.listBox1);
             this.tabPageIdentification.Controls.Add(this.panelIdentification);
             this.tabPageIdentification.Location = new System.Drawing.Point(4, 22);
             this.tabPageIdentification.Name = "tabPageIdentification";
@@ -1032,6 +1034,20 @@
             this.label22.TabIndex = 0;
             this.label22.Text = "id";
             // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Items.AddRange(new object[] {
+            "azerty",
+            "qwerty",
+            "truc",
+            "pouet",
+            "combobox"});
+            this.listBox1.Location = new System.Drawing.Point(82, 95);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(120, 17);
+            this.listBox1.TabIndex = 7;
+            // 
             // FormBiBliotheque
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1160,6 +1176,7 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.ComboBox comboBoxLivreAuteurPrenom;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
 
