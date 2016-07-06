@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f2afd114bcec4cb6b98b312471dfa72f" Name="Diagram1">
+        <EntityTypeShape EntityType="maBibliothequeModel.adherent" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="maBibliothequeModel.auteur" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="maBibliothequeModel.bibliothecaire" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="maBibliothequeModel.emplacement" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="maBibliothequeModel.emprunter" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="maBibliothequeModel.genre" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="maBibliothequeModel.livre" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="maBibliothequeModel.FK_emprunter_adherent_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="maBibliothequeModel.FK_livre_auteur_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="maBibliothequeModel.FK_livre_emplacement_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="maBibliothequeModel.FK_emprunter_livre_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="maBibliothequeModel.FK_livre_genre_ID" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
