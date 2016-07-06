@@ -9,7 +9,7 @@
         <abbr title="Phone">P:</abbr>
         06.16.30.77.54
     </address>
-
+    <%--  --%>
     <address>
         <strong>Support:</strong>   <a href="mailto:a.tshibangu@amat-rh.com">a.tshibangu@amat-rh.com</a>
     </address>
