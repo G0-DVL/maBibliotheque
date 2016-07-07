@@ -159,14 +159,10 @@ namespace WebApplicationBiblio
                     Emplacement = o.emplacement_libelle
                 }).ToList();
 
+                GridViewLivre.AllowSorting = aListLivre.Count > 1;
                 GridViewLivre.DataSource = aListLivre;
                 GridViewLivre.DataBind();
-                GridView1.DataSource = aListLivre;
-                GridView1.DataBind();
-                GridView2.DataSource = aListLivre;
-                GridView2.DataBind();
             }
-
         }
         private string getColumnSortExpression(string sColumnName)
         {
@@ -176,6 +172,10 @@ namespace WebApplicationBiblio
         //  Gère la variable ViewState pour permettre le tri du résultat de la requête
         protected void GridViewLivre_Sorting(object sender, GridViewSortEventArgs e)
         {
+            if(GridViewLivre.Rows.Count<2)
+            {
+                return;
+            }
             //  Response.Write(e.SortDirection + " / " + e.SortExpression + "<br/>");
             string sExpressiontoFind = ";" + e.SortExpression + "=";
             string sSortDirection = "A";
@@ -189,11 +189,6 @@ namespace WebApplicationBiblio
             ViewState["orderBy"] = ViewState["orderBy"].ToString() + sExpressiontoFind + sSortDirection;
             loadGridViewLivre(false);
             //  Response.Write(ViewState["orderBy"] + "<hr/>");
-        }
-
-        protected void DropDownListAuteur_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

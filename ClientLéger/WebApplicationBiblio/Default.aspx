@@ -6,8 +6,30 @@
 
     <div class="container-fluid">
 	    <div class="row">
-		    <div class="col-md-4">
-                <table>
+		    <div class="col-md-12">
+                <hr />
+                
+                <%
+    if (GridViewLivre.Rows.Count > 0) {%>
+                <p><%=GridViewLivre.Rows.Count%> <%
+        if (GridViewLivre.Rows.Count > 1)
+        {
+                   %>résultats correspondent à votre recherche<%
+        }
+        else
+        {
+                   %>résultat correspond à votre recherche<%
+        }%></p>
+                <asp:GridView ID="GridViewLivre" runat="server" AllowSorting="True" OnSorting="GridViewLivre_Sorting" ViewStateMode="Enabled" Width="100%" CssClass="center-table"></asp:GridView>
+                <hr />
+                        <%
+                    }
+                    else {
+
+                    } %>
+		    </div>
+		    <div class="col-md-12">
+                <table class="center-table">
                     <tbody>
                         <tr>
                             <td>
@@ -30,7 +52,7 @@
                                 <asp:Label ID="LabelAuteur" runat="server" Text="Auteur : "></asp:Label>
                             </td>
                             <td>
-                                <asp:DropDownList ID="DropDownListAuteur" runat="server" OnSelectedIndexChanged="DropDownListAuteur_SelectedIndexChanged"></asp:DropDownList>
+                                <asp:DropDownList ID="DropDownListAuteur" runat="server"></asp:DropDownList>
                             </td>
                         </tr>
                         <tr>
@@ -56,16 +78,6 @@
                         </tr>
                     </tbody>
                 </table>
-                
-		    </div>
-		    <div class="col-md-8">
-                <asp:GridView ID="GridViewLivre" runat="server" AllowSorting="True" OnSorting="GridViewLivre_Sorting" ViewStateMode="Enabled" Width="100%" CssClass="Table"></asp:GridView>
-		    </div>
-		    <div class="col-md-12">
-                <asp:GridView ID="GridView1" runat="server" AllowSorting="True" OnSorting="GridViewLivre_Sorting" ViewStateMode="Enabled" Width="100%" CssClass="Table"></asp:GridView>
-		    </div>
-		    <div class="col-md-12">
-                <asp:GridView ID="GridView2" runat="server" AllowSorting="True" OnSorting="GridViewLivre_Sorting" ViewStateMode="Enabled" Width="100%"></asp:GridView>
 		    </div>
 	    </div>
     </div>
