@@ -4,25 +4,40 @@
     <div class="container-fluid">
 	    <div class="row">
 		    <div class="col-md-12">
+			    <div class="jumbotron well">
+				    <h2>
+					    Bienvenue à la bibliothèque BLIBLI YO !
+				    </h2>
+			    </div>
+		    </div>
+		    <div class="col-md-12">
                 <hr />
                 
+                <p>
                 <%
-    if (GridViewLivre.Rows.Count > 0) {%>
-                <p><%=GridViewLivre.Rows.Count%> <%
+    if (GridViewLivre.Rows.Count > 0) {
+        %><%=GridViewLivre.Rows.Count%> <%
         if (GridViewLivre.Rows.Count > 1)
         {
-                   %>résultats correspondent à votre recherche<%
+            %>résultats correspondent à votre recherche<%
         }
         else
         {
-                   %>résultat correspond à votre recherche<%
-        }%></p>
+            %>résultat correspond à votre recherche<%
+        }
+
+        if("" != ViewState["orderBy"].ToString())
+        {
+            Regex rRegex = new Regex(";([^=]+)=[AD]");
+            Response.Write(", ordonné par " + rRegex.Replace(ViewState["orderBy"].ToString(), ", $1").Substring(2));
+        }
+                                                       %></p>
                 <asp:GridView ID="GridViewLivre" runat="server" AllowSorting="True" OnSorting="GridViewLivre_Sorting" ViewStateMode="Enabled" Width="100%" CssClass="center-table"></asp:GridView>
                 <hr />
                         <%
                     }
                     else {
-
+%>Veuillez saisir un élément de recherche : </p><%
                     } %>
 		    </div>
 		    <div class="col-md-12">
