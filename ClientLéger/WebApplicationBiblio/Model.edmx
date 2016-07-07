@@ -1,0 +1,437 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="maBibliothequeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="adherent">
+          <Key>
+            <PropertyRef Name="adherent_ID" />
+          </Key>
+          <Property Name="adherent_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="adherent_nom" Type="varchar" MaxLength="32" />
+          <Property Name="adherent_prenom" Type="varchar" MaxLength="32" />
+          <Property Name="adherent_date_naissance" Type="date" />
+          <Property Name="adherent_adresse" Type="varchar" MaxLength="32" />
+          <Property Name="adherent_code_postal" Type="varchar" MaxLength="5" />
+          <Property Name="adherent_telephone" Type="varchar" MaxLength="10" />
+          <Property Name="adherent_email" Type="varchar" MaxLength="32" />
+          <Property Name="adherent_date_inscription" Type="date" />
+        </EntityType>
+        <EntityType Name="auteur">
+          <Key>
+            <PropertyRef Name="auteur_ID" />
+          </Key>
+          <Property Name="auteur_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="auteur_nom" Type="varchar" MaxLength="32" />
+          <Property Name="auteur_prenom" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="bibliothecaire">
+          <Key>
+            <PropertyRef Name="bibliothecaire_ID" />
+          </Key>
+          <Property Name="bibliothecaire_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bibliothecaire_login" Type="varchar" MaxLength="32" />
+          <Property Name="bibliothecaire_password" Type="varchar" MaxLength="32" />
+          <Property Name="bibliothecaire_nom" Type="varchar" MaxLength="32" />
+          <Property Name="bibliothecaire_prenom" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="emplacement">
+          <Key>
+            <PropertyRef Name="emplacement_ID" />
+          </Key>
+          <Property Name="emplacement_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="emplacement_libelle" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="emprunter">
+          <Key>
+            <PropertyRef Name="livre_ID" />
+            <PropertyRef Name="adherent_ID" />
+          </Key>
+          <Property Name="date_emprunt" Type="date" />
+          <Property Name="date_retour" Type="date" />
+          <Property Name="livre_ID" Type="int" Nullable="false" />
+          <Property Name="adherent_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="genre">
+          <Key>
+            <PropertyRef Name="genre_ID" />
+          </Key>
+          <Property Name="genre_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="genre_libelle" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="livre">
+          <Key>
+            <PropertyRef Name="livre_ID" />
+          </Key>
+          <Property Name="livre_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="livre_titre" Type="varchar" MaxLength="32" />
+          <Property Name="livre_annee_parution" Type="date" />
+          <Property Name="genre_ID" Type="int" />
+          <Property Name="auteur_ID" Type="int" />
+          <Property Name="emplacement_ID" Type="int" />
+        </EntityType>
+        <Association Name="FK_emprunter_adherent_ID">
+          <End Role="adherent" Type="Self.adherent" Multiplicity="1" />
+          <End Role="emprunter" Type="Self.emprunter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="adherent">
+              <PropertyRef Name="adherent_ID" />
+            </Principal>
+            <Dependent Role="emprunter">
+              <PropertyRef Name="adherent_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_emprunter_livre_ID">
+          <End Role="livre" Type="Self.livre" Multiplicity="1" />
+          <End Role="emprunter" Type="Self.emprunter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="livre">
+              <PropertyRef Name="livre_ID" />
+            </Principal>
+            <Dependent Role="emprunter">
+              <PropertyRef Name="livre_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_livre_auteur_ID">
+          <End Role="auteur" Type="Self.auteur" Multiplicity="0..1" />
+          <End Role="livre" Type="Self.livre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="auteur">
+              <PropertyRef Name="auteur_ID" />
+            </Principal>
+            <Dependent Role="livre">
+              <PropertyRef Name="auteur_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_livre_emplacement_ID">
+          <End Role="emplacement" Type="Self.emplacement" Multiplicity="0..1" />
+          <End Role="livre" Type="Self.livre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="emplacement">
+              <PropertyRef Name="emplacement_ID" />
+            </Principal>
+            <Dependent Role="livre">
+              <PropertyRef Name="emplacement_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_livre_genre_ID">
+          <End Role="genre" Type="Self.genre" Multiplicity="0..1" />
+          <End Role="livre" Type="Self.livre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="genre">
+              <PropertyRef Name="genre_ID" />
+            </Principal>
+            <Dependent Role="livre">
+              <PropertyRef Name="genre_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="maBibliothequeModelStoreContainer">
+          <EntitySet Name="adherent" EntityType="Self.adherent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="auteur" EntityType="Self.auteur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="bibliothecaire" EntityType="Self.bibliothecaire" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="emplacement" EntityType="Self.emplacement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="emprunter" EntityType="Self.emprunter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="genre" EntityType="Self.genre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="livre" EntityType="Self.livre" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_emprunter_adherent_ID" Association="Self.FK_emprunter_adherent_ID">
+            <End Role="adherent" EntitySet="adherent" />
+            <End Role="emprunter" EntitySet="emprunter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_emprunter_livre_ID" Association="Self.FK_emprunter_livre_ID">
+            <End Role="livre" EntitySet="livre" />
+            <End Role="emprunter" EntitySet="emprunter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_livre_auteur_ID" Association="Self.FK_livre_auteur_ID">
+            <End Role="auteur" EntitySet="auteur" />
+            <End Role="livre" EntitySet="livre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_livre_emplacement_ID" Association="Self.FK_livre_emplacement_ID">
+            <End Role="emplacement" EntitySet="emplacement" />
+            <End Role="livre" EntitySet="livre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_livre_genre_ID" Association="Self.FK_livre_genre_ID">
+            <End Role="genre" EntitySet="genre" />
+            <End Role="livre" EntitySet="livre" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="maBibliothequeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="adherent">
+          <Key>
+            <PropertyRef Name="adherent_ID" />
+          </Key>
+          <Property Name="adherent_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="adherent_nom" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="adherent_prenom" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="adherent_date_naissance" Type="DateTime" Precision="0" />
+          <Property Name="adherent_adresse" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="adherent_code_postal" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="adherent_telephone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="adherent_email" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="adherent_date_inscription" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="emprunters" Relationship="Self.FK_emprunter_adherent_ID" FromRole="adherent" ToRole="emprunter" />
+        </EntityType>
+        <EntityType Name="auteur">
+          <Key>
+            <PropertyRef Name="auteur_ID" />
+          </Key>
+          <Property Name="auteur_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="auteur_nom" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="auteur_prenom" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="livres" Relationship="Self.FK_livre_auteur_ID" FromRole="auteur" ToRole="livre" />
+        </EntityType>
+        <EntityType Name="bibliothecaire">
+          <Key>
+            <PropertyRef Name="bibliothecaire_ID" />
+          </Key>
+          <Property Name="bibliothecaire_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bibliothecaire_login" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="bibliothecaire_password" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="bibliothecaire_nom" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="bibliothecaire_prenom" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="emplacement">
+          <Key>
+            <PropertyRef Name="emplacement_ID" />
+          </Key>
+          <Property Name="emplacement_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="emplacement_libelle" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="livres" Relationship="Self.FK_livre_emplacement_ID" FromRole="emplacement" ToRole="livre" />
+        </EntityType>
+        <EntityType Name="emprunter">
+          <Key>
+            <PropertyRef Name="livre_ID" />
+            <PropertyRef Name="adherent_ID" />
+          </Key>
+          <Property Name="date_emprunt" Type="DateTime" Precision="0" />
+          <Property Name="date_retour" Type="DateTime" Precision="0" />
+          <Property Name="livre_ID" Type="Int32" Nullable="false" />
+          <Property Name="adherent_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="adherent" Relationship="Self.FK_emprunter_adherent_ID" FromRole="emprunter" ToRole="adherent" />
+          <NavigationProperty Name="livre" Relationship="Self.FK_emprunter_livre_ID" FromRole="emprunter" ToRole="livre" />
+        </EntityType>
+        <EntityType Name="genre">
+          <Key>
+            <PropertyRef Name="genre_ID" />
+          </Key>
+          <Property Name="genre_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="genre_libelle" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="livres" Relationship="Self.FK_livre_genre_ID" FromRole="genre" ToRole="livre" />
+        </EntityType>
+        <EntityType Name="livre">
+          <Key>
+            <PropertyRef Name="livre_ID" />
+          </Key>
+          <Property Name="livre_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="livre_titre" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="livre_annee_parution" Type="DateTime" Precision="0" />
+          <Property Name="genre_ID" Type="Int32" />
+          <Property Name="auteur_ID" Type="Int32" />
+          <Property Name="emplacement_ID" Type="Int32" />
+          <NavigationProperty Name="auteur" Relationship="Self.FK_livre_auteur_ID" FromRole="livre" ToRole="auteur" />
+          <NavigationProperty Name="emplacement" Relationship="Self.FK_livre_emplacement_ID" FromRole="livre" ToRole="emplacement" />
+          <NavigationProperty Name="emprunters" Relationship="Self.FK_emprunter_livre_ID" FromRole="livre" ToRole="emprunter" />
+          <NavigationProperty Name="genre" Relationship="Self.FK_livre_genre_ID" FromRole="livre" ToRole="genre" />
+        </EntityType>
+        <Association Name="FK_emprunter_adherent_ID">
+          <End Role="adherent" Type="Self.adherent" Multiplicity="1" />
+          <End Role="emprunter" Type="Self.emprunter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="adherent">
+              <PropertyRef Name="adherent_ID" />
+            </Principal>
+            <Dependent Role="emprunter">
+              <PropertyRef Name="adherent_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_livre_auteur_ID">
+          <End Role="auteur" Type="Self.auteur" Multiplicity="0..1" />
+          <End Role="livre" Type="Self.livre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="auteur">
+              <PropertyRef Name="auteur_ID" />
+            </Principal>
+            <Dependent Role="livre">
+              <PropertyRef Name="auteur_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_livre_emplacement_ID">
+          <End Role="emplacement" Type="Self.emplacement" Multiplicity="0..1" />
+          <End Role="livre" Type="Self.livre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="emplacement">
+              <PropertyRef Name="emplacement_ID" />
+            </Principal>
+            <Dependent Role="livre">
+              <PropertyRef Name="emplacement_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_emprunter_livre_ID">
+          <End Role="livre" Type="Self.livre" Multiplicity="1" />
+          <End Role="emprunter" Type="Self.emprunter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="livre">
+              <PropertyRef Name="livre_ID" />
+            </Principal>
+            <Dependent Role="emprunter">
+              <PropertyRef Name="livre_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_livre_genre_ID">
+          <End Role="genre" Type="Self.genre" Multiplicity="0..1" />
+          <End Role="livre" Type="Self.livre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="genre">
+              <PropertyRef Name="genre_ID" />
+            </Principal>
+            <Dependent Role="livre">
+              <PropertyRef Name="genre_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="maBibliothequeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="adherents" EntityType="Self.adherent" />
+          <EntitySet Name="auteurs" EntityType="Self.auteur" />
+          <EntitySet Name="bibliothecaires" EntityType="Self.bibliothecaire" />
+          <EntitySet Name="emplacements" EntityType="Self.emplacement" />
+          <EntitySet Name="emprunters" EntityType="Self.emprunter" />
+          <EntitySet Name="genres" EntityType="Self.genre" />
+          <EntitySet Name="livres" EntityType="Self.livre" />
+          <AssociationSet Name="FK_emprunter_adherent_ID" Association="Self.FK_emprunter_adherent_ID">
+            <End Role="adherent" EntitySet="adherents" />
+            <End Role="emprunter" EntitySet="emprunters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_livre_auteur_ID" Association="Self.FK_livre_auteur_ID">
+            <End Role="auteur" EntitySet="auteurs" />
+            <End Role="livre" EntitySet="livres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_livre_emplacement_ID" Association="Self.FK_livre_emplacement_ID">
+            <End Role="emplacement" EntitySet="emplacements" />
+            <End Role="livre" EntitySet="livres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_emprunter_livre_ID" Association="Self.FK_emprunter_livre_ID">
+            <End Role="livre" EntitySet="livres" />
+            <End Role="emprunter" EntitySet="emprunters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_livre_genre_ID" Association="Self.FK_livre_genre_ID">
+            <End Role="genre" EntitySet="genres" />
+            <End Role="livre" EntitySet="livres" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="maBibliothequeModelStoreContainer" CdmEntityContainer="maBibliothequeEntities">
+          <EntitySetMapping Name="adherents">
+            <EntityTypeMapping TypeName="maBibliothequeModel.adherent">
+              <MappingFragment StoreEntitySet="adherent">
+                <ScalarProperty Name="adherent_ID" ColumnName="adherent_ID" />
+                <ScalarProperty Name="adherent_nom" ColumnName="adherent_nom" />
+                <ScalarProperty Name="adherent_prenom" ColumnName="adherent_prenom" />
+                <ScalarProperty Name="adherent_date_naissance" ColumnName="adherent_date_naissance" />
+                <ScalarProperty Name="adherent_adresse" ColumnName="adherent_adresse" />
+                <ScalarProperty Name="adherent_code_postal" ColumnName="adherent_code_postal" />
+                <ScalarProperty Name="adherent_telephone" ColumnName="adherent_telephone" />
+                <ScalarProperty Name="adherent_email" ColumnName="adherent_email" />
+                <ScalarProperty Name="adherent_date_inscription" ColumnName="adherent_date_inscription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="auteurs">
+            <EntityTypeMapping TypeName="maBibliothequeModel.auteur">
+              <MappingFragment StoreEntitySet="auteur">
+                <ScalarProperty Name="auteur_ID" ColumnName="auteur_ID" />
+                <ScalarProperty Name="auteur_nom" ColumnName="auteur_nom" />
+                <ScalarProperty Name="auteur_prenom" ColumnName="auteur_prenom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bibliothecaires">
+            <EntityTypeMapping TypeName="maBibliothequeModel.bibliothecaire">
+              <MappingFragment StoreEntitySet="bibliothecaire">
+                <ScalarProperty Name="bibliothecaire_ID" ColumnName="bibliothecaire_ID" />
+                <ScalarProperty Name="bibliothecaire_login" ColumnName="bibliothecaire_login" />
+                <ScalarProperty Name="bibliothecaire_password" ColumnName="bibliothecaire_password" />
+                <ScalarProperty Name="bibliothecaire_nom" ColumnName="bibliothecaire_nom" />
+                <ScalarProperty Name="bibliothecaire_prenom" ColumnName="bibliothecaire_prenom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="emplacements">
+            <EntityTypeMapping TypeName="maBibliothequeModel.emplacement">
+              <MappingFragment StoreEntitySet="emplacement">
+                <ScalarProperty Name="emplacement_ID" ColumnName="emplacement_ID" />
+                <ScalarProperty Name="emplacement_libelle" ColumnName="emplacement_libelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="emprunters">
+            <EntityTypeMapping TypeName="maBibliothequeModel.emprunter">
+              <MappingFragment StoreEntitySet="emprunter">
+                <ScalarProperty Name="date_emprunt" ColumnName="date_emprunt" />
+                <ScalarProperty Name="date_retour" ColumnName="date_retour" />
+                <ScalarProperty Name="livre_ID" ColumnName="livre_ID" />
+                <ScalarProperty Name="adherent_ID" ColumnName="adherent_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="genres">
+            <EntityTypeMapping TypeName="maBibliothequeModel.genre">
+              <MappingFragment StoreEntitySet="genre">
+                <ScalarProperty Name="genre_ID" ColumnName="genre_ID" />
+                <ScalarProperty Name="genre_libelle" ColumnName="genre_libelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="livres">
+            <EntityTypeMapping TypeName="maBibliothequeModel.livre">
+              <MappingFragment StoreEntitySet="livre">
+                <ScalarProperty Name="livre_ID" ColumnName="livre_ID" />
+                <ScalarProperty Name="livre_titre" ColumnName="livre_titre" />
+                <ScalarProperty Name="livre_annee_parution" ColumnName="livre_annee_parution" />
+                <ScalarProperty Name="genre_ID" ColumnName="genre_ID" />
+                <ScalarProperty Name="auteur_ID" ColumnName="auteur_ID" />
+                <ScalarProperty Name="emplacement_ID" ColumnName="emplacement_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
