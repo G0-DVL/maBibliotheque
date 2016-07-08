@@ -953,8 +953,23 @@ namespace ClientLourd
                             monContext.emplacements.Find(oLivre.emplacement_ID ).emplacement_libelle
                         );
                     }
-                    //  Remplir les valeurs des combobox
-                
+                //  Remplir les valeurs des combobox
+
+            }
+
+            if (0 == comboBoxLivreAuteurNom.Items.Count)
+            {//  On remplit le ComboBox des genres
+                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+                {
+                    var oQuery = from nimportequoi in monContext.auteurs select nimportequoi;
+                    var oListResultats = oQuery.ToList();
+                    foreach (auteur oAuteur in oListResultats)
+                    {
+                        comboBoxLivreAuteurNom.Items.Add(oAuteur.auteur_nom);
+                        comboBoxLivreAuteurPrenom.Items.Add(oAuteur.auteur_prenom);
+                    }
+                }
+
             }
 
             if (0 == comboBoxLivreGenre.Items.Count)
@@ -1270,46 +1285,10 @@ namespace ClientLourd
 
         private void tabPageEmprunt_Enter(object sender, EventArgs e)
         {
-            dateTimePickerDateRetour.Value = dateTimePickerDateEmprunt.Value.AddDays(21);
-
-            // reenitialiser le dataGridViewEmprunt
-
-            dataGridViewEmprunt.Rows.Clear();
-
-            using (maBibliothequeEntities monContext = new maBibliothequeEntities())
-            {   //  On liste les emprunts en cours
-                var oEmprunterQuery = from tableEmprunt in monContext.emprunters
-                                      join tableAdherent in monContext.adherents
-                                        on tableEmprunt.adherent_ID equals tableAdherent.adherent_ID
-                                      join tableLivre in monContext.livres
-                                        on tableEmprunt.livre_ID equals tableLivre.livre_ID
-                                      select new
-                                      {
-                                          tableAdherent.adherent_ID,
-                                          tableAdherent.adherent_nom,
-                                          tableAdherent.adherent_prenom,
-                                          tableLivre.livre_ID,
-                                          tableLivre.livre_titre,
-                                          tableEmprunt.date_emprunt,
-                                          tableEmprunt.date_retour
-                                      };
-
-                var listEmprunt = oEmprunterQuery.ToList();
-
-                foreach (var empr in listEmprunt)
-                {
-                    dataGridViewEmprunt.Rows.Add(
-                        empr.adherent_ID,
-                        empr.adherent_nom,
-                        empr.adherent_prenom,
-                        empr.livre_ID,
-                        empr.livre_titre,
-                        empr.date_emprunt,
-                        empr.date_retour
-
-                        );
-                 }
-                 
+            if (0 == dataGridViewEmprunt.Rows.Count)
+            {
+                dateTimePickerDateRetour.Value = dateTimePickerDateEmprunt.Value.AddDays(21);
+                buttonEmpruntAfficherTout_Click(sender, e);
             }
         }
 
@@ -1408,6 +1387,48 @@ namespace ClientLourd
 
             }
 
+        }
+
+        private void buttonEmpruntAfficherTout_Click(object sender, EventArgs e)
+        {
+            // reenitialiser le dataGridViewEmprunt
+
+            dataGridViewEmprunt.Rows.Clear();
+
+            using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+            {   //  On liste les emprunts en cours
+                var oEmprunterQuery = from tableEmprunt in monContext.emprunters
+                                      join tableAdherent in monContext.adherents
+                                        on tableEmprunt.adherent_ID equals tableAdherent.adherent_ID
+                                      join tableLivre in monContext.livres
+                                        on tableEmprunt.livre_ID equals tableLivre.livre_ID
+                                      select new
+                                      {
+                                          tableAdherent.adherent_ID,
+                                          tableAdherent.adherent_nom,
+                                          tableAdherent.adherent_prenom,
+                                          tableLivre.livre_ID,
+                                          tableLivre.livre_titre,
+                                          tableEmprunt.date_emprunt,
+                                          tableEmprunt.date_retour
+                                      };
+
+                var listEmprunt = oEmprunterQuery.ToList();
+
+                foreach (var empr in listEmprunt)
+                {
+                    dataGridViewEmprunt.Rows.Add(
+                        empr.adherent_ID,
+                        empr.adherent_nom,
+                        empr.adherent_prenom,
+                        empr.livre_ID,
+                        empr.livre_titre,
+                        empr.date_emprunt,
+                        empr.date_retour
+
+                        );
+                }
+            }
         }
     }
     
