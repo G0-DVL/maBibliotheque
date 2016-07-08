@@ -30,6 +30,8 @@ namespace ClientLourd
         private TabPage oTabPageAdherent;
         private TabPage oTabPageLivre;
         private TabPage oTabPageAuteur;
+        private TabPage oTabPageEmprunt;
+
 
         //  Fonction lancée à la création de la fenêtre (constructeur)
         public FormBiBliotheque()
@@ -64,10 +66,13 @@ namespace ClientLourd
             oTabPageAdherent       = tabPageAdherent;
             oTabPageLivre          = tabPageLivre;
             oTabPageAuteur         = tabPageAuteur;
+            oTabPageEmprunt        = tabPageEmprunt;
+
             tabControlBibliotheque.TabPages.Remove(tabPageBibliothecaire);
             tabControlBibliotheque.TabPages.Remove(tabPageAdherent);
-             tabControlBibliotheque.TabPages.Remove(tabPageLivre);
+            tabControlBibliotheque.TabPages.Remove(tabPageLivre);
             tabControlBibliotheque.TabPages.Remove(tabPageAuteur);
+            tabControlBibliotheque.TabPages.Remove(tabPageEmprunt);
 
             //  Pour notre tabControl, nous voulons qu'il soit redimensionné à la taille de notre fenêtre
             //  Pour cela, nous utilisons des ancres (Anchor) en haut, à gauche
@@ -123,6 +128,7 @@ namespace ClientLourd
                     tabControlBibliotheque.TabPages.Add(oTabPageAdherent);
                     tabControlBibliotheque.TabPages.Add(oTabPageLivre);
                     tabControlBibliotheque.TabPages.Add(oTabPageAuteur);
+                    tabControlBibliotheque.TabPages.Add(oTabPageEmprunt);
 
                     TextBoxLogin.Enabled = false;
                     TextBoxPass.Enabled = false;
@@ -362,7 +368,9 @@ namespace ClientLourd
         #endregion tabPageBibliothecaire
 
         #region tabPageAdherent
+        //****************************************************************************
         //  Fonction appellée au clic sur le bouton Création dans le tabPage Adhérent
+        //**************************************************************************** 
         private void buttonAdherentCreation_Click(object sender, EventArgs e)
         {   //  On initialise une variable message d'erreur. Si le message d'erreur reste vide, alors on n'a pas d'erreur
             string sMessageDErreur = "";
@@ -428,7 +436,9 @@ namespace ClientLourd
             }
         }
 
+        //********************************************************************************
         //  Fonction appellée au clic sur le bouton Modification dans le tabPage Adhérent
+        //********************************************************************************
         private void buttonAdherentModif_Click(object sender, EventArgs e)
         {   //  On initialise une variable message d'erreur. Si le message d'erreur reste vide, alors on n'a pas d'erreur
             string sMessageDErreur = "";
@@ -528,7 +538,9 @@ namespace ClientLourd
                 MessageBox.Show("Impossible de modifier l'adhérent !\n" + eException.Message);
             }
         }
-
+        //********************************************************************************
+        //  Fonction appellée au clic sur le bouton Suppression dans le tabPage Adhérent
+        //********************************************************************************
         private void buttonAdherentSupp_Click(object sender, EventArgs e)
         {   //  On initialise une variable message d'erreur. Si le message d'erreur reste vide, alors on n'a pas d'erreur
             string sMessageDErreur = "";
@@ -551,7 +563,17 @@ namespace ClientLourd
                     {   //  Si on le trouve pas, l'objet est null et on a rien à supprimer !
                         throw new Exception("L'adhérent avec un ID " + textBoxAdherentId.Text + " n'éxiste pas !");
                     }
+                    // vérifier que l'adherent n'a pas d'emprunts en cours
+                    var iAdherentId = int.Parse(textBoxAdherentId.Text);
 
+                    var oEmprunter = monContext.emprunters.Where(t => t.adherent_ID==iAdherentId).FirstOrDefault();
+                    if (oEmprunter != null)
+                    {
+                        //si on trouve des emprunts pour l'usager ne pas le supprimer
+                        throw new Exception("L'adherent a des emprunts en cours.On ne peut le supprimer !");
+
+                    }
+                     
                     monContext.adherents.Remove(oAdherent); //  On supprime l'adhérent
                     monContext.SaveChanges();   //  On sauvegarde les données
 
@@ -631,11 +653,14 @@ namespace ClientLourd
         #endregion tabPageAdherent
 
         #region tabPageLivre
-
+        //**********************************************************************
         //  Se produit au clic du bouton Modification dans l'onglet tabPageLivre
+        //**********************************************************************
 
         private void buttonLivreModification_Click(object sender, EventArgs e)
         {
+             
+
             string sMessageDErreur = "";
             try
             {
@@ -739,9 +764,13 @@ namespace ClientLourd
             }
         }
 
+        //***********************************************************************
         //  Se produit au clic du bouton suppression dans l'onglet tabPageLivre
+        //***********************************************************************
         private void buttonLivreSuppression_Click(object sender, EventArgs e)
         {
+             
+
             string sMessageDErreur = "";
             try
             {
@@ -756,7 +785,7 @@ namespace ClientLourd
                 }
 
                 using (maBibliothequeEntities monContext = new maBibliothequeEntities())
-                {   //  On va rechercher en base si l'ID de notre bibliothecaire éxiste toujours
+                {   //  On va rechercher en base si l'ID du livre éxiste toujours
                     var oLivre = monContext.livres.Find(int.Parse(textBoxLivreId.Text));
                     if (oLivre == null)
                     {   //  Si on le trouve pas, l'objet est null et on a rien à supprimer !
@@ -782,9 +811,15 @@ namespace ClientLourd
                 MessageBox.Show("Impossible de supprimer le livre !\n" + eException.Message);
             }
         }
+
+        //*******************************************************************
         //  Se produit au clic du bouton création dans l'onglet tabPageLivre
+        //*******************************************************************
         private void buttonLivreCreation_Click(object sender, EventArgs e)
         {   //  On initialise une variable message d'erreur. Si le message d'erreur reste vide, alors on n'a pas d'erreur
+
+             
+
             string sMessageDErreur = "";
             try
             {
@@ -900,8 +935,8 @@ namespace ClientLourd
 
         private void tabPageLivre_Enter(object sender, EventArgs e)
         {
-            if (0 == dataGridViewLivre.Rows.Count)
-            {
+            dataGridViewLivre.Rows.Clear();
+
                 using (maBibliothequeEntities monContext = new maBibliothequeEntities())
                 {
                     //  Remplir le dataGrid des livres
@@ -919,7 +954,7 @@ namespace ClientLourd
                         );
                     }
                     //  Remplir les valeurs des combobox
-                }
+                
             }
 
             if (0 == comboBoxLivreGenre.Items.Count)
@@ -956,8 +991,9 @@ namespace ClientLourd
         #endregion tabPageLivre
 
         #region tabPageAuteur
-
+        //**************************************************************************
         //  Fonction appellée au clic sur le bouton Création dans le tabPage Auteur
+        //***************************************************************************
         private void buttonAuteurCreation_Click(object sender, EventArgs e)
         {
             
@@ -996,6 +1032,9 @@ namespace ClientLourd
 
         }
 
+        //**************************************************************************
+        //  Fonction appellée au clic sur le bouton Modification dans le tabPage Auteur
+        //***************************************************************************
         private void buttonAuteurModification_Click(object sender, EventArgs e)
         {
             string sMessageDErreur = "";
@@ -1053,7 +1092,9 @@ namespace ClientLourd
                 MessageBox.Show("Impossible de modifier l'auteur !\n" + eException.Message);
             }
         }
-
+        //**************************************************************************
+        //  Fonction appellée au clic sur le bouton Suppression dans le tabPage Auteur
+        //***************************************************************************
         private void buttonAuteurSuppression_Click(object sender, EventArgs e)
         {
             string sMessageDErreur = "";
@@ -1075,6 +1116,17 @@ namespace ClientLourd
                     if (oAuteurs == null)
                     {   //  Si on le trouve pas, l'objet est null et on a rien à supprimer !
                         throw new Exception("L'auteur avec un ID " + textBoxAuteurId.Text + " n'éxiste pas !");
+                    }
+                    //
+                    // vérifier qu'à l'auteur ne correspond aucun livre
+                    //
+                    var iAuteurId = int.Parse(textBoxAuteurId.Text);
+                    var oLivre= monContext.livres.Where(t => t.auteur_ID == iAuteurId).FirstOrDefault();
+                    if (oLivre != null)
+                    {
+                        //si on trouve des livres pour l'auteur ne pas le supprimer
+                        throw new Exception("L'auteur a des livres.\nOn ne peut le supprimer !");
+
                     }
 
                     monContext.auteurs.Remove(oAuteurs); //  On supprime l'adhérent
@@ -1100,8 +1152,8 @@ namespace ClientLourd
 
         private void tabPageAuteur_Enter(object sender, EventArgs e)
         {
-            if (0 == dataGridViewAuteur.Rows.Count)
-            {
+            dataGridViewAuteur.Rows.Clear();
+
                 using (maBibliothequeEntities monContext = new maBibliothequeEntities())
                 {
                     var oQuery = from nimportequoi in monContext.auteurs select nimportequoi;
@@ -1115,7 +1167,6 @@ namespace ClientLourd
                         );
                     }
                 }
-            }
         }
 
         private void dataGridViewAuteur_CellStateChanged(object sender, DataGridViewCellStateChangedEventArgs e)
@@ -1143,6 +1194,221 @@ namespace ClientLourd
         }
 
         #endregion tabPageAuteur
+    
+        //************************
+        // Traitement de l'emprunt
+        //************************
+        private void buttonEmprunt_Click(object sender, EventArgs e)
+        {
+            string sMessageDErreur = "";
+            try
+            {
+                if ("" == textBoxIDAdherent.Text || "" == textBoxIDLivre.Text)
+                {   //  Il nous faut obligatoirement l'ID pour continuer
+                    sMessageDErreur += "\n" + "- Vous devez saisir l'ID de l'adherent et l'ID du livre";
+                }
 
+
+                if ("" != sMessageDErreur)
+                {   //  Pour le moindre motif d'erreur, nous levons une exception et on interrompt l'éxécution du code
+                    throw new Exception(sMessageDErreur);
+                }
+
+                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+                {   //  On va rechercher en base si l'ID de l'adherent éxiste toujours
+                    var oEmpruntAdherent = monContext.adherents.Find(int.Parse(textBoxIDAdherent.Text));
+                    if (oEmpruntAdherent == null)
+                    {   //  Si on le trouve pas, l'adherent n'est pas trouvé !
+                        throw new Exception("L'adherent avec un ID " + textBoxIDAdherent.Text + " n'éxiste pas !");
+                    }
+
+                    var oEmpruntLivre = monContext.livres.Find(int.Parse(textBoxIDLivre.Text));
+                    if (oEmpruntLivre == null)
+                    {   //  Si on le trouve pas, le livre n'est pas trouvé !
+                        throw new Exception("Le livre avec un ID " + textBoxIDLivre.Text + " n'éxiste pas !");
+                    }
+
+                    // verifier qu'il n'y a pas 5 emprunts 
+
+                    int iAdherentId = int.Parse(textBoxIDAdherent.Text);
+                    if (monContext.emprunters.Count(t => t.adherent_ID == iAdherentId)>4)
+                    {
+                        throw new Exception("l'adherent a déjà 5 emprunts ! Nouvel emprunt non autorisé ");
+                    }
+
+                    var oEmprunter = new emprunter
+                    {
+                        date_emprunt = dateTimePickerDateEmprunt.Value,
+                        date_retour = dateTimePickerDateRetour.Value,
+                        livre_ID = oEmpruntLivre.livre_ID,
+                        adherent_ID = oEmpruntAdherent.adherent_ID
+
+                    };
+
+                    monContext.emprunters.Add(oEmprunter);    //  On ajoute le nouveau emprunt
+                    monContext.SaveChanges();   //  puis nous sauvegardons le tout dans la base
+
+                    // Remplir la dataGridView avec les informations de l'emprunt
+                    dataGridViewEmprunt.Rows.Add(
+                        oEmpruntAdherent.adherent_ID,
+                        oEmpruntAdherent.adherent_nom,
+                        oEmpruntAdherent.adherent_prenom,
+                        oEmpruntLivre.livre_ID,
+                        oEmpruntLivre.livre_titre,
+                        dateTimePickerDateEmprunt.Value,
+                        dateTimePickerDateRetour.Value
+                        );
+                    
+                }
+            }
+            catch (Exception eException)
+            {
+                MessageBox.Show("Impossible de realiser l'emprunt !\n" + eException.Message);
+            }
+            
+         }
+
+        private void tabPageEmprunt_Enter(object sender, EventArgs e)
+        {
+            dateTimePickerDateRetour.Value = dateTimePickerDateEmprunt.Value.AddDays(21);
+
+            // reenitialiser le dataGridViewEmprunt
+
+            dataGridViewEmprunt.Rows.Clear();
+
+            using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+            {   //  On liste les emprunts en cours
+                var oEmprunterQuery = from tableEmprunt in monContext.emprunters
+                                      join tableAdherent in monContext.adherents
+                                        on tableEmprunt.adherent_ID equals tableAdherent.adherent_ID
+                                      join tableLivre in monContext.livres
+                                        on tableEmprunt.livre_ID equals tableLivre.livre_ID
+                                      select new
+                                      {
+                                          tableAdherent.adherent_ID,
+                                          tableAdherent.adherent_nom,
+                                          tableAdherent.adherent_prenom,
+                                          tableLivre.livre_ID,
+                                          tableLivre.livre_titre,
+                                          tableEmprunt.date_emprunt,
+                                          tableEmprunt.date_retour
+                                      };
+
+                var listEmprunt = oEmprunterQuery.ToList();
+
+                foreach (var empr in listEmprunt)
+                {
+                    dataGridViewEmprunt.Rows.Add(
+                        empr.adherent_ID,
+                        empr.adherent_nom,
+                        empr.adherent_prenom,
+                        empr.livre_ID,
+                        empr.livre_titre,
+                        empr.date_emprunt,
+                        empr.date_retour
+
+                        );
+                 }
+                 
+            }
+        }
+
+        //************************
+        // Traitement du retour
+        //************************
+        private void buttonRendre_Click(object sender, EventArgs e)
+        {
+            string sMessageDErreur = "";
+            try
+            {
+                if ("" == textBoxIDAdherent.Text || "" == textBoxIDLivre.Text)
+                {   //  Il nous faut obligatoirement l'ID pour continuer
+                    sMessageDErreur += "\n" + "- Vous devez saisir l'ID de l'adherent et l'ID du livre";
+                }
+
+
+                if ("" != sMessageDErreur)
+                {   //  Pour le moindre motif d'erreur, nous levons une exception et on interrompt l'éxécution du code
+                    throw new Exception(sMessageDErreur);
+                }
+
+                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+                {
+                    int iAdherentId = int.Parse(textBoxIDAdherent.Text);
+                    int iLivreId = int.Parse(textBoxIDLivre.Text);
+                    var oEmprunt = monContext.emprunters.Where(t => t.adherent_ID == iAdherentId && t.livre_ID == iLivreId).FirstOrDefault();
+                    monContext.emprunters.Remove(oEmprunt); //  On supprime l'emprunt
+                    monContext.SaveChanges();   //  On sauvegarde les données
+
+                    //  Nous recherchons dans la DataGridView l'emprunt supprimé et nous l'enlevons du DataGridView
+                    foreach (DataGridViewRow oDataGridViewRow in dataGridViewEmprunt.Rows)
+                    {
+                        if (oEmprunt.adherent_ID == (int)oDataGridViewRow.Cells[0].Value
+                            && oEmprunt.livre_ID == (int)oDataGridViewRow.Cells[3].Value
+                            )
+                        {
+                            dataGridViewEmprunt.Rows.Remove(oDataGridViewRow);
+                            break;
+                        }
+                    }
+                }
+
+            }
+            catch (Exception eException)
+            {
+                MessageBox.Show("Impossible de supprimer l'emprunt !\n" + eException.Message);
+            }
+        }
+
+        //************************************** 
+        // Traitement de la liste des retards
+        //**************************************
+        private void buttonListeRetards_Click(object sender, EventArgs e)
+        {
+            // Effacer le dataGrid précédent 
+
+            dataGridViewEmprunt.Rows.Clear();
+
+
+            // Traitement des retards : liste des retards dans le DataGrid
+            using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+            {   //  On liste les emprunts en retard
+                var oEmprunterQuery = from tableEmprunt in monContext.emprunters
+                                      join tableAdherent in monContext.adherents
+                                        on tableEmprunt.adherent_ID equals tableAdherent.adherent_ID
+                                      join tableLivre in monContext.livres
+                                        on tableEmprunt.livre_ID equals tableLivre.livre_ID
+                                      where tableEmprunt.date_retour < DateTime.Now
+                                      select new
+                                      {
+                                          tableAdherent.adherent_ID,
+                                          tableAdherent.adherent_nom,
+                                          tableAdherent.adherent_prenom,
+                                          tableLivre.livre_ID,
+                                          tableLivre.livre_titre,
+                                          tableEmprunt.date_emprunt,
+                                          tableEmprunt.date_retour
+                                      };
+
+                var listEmprunt = oEmprunterQuery.ToList();
+
+                foreach (var empr in listEmprunt)
+                {
+                    dataGridViewEmprunt.Rows.Add(
+                        empr.adherent_ID,
+                        empr.adherent_nom,
+                        empr.adherent_prenom,
+                        empr.livre_ID,
+                        empr.livre_titre,
+                        empr.date_emprunt,
+                        empr.date_retour
+
+                        );
+                }
+
+            }
+
+        }
     }
+    
 }

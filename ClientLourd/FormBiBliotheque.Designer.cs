@@ -126,6 +126,26 @@
             this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
+            this.tabPageEmprunt = new System.Windows.Forms.TabPage();
+            this.buttonListeRetards = new System.Windows.Forms.Button();
+            this.dataGridViewEmprunt = new System.Windows.Forms.DataGridView();
+            this.IdAdherent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NomAdherent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrenomAdherent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdLivre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TitreLivre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DateEmprunt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DateRetour = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonRendre = new System.Windows.Forms.Button();
+            this.buttonEmprunt = new System.Windows.Forms.Button();
+            this.dateTimePickerDateRetour = new System.Windows.Forms.DateTimePicker();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.dateTimePickerDateEmprunt = new System.Windows.Forms.DateTimePicker();
+            this.textBoxIDLivre = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.textBoxIDAdherent = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
             this.tabControlBibliotheque.SuspendLayout();
             this.tabPageIdentification.SuspendLayout();
             this.panelIdentification.SuspendLayout();
@@ -137,6 +157,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLivre)).BeginInit();
             this.tabPageAuteur.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAuteur)).BeginInit();
+            this.tabPageEmprunt.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmprunt)).BeginInit();
             this.SuspendLayout();
             // 
             // TextBoxLogin
@@ -145,6 +167,7 @@
             this.TextBoxLogin.Name = "TextBoxLogin";
             this.TextBoxLogin.Size = new System.Drawing.Size(100, 20);
             this.TextBoxLogin.TabIndex = 0;
+            this.TextBoxLogin.Text = "admin";
             this.TextBoxLogin.Enter += new System.EventHandler(this.TextBoxIdentification_Enter);
             this.TextBoxLogin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxLogin_keyPress);
             // 
@@ -175,6 +198,7 @@
             this.TextBoxPass.PasswordChar = '*';
             this.TextBoxPass.Size = new System.Drawing.Size(100, 20);
             this.TextBoxPass.TabIndex = 1;
+            this.TextBoxPass.Text = "admin";
             this.TextBoxPass.Enter += new System.EventHandler(this.TextBoxIdentification_Enter);
             this.TextBoxPass.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxPass_keyPress);
             // 
@@ -204,10 +228,11 @@
             this.tabControlBibliotheque.Controls.Add(this.tabPageAdherent);
             this.tabControlBibliotheque.Controls.Add(this.tabPageLivre);
             this.tabControlBibliotheque.Controls.Add(this.tabPageAuteur);
+            this.tabControlBibliotheque.Controls.Add(this.tabPageEmprunt);
             this.tabControlBibliotheque.Location = new System.Drawing.Point(2, 1);
             this.tabControlBibliotheque.Name = "tabControlBibliotheque";
             this.tabControlBibliotheque.SelectedIndex = 0;
-            this.tabControlBibliotheque.Size = new System.Drawing.Size(744, 537);
+            this.tabControlBibliotheque.Size = new System.Drawing.Size(886, 591);
             this.tabControlBibliotheque.TabIndex = 9;
             // 
             // tabPageIdentification
@@ -215,7 +240,7 @@
             this.tabPageIdentification.Controls.Add(this.panelIdentification);
             this.tabPageIdentification.Location = new System.Drawing.Point(4, 22);
             this.tabPageIdentification.Name = "tabPageIdentification";
-            this.tabPageIdentification.Size = new System.Drawing.Size(736, 511);
+            this.tabPageIdentification.Size = new System.Drawing.Size(878, 565);
             this.tabPageIdentification.TabIndex = 0;
             this.tabPageIdentification.Text = "Identification";
             this.tabPageIdentification.UseVisualStyleBackColor = true;
@@ -252,7 +277,7 @@
             this.tabPageBibliothecaire.Controls.Add(this.label2);
             this.tabPageBibliothecaire.Location = new System.Drawing.Point(4, 22);
             this.tabPageBibliothecaire.Name = "tabPageBibliothecaire";
-            this.tabPageBibliothecaire.Size = new System.Drawing.Size(736, 511);
+            this.tabPageBibliothecaire.Size = new System.Drawing.Size(878, 565);
             this.tabPageBibliothecaire.TabIndex = 1;
             this.tabPageBibliothecaire.Text = "Bibliothécaire";
             this.tabPageBibliothecaire.UseVisualStyleBackColor = true;
@@ -271,7 +296,7 @@
             this.Login,
             this.Nom,
             this.Prenom});
-            this.dataGridViewBibliothecaire.Location = new System.Drawing.Point(207, 55);
+            this.dataGridViewBibliothecaire.Location = new System.Drawing.Point(214, 55);
             this.dataGridViewBibliothecaire.Name = "dataGridViewBibliothecaire";
             this.dataGridViewBibliothecaire.Size = new System.Drawing.Size(526, 453);
             this.dataGridViewBibliothecaire.TabIndex = 8;
@@ -434,7 +459,7 @@
             this.tabPageAdherent.Controls.Add(this.label11);
             this.tabPageAdherent.Location = new System.Drawing.Point(4, 22);
             this.tabPageAdherent.Name = "tabPageAdherent";
-            this.tabPageAdherent.Size = new System.Drawing.Size(736, 511);
+            this.tabPageAdherent.Size = new System.Drawing.Size(878, 565);
             this.tabPageAdherent.TabIndex = 2;
             this.tabPageAdherent.Text = "Adhérent";
             this.tabPageAdherent.UseVisualStyleBackColor = true;
@@ -709,7 +734,7 @@
             this.tabPageLivre.Controls.Add(this.textBoxLivreId);
             this.tabPageLivre.Location = new System.Drawing.Point(4, 22);
             this.tabPageLivre.Name = "tabPageLivre";
-            this.tabPageLivre.Size = new System.Drawing.Size(736, 511);
+            this.tabPageLivre.Size = new System.Drawing.Size(878, 565);
             this.tabPageLivre.TabIndex = 3;
             this.tabPageLivre.Text = "Livre";
             this.tabPageLivre.UseVisualStyleBackColor = true;
@@ -778,6 +803,7 @@
             // dataGridViewLivre
             // 
             this.dataGridViewLivre.AllowUserToAddRows = false;
+            this.dataGridViewLivre.AllowUserToDeleteRows = false;
             this.dataGridViewLivre.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -919,7 +945,7 @@
             this.tabPageAuteur.Location = new System.Drawing.Point(4, 22);
             this.tabPageAuteur.Name = "tabPageAuteur";
             this.tabPageAuteur.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAuteur.Size = new System.Drawing.Size(736, 511);
+            this.tabPageAuteur.Size = new System.Drawing.Size(878, 565);
             this.tabPageAuteur.TabIndex = 4;
             this.tabPageAuteur.Text = "Auteur";
             this.tabPageAuteur.UseVisualStyleBackColor = true;
@@ -1032,11 +1058,187 @@
             this.label22.TabIndex = 0;
             this.label22.Text = "id";
             // 
+            // tabPageEmprunt
+            // 
+            this.tabPageEmprunt.Controls.Add(this.buttonListeRetards);
+            this.tabPageEmprunt.Controls.Add(this.dataGridViewEmprunt);
+            this.tabPageEmprunt.Controls.Add(this.buttonRendre);
+            this.tabPageEmprunt.Controls.Add(this.buttonEmprunt);
+            this.tabPageEmprunt.Controls.Add(this.dateTimePickerDateRetour);
+            this.tabPageEmprunt.Controls.Add(this.label28);
+            this.tabPageEmprunt.Controls.Add(this.label27);
+            this.tabPageEmprunt.Controls.Add(this.dateTimePickerDateEmprunt);
+            this.tabPageEmprunt.Controls.Add(this.textBoxIDLivre);
+            this.tabPageEmprunt.Controls.Add(this.label26);
+            this.tabPageEmprunt.Controls.Add(this.textBoxIDAdherent);
+            this.tabPageEmprunt.Controls.Add(this.label25);
+            this.tabPageEmprunt.Location = new System.Drawing.Point(4, 22);
+            this.tabPageEmprunt.Name = "tabPageEmprunt";
+            this.tabPageEmprunt.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageEmprunt.Size = new System.Drawing.Size(878, 565);
+            this.tabPageEmprunt.TabIndex = 5;
+            this.tabPageEmprunt.Text = "Emprunt";
+            this.tabPageEmprunt.UseVisualStyleBackColor = true;
+            this.tabPageEmprunt.Enter += new System.EventHandler(this.tabPageEmprunt_Enter);
+            // 
+            // buttonListeRetards
+            // 
+            this.buttonListeRetards.Location = new System.Drawing.Point(279, 381);
+            this.buttonListeRetards.Name = "buttonListeRetards";
+            this.buttonListeRetards.Size = new System.Drawing.Size(121, 23);
+            this.buttonListeRetards.TabIndex = 6;
+            this.buttonListeRetards.Text = "Liste des retards";
+            this.buttonListeRetards.UseVisualStyleBackColor = true;
+            this.buttonListeRetards.Click += new System.EventHandler(this.buttonListeRetards_Click);
+            // 
+            // dataGridViewEmprunt
+            // 
+            this.dataGridViewEmprunt.AllowUserToAddRows = false;
+            this.dataGridViewEmprunt.AllowUserToDeleteRows = false;
+            this.dataGridViewEmprunt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewEmprunt.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IdAdherent,
+            this.NomAdherent,
+            this.PrenomAdherent,
+            this.IdLivre,
+            this.TitreLivre,
+            this.DateEmprunt,
+            this.DateRetour});
+            this.dataGridViewEmprunt.Location = new System.Drawing.Point(226, 54);
+            this.dataGridViewEmprunt.Name = "dataGridViewEmprunt";
+            this.dataGridViewEmprunt.Size = new System.Drawing.Size(649, 283);
+            this.dataGridViewEmprunt.TabIndex = 7;
+            // 
+            // IdAdherent
+            // 
+            this.IdAdherent.HeaderText = "ID Adherent";
+            this.IdAdherent.Name = "IdAdherent";
+            // 
+            // NomAdherent
+            // 
+            this.NomAdherent.HeaderText = "Nom Adherent";
+            this.NomAdherent.Name = "NomAdherent";
+            // 
+            // PrenomAdherent
+            // 
+            this.PrenomAdherent.HeaderText = "Prenom Adherent";
+            this.PrenomAdherent.Name = "PrenomAdherent";
+            // 
+            // IdLivre
+            // 
+            this.IdLivre.HeaderText = "ID Livre";
+            this.IdLivre.Name = "IdLivre";
+            // 
+            // TitreLivre
+            // 
+            this.TitreLivre.HeaderText = "Titre";
+            this.TitreLivre.Name = "TitreLivre";
+            // 
+            // DateEmprunt
+            // 
+            this.DateEmprunt.HeaderText = "Date Emprunt";
+            this.DateEmprunt.Name = "DateEmprunt";
+            // 
+            // DateRetour
+            // 
+            this.DateRetour.HeaderText = "Date Retour";
+            this.DateRetour.Name = "DateRetour";
+            // 
+            // buttonRendre
+            // 
+            this.buttonRendre.Location = new System.Drawing.Point(142, 381);
+            this.buttonRendre.Name = "buttonRendre";
+            this.buttonRendre.Size = new System.Drawing.Size(75, 23);
+            this.buttonRendre.TabIndex = 5;
+            this.buttonRendre.Text = "Rendre";
+            this.buttonRendre.UseVisualStyleBackColor = true;
+            this.buttonRendre.Click += new System.EventHandler(this.buttonRendre_Click);
+            // 
+            // buttonEmprunt
+            // 
+            this.buttonEmprunt.Location = new System.Drawing.Point(24, 381);
+            this.buttonEmprunt.Name = "buttonEmprunt";
+            this.buttonEmprunt.Size = new System.Drawing.Size(75, 23);
+            this.buttonEmprunt.TabIndex = 4;
+            this.buttonEmprunt.Text = "Emprunter";
+            this.buttonEmprunt.UseVisualStyleBackColor = true;
+            this.buttonEmprunt.Click += new System.EventHandler(this.buttonEmprunt_Click);
+            // 
+            // dateTimePickerDateRetour
+            // 
+            this.dateTimePickerDateRetour.CustomFormat = "dd/MM/yyyy";
+            this.dateTimePickerDateRetour.Enabled = false;
+            this.dateTimePickerDateRetour.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePickerDateRetour.Location = new System.Drawing.Point(105, 156);
+            this.dateTimePickerDateRetour.Name = "dateTimePickerDateRetour";
+            this.dateTimePickerDateRetour.Size = new System.Drawing.Size(97, 20);
+            this.dateTimePickerDateRetour.TabIndex = 3;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(21, 164);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(65, 13);
+            this.label28.TabIndex = 6;
+            this.label28.Text = "Date Retour";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(21, 127);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(75, 13);
+            this.label27.TabIndex = 5;
+            this.label27.Text = "Date  Emprunt";
+            // 
+            // dateTimePickerDateEmprunt
+            // 
+            this.dateTimePickerDateEmprunt.CustomFormat = "dd/MM/yyyy";
+            this.dateTimePickerDateEmprunt.Enabled = false;
+            this.dateTimePickerDateEmprunt.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePickerDateEmprunt.Location = new System.Drawing.Point(105, 121);
+            this.dateTimePickerDateEmprunt.Name = "dateTimePickerDateEmprunt";
+            this.dateTimePickerDateEmprunt.Size = new System.Drawing.Size(97, 20);
+            this.dateTimePickerDateEmprunt.TabIndex = 2;
+            // 
+            // textBoxIDLivre
+            // 
+            this.textBoxIDLivre.Location = new System.Drawing.Point(88, 89);
+            this.textBoxIDLivre.Name = "textBoxIDLivre";
+            this.textBoxIDLivre.Size = new System.Drawing.Size(100, 20);
+            this.textBoxIDLivre.TabIndex = 1;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(21, 89);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(44, 13);
+            this.label26.TabIndex = 2;
+            this.label26.Text = "ID Livre";
+            // 
+            // textBoxIDAdherent
+            // 
+            this.textBoxIDAdherent.Location = new System.Drawing.Point(88, 54);
+            this.textBoxIDAdherent.Name = "textBoxIDAdherent";
+            this.textBoxIDAdherent.Size = new System.Drawing.Size(100, 20);
+            this.textBoxIDAdherent.TabIndex = 0;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(21, 54);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(64, 13);
+            this.label25.TabIndex = 0;
+            this.label25.Text = "ID Adherent";
+            // 
             // FormBiBliotheque
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(836, 539);
+            this.ClientSize = new System.Drawing.Size(889, 602);
             this.Controls.Add(this.tabControlBibliotheque);
             this.Name = "FormBiBliotheque";
             this.Text = "Bienvenue à la bibliothèque";
@@ -1056,6 +1258,9 @@
             this.tabPageAuteur.ResumeLayout(false);
             this.tabPageAuteur.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAuteur)).EndInit();
+            this.tabPageEmprunt.ResumeLayout(false);
+            this.tabPageEmprunt.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmprunt)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1160,6 +1365,26 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.ComboBox comboBoxLivreAuteurPrenom;
+        private System.Windows.Forms.TabPage tabPageEmprunt;
+        private System.Windows.Forms.DataGridView dataGridViewEmprunt;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdAdherent;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NomAdherent;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PrenomAdherent;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdLivre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TitreLivre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DateEmprunt;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DateRetour;
+        private System.Windows.Forms.Button buttonRendre;
+        private System.Windows.Forms.Button buttonEmprunt;
+        private System.Windows.Forms.DateTimePicker dateTimePickerDateRetour;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.DateTimePicker dateTimePickerDateEmprunt;
+        private System.Windows.Forms.TextBox textBoxIDLivre;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.TextBox textBoxIDAdherent;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Button buttonListeRetards;
     }
 }
 
