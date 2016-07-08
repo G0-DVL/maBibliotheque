@@ -904,7 +904,8 @@ namespace ClientLourd
                         oLivre.livre_titre,
                         oLivre.livre_annee_parution,
                         oGenreTrouve.genre_libelle,
-                        oAuteurTrouve.auteur_prenom + " " + oAuteurTrouve.auteur_nom,
+                        oAuteurTrouve.auteur_nom,
+                        oAuteurTrouve.auteur_prenom,
                         oEmplacementTrouve.emplacement_libelle
                     );
                 }
@@ -956,6 +957,22 @@ namespace ClientLourd
                             oLivre.livre_annee_parution = dateTimePickerLivreAnneeParution.Value;
                             oDataGridViewRow.Cells[2].Value = dateTimePickerLivreAnneeParution.Value;
 
+                            var oGenreQuery = from tableGenre in monContext.genres
+                                              where tableGenre.genre_libelle == comboBoxLivreGenre.Text
+                                              select tableGenre;
+                            genre oGenreTrouve = oGenreQuery.FirstOrDefault();
+                            if (oGenreTrouve == null)
+                            {
+                                oGenreTrouve = new genre
+                                {
+                                    genre_libelle = comboBoxLivreGenre.Text
+                                };
+                                monContext.genres.Add(oGenreTrouve);
+                                monContext.SaveChanges();
+                            }
+                            oLivre.genre_ID = oGenreTrouve.genre_ID;
+                            oDataGridViewRow.Cells[3].Value = oGenreTrouve.genre_libelle;
+
                             var oAuteurQuery = from tableAuteur in monContext.auteurs
                                                where tableAuteur.auteur_nom == comboBoxLivreAuteurNom.Text
                                                && tableAuteur.auteur_prenom == comboBoxLivreAuteurPrenom.Text
@@ -978,23 +995,8 @@ namespace ClientLourd
                                 );
                             }
                             oLivre.auteur_ID = oAuteurTrouve.auteur_ID;
-                            oDataGridViewRow.Cells[4].Value = oAuteurTrouve.auteur_prenom + " " + oAuteurTrouve.auteur_nom;
-
-                            var oGenreQuery = from tableGenre in monContext.genres
-                                              where tableGenre.genre_libelle == comboBoxLivreGenre.Text
-                                              select tableGenre;
-                            genre oGenreTrouve = oGenreQuery.FirstOrDefault();
-                            if (oGenreTrouve == null)
-                            {
-                                oGenreTrouve = new genre
-                                {
-                                    genre_libelle = comboBoxLivreGenre.Text
-                                };
-                                monContext.genres.Add(oGenreTrouve);
-                                monContext.SaveChanges();
-                            }
-                            oLivre.genre_ID = oGenreTrouve.genre_ID;
-                            oDataGridViewRow.Cells[3].Value = oGenreTrouve.genre_libelle;
+                            oDataGridViewRow.Cells[4].Value = oAuteurTrouve.auteur_nom;
+                            oDataGridViewRow.Cells[5].Value = oAuteurTrouve.auteur_prenom;
 
                             var oEmplacementQuery = from tableEmplacement in monContext.emplacements
                                                     where tableEmplacement.emplacement_libelle == comboBoxLivreEmplacement.Text
@@ -1010,7 +1012,7 @@ namespace ClientLourd
                                 monContext.SaveChanges();
                             }
                             oLivre.emplacement_ID = oEmplacementTrouve.emplacement_ID;
-                            oDataGridViewRow.Cells[5].Value = oEmplacementTrouve.emplacement_libelle;
+                            oDataGridViewRow.Cells[6].Value = oEmplacementTrouve.emplacement_libelle;
 
                             break;
                         }
@@ -1047,12 +1049,20 @@ namespace ClientLourd
 
                 using (maBibliothequeEntities monContext = new maBibliothequeEntities())
                 {   //  On va rechercher en base si l'ID du livre éxiste toujours
+                    var iLivreId = int.Parse(textBoxLivreId.Text);
                     var oLivre = monContext.livres.Find(int.Parse(textBoxLivreId.Text));
                     if (oLivre == null)
                     {   //  Si on le trouve pas, l'objet est null et on a rien à supprimer !
                         throw new Exception("Le livre avec un ID " + textBoxLivreId.Text + " n'éxiste pas !");
                     }
 
+                    var oEmprunter = monContext.emprunters.Where(tableEmprunter => tableEmprunter.livre_ID == iLivreId).FirstOrDefault();
+                    if (oEmprunter != null)
+                    {
+                        //si on trouve des emprunts pour l'usager ne pas le supprimer
+                        throw new Exception("Le livre n'a pas encore été rendu. On ne peut le supprimer !");
+
+                    }
                     monContext.livres.Remove(oLivre); //  On supprime le livre
                     monContext.SaveChanges();   //  On sauvegarde les données
 
@@ -1133,7 +1143,7 @@ namespace ClientLourd
                 if (null != dAnneeParution)
                 {
                     oLivreQuery = oLivreQuery.Where(
-                        tableLivre => tableLivre.livre_annee_parution == dAnneeParution
+                        tableLivre => tableLivre.livre_annee_parution.Value.Year == dAnneeParution.Value.Year
                     );
                 }
 
@@ -1174,7 +1184,8 @@ namespace ClientLourd
                         oResult.livre_titre,
                         oResult.livre_annee_parution,
                         oResult.genre_libelle,
-                        oResult.auteur_prenom + " " + oResult.auteur_nom,
+                        oResult.auteur_nom,
+                        oResult.auteur_prenom,
                         oResult.emplacement_libelle
                     );
                 }
@@ -1232,6 +1243,34 @@ namespace ClientLourd
                     }
                 }
             }
+        }
+        
+        private void dataGridViewLivre_CellStateChanged(object sender, DataGridViewCellStateChangedEventArgs e)
+        {
+            dataGridViewLivre_StateChanged();
+        }
+
+        private void dataGridViewLivre_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
+        {
+            dataGridViewLivre_StateChanged();
+        }
+
+        private void dataGridViewLivre_StateChanged()
+        {
+            DataGridViewSelectedCellCollection oCellCollection = dataGridViewLivre.SelectedCells;
+            if (0 == oCellCollection.Count)
+            {
+                return;
+            }
+            DataGridViewCellCollection oRowCells = oCellCollection[0].OwningRow.Cells;
+
+            textBoxLivreId.Text = oRowCells[0].Value.ToString();
+            textBoxLivreTitre.Text = oRowCells[1].Value.ToString();
+            dateTimePickerLivreAnneeParution.Value = (DateTime)oRowCells[2].Value;
+            comboBoxLivreGenre.Text = oRowCells[3].Value.ToString();
+            comboBoxLivreAuteurNom.Text = oRowCells[4].Value.ToString();
+            comboBoxLivreAuteurPrenom.Text = oRowCells[5].Value.ToString();
+            comboBoxLivreEmplacement.Text = oRowCells[6].Value.ToString();
         }
 
         #endregion tabPageLivre
@@ -1396,6 +1435,64 @@ namespace ClientLourd
             }
         }
 
+        private void buttonAuteurRechercher_Click(object sender, EventArgs e)
+        {
+            buttonAuteurAfficherTout.Visible = true;
+            rechercherAuteur(
+                textBoxAuteurId.Text,
+                textBoxAuteurNom.Text,
+                textBoxAuteurPrenom.Text
+            );
+        }
+
+        private void buttonAuteurAfficherTout_Click(object sender, EventArgs e)
+        {
+            buttonAuteurAfficherTout.Visible = false;
+            rechercherAuteur();
+        }
+
+        private void rechercherAuteur(string sId = "", string sAuteurNom = "", string sAuteurPrenom = "")
+        {
+            using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+            {
+                var oAuteurQuery = from tableAuteur in monContext.auteurs
+                                   select tableAuteur;
+                if ("" != sId)
+                {
+                    int iAuteurId = int.Parse(sId);
+                    oAuteurQuery = oAuteurQuery.Where(
+                        tableAuteur => tableAuteur.auteur_ID == iAuteurId
+                    );
+                }
+
+                if ("" != sAuteurNom)
+                {
+                    oAuteurQuery = oAuteurQuery.Where(
+                        tableAuteur => tableAuteur.auteur_nom.Contains(sAuteurNom)
+                    );
+                }
+
+
+                if ("" != sAuteurPrenom)
+                {
+                    oAuteurQuery = oAuteurQuery.Where(
+                        tableAuteur => tableAuteur.auteur_prenom.Contains(sAuteurPrenom)
+                    );
+                }
+
+                var oListResultats = oAuteurQuery.ToList();
+                dataGridViewAuteur.Rows.Clear();
+                foreach (auteur oAuteur in oListResultats)
+                {
+                    dataGridViewAuteur.Rows.Add(
+                        oAuteur.auteur_ID,
+                        oAuteur.auteur_nom,
+                        oAuteur.auteur_prenom
+                    );
+                }
+            }
+        }
+
         private void tabPageAuteur_Enter(object sender, EventArgs e)
         {
             dataGridViewAuteur.Rows.Clear();
@@ -1451,7 +1548,7 @@ namespace ClientLourd
             string sMessageDErreur = "";
             try
             {
-                if ("" == textBoxIDAdherent.Text || "" == textBoxIDLivre.Text)
+                if ("" == textBoxEmprunterAdherentId.Text || "" == textBoxEmprunterLivreId.Text)
                 {   //  Il nous faut obligatoirement l'ID pour continuer
                     sMessageDErreur += "\n" + "- Vous devez saisir l'ID de l'adherent et l'ID du livre";
                 }
@@ -1464,21 +1561,21 @@ namespace ClientLourd
 
                 using (maBibliothequeEntities monContext = new maBibliothequeEntities())
                 {   //  On va rechercher en base si l'ID de l'adherent éxiste toujours
-                    var oEmpruntAdherent = monContext.adherents.Find(int.Parse(textBoxIDAdherent.Text));
+                    var oEmpruntAdherent = monContext.adherents.Find(int.Parse(textBoxEmprunterAdherentId.Text));
                     if (oEmpruntAdherent == null)
                     {   //  Si on le trouve pas, l'adherent n'est pas trouvé !
-                        throw new Exception("L'adherent avec un ID " + textBoxIDAdherent.Text + " n'éxiste pas !");
+                        throw new Exception("L'adherent avec un ID " + textBoxEmprunterAdherentId.Text + " n'éxiste pas !");
                     }
 
-                    var oEmpruntLivre = monContext.livres.Find(int.Parse(textBoxIDLivre.Text));
+                    var oEmpruntLivre = monContext.livres.Find(int.Parse(textBoxEmprunterLivreId.Text));
                     if (oEmpruntLivre == null)
                     {   //  Si on le trouve pas, le livre n'est pas trouvé !
-                        throw new Exception("Le livre avec un ID " + textBoxIDLivre.Text + " n'éxiste pas !");
+                        throw new Exception("Le livre avec un ID " + textBoxEmprunterLivreId.Text + " n'éxiste pas !");
                     }
 
                     // verifier qu'il n'y a pas 5 emprunts 
 
-                    int iAdherentId = int.Parse(textBoxIDAdherent.Text);
+                    int iAdherentId = int.Parse(textBoxEmprunterAdherentId.Text);
                     if (monContext.emprunters.Count(t => t.adherent_ID == iAdherentId)>4)
                     {
                         throw new Exception("l'adherent a déjà 5 emprunts ! Nouvel emprunt non autorisé ");
@@ -1497,7 +1594,7 @@ namespace ClientLourd
                     monContext.SaveChanges();   //  puis nous sauvegardons le tout dans la base
 
                     // Remplir la dataGridView avec les informations de l'emprunt
-                    dataGridViewEmprunt.Rows.Add(
+                    dataGridViewEmprunter.Rows.Add(
                         oEmpruntAdherent.adherent_ID,
                         oEmpruntAdherent.adherent_nom,
                         oEmpruntAdherent.adherent_prenom,
@@ -1518,7 +1615,7 @@ namespace ClientLourd
 
         private void tabPageEmprunt_Enter(object sender, EventArgs e)
         {
-            if (0 == dataGridViewEmprunt.Rows.Count)
+            if (0 == dataGridViewEmprunter.Rows.Count)
             {
                 dateTimePickerDateRetour.Value = dateTimePickerDateEmprunt.Value.AddDays(21);
                 buttonEmpruntAfficherTout_Click(sender, e);
@@ -1533,7 +1630,7 @@ namespace ClientLourd
             string sMessageDErreur = "";
             try
             {
-                if ("" == textBoxIDAdherent.Text || "" == textBoxIDLivre.Text)
+                if ("" == textBoxEmprunterAdherentId.Text || "" == textBoxEmprunterLivreId.Text)
                 {   //  Il nous faut obligatoirement l'ID pour continuer
                     sMessageDErreur += "\n" + "- Vous devez saisir l'ID de l'adherent et l'ID du livre";
                 }
@@ -1546,20 +1643,20 @@ namespace ClientLourd
 
                 using (maBibliothequeEntities monContext = new maBibliothequeEntities())
                 {
-                    int iAdherentId = int.Parse(textBoxIDAdherent.Text);
-                    int iLivreId = int.Parse(textBoxIDLivre.Text);
+                    int iAdherentId = int.Parse(textBoxEmprunterAdherentId.Text);
+                    int iLivreId = int.Parse(textBoxEmprunterLivreId.Text);
                     var oEmprunt = monContext.emprunters.Where(t => t.adherent_ID == iAdherentId && t.livre_ID == iLivreId).FirstOrDefault();
                     monContext.emprunters.Remove(oEmprunt); //  On supprime l'emprunt
                     monContext.SaveChanges();   //  On sauvegarde les données
 
                     //  Nous recherchons dans la DataGridView l'emprunt supprimé et nous l'enlevons du DataGridView
-                    foreach (DataGridViewRow oDataGridViewRow in dataGridViewEmprunt.Rows)
+                    foreach (DataGridViewRow oDataGridViewRow in dataGridViewEmprunter.Rows)
                     {
                         if (oEmprunt.adherent_ID == (int)oDataGridViewRow.Cells[0].Value
                             && oEmprunt.livre_ID == (int)oDataGridViewRow.Cells[3].Value
                             )
                         {
-                            dataGridViewEmprunt.Rows.Remove(oDataGridViewRow);
+                            dataGridViewEmprunter.Rows.Remove(oDataGridViewRow);
                             break;
                         }
                     }
@@ -1579,7 +1676,7 @@ namespace ClientLourd
         {
             // Effacer le dataGrid précédent 
 
-            dataGridViewEmprunt.Rows.Clear();
+            dataGridViewEmprunter.Rows.Clear();
 
 
             // Traitement des retards : liste des retards dans le DataGrid
@@ -1606,7 +1703,7 @@ namespace ClientLourd
 
                 foreach (var empr in listEmprunt)
                 {
-                    dataGridViewEmprunt.Rows.Add(
+                    dataGridViewEmprunter.Rows.Add(
                         empr.adherent_ID,
                         empr.adherent_nom,
                         empr.adherent_prenom,
@@ -1626,7 +1723,7 @@ namespace ClientLourd
         {
             // reenitialiser le dataGridViewEmprunt
 
-            dataGridViewEmprunt.Rows.Clear();
+            dataGridViewEmprunter.Rows.Clear();
 
             using (maBibliothequeEntities monContext = new maBibliothequeEntities())
             {   //  On liste les emprunts en cours
@@ -1650,7 +1747,7 @@ namespace ClientLourd
 
                 foreach (var empr in listEmprunt)
                 {
-                    dataGridViewEmprunt.Rows.Add(
+                    dataGridViewEmprunter.Rows.Add(
                         empr.adherent_ID,
                         empr.adherent_nom,
                         empr.adherent_prenom,
@@ -1662,6 +1759,31 @@ namespace ClientLourd
                         );
                 }
             }
+        }
+
+        private void dataGridViewEmprunter_CellStateChanged(object sender, DataGridViewCellStateChangedEventArgs e)
+        {
+            dataGridViewEmprunter_StateChanged();
+        }
+
+        private void dataGridViewEmprunter_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
+        {
+            dataGridViewEmprunter_StateChanged();
+        }
+
+        private void dataGridViewEmprunter_StateChanged()
+        {
+            DataGridViewSelectedCellCollection oCellCollection = dataGridViewEmprunter.SelectedCells;
+            if (0 == oCellCollection.Count)
+            {
+                return;
+            }
+            DataGridViewCellCollection oRowCells = oCellCollection[0].OwningRow.Cells;
+
+            textBoxEmprunterAdherentId.Text = oRowCells[0].Value.ToString();
+            textBoxEmprunterLivreId.Text = oRowCells[1].Value.ToString();
+            //  dateTimePickerDateEmprunt.Value = (DateTime)oRowCells[2].Value;
+            //  dateTimePickerDateRetour.Value = (DateTime)oRowCells[3].Value;
         }
 
         #endregion tabPageEmprunt

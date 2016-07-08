@@ -97,12 +97,6 @@
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.dataGridViewLivre = new System.Windows.Forms.DataGridView();
-            this.LivreId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LivreTitre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LivreAnneeParution = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LivreGenreId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LivreAuteurId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LivreEmplacementId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonLivreSuppression = new System.Windows.Forms.Button();
             this.buttonLivreModification = new System.Windows.Forms.Button();
             this.buttonLivreCreation = new System.Windows.Forms.Button();
@@ -128,7 +122,7 @@
             this.label22 = new System.Windows.Forms.Label();
             this.tabPageEmprunt = new System.Windows.Forms.TabPage();
             this.buttonListeRetards = new System.Windows.Forms.Button();
-            this.dataGridViewEmprunt = new System.Windows.Forms.DataGridView();
+            this.dataGridViewEmprunter = new System.Windows.Forms.DataGridView();
             this.IdAdherent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NomAdherent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PrenomAdherent = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -142,9 +136,9 @@
             this.label28 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.dateTimePickerDateEmprunt = new System.Windows.Forms.DateTimePicker();
-            this.textBoxIDLivre = new System.Windows.Forms.TextBox();
+            this.textBoxEmprunterLivreId = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
-            this.textBoxIDAdherent = new System.Windows.Forms.TextBox();
+            this.textBoxEmprunterAdherentId = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
             this.buttonEmpruntAfficherTout = new System.Windows.Forms.Button();
             this.buttonBibliothecaireRechercher = new System.Windows.Forms.Button();
@@ -153,6 +147,15 @@
             this.buttonAdherentRechercher = new System.Windows.Forms.Button();
             this.buttonLivreAfficherTout = new System.Windows.Forms.Button();
             this.buttonLivreRechercher = new System.Windows.Forms.Button();
+            this.LivreId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LivreTitre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LivreAnneeParution = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LivreGenreLibelle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LivreAuteurNom = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LivreAuteurPrenom = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LivreEmplacementLibelle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonAuteurAfficherTout = new System.Windows.Forms.Button();
+            this.buttonAuteurRechercher = new System.Windows.Forms.Button();
             this.tabControlBibliotheque.SuspendLayout();
             this.tabPageIdentification.SuspendLayout();
             this.panelIdentification.SuspendLayout();
@@ -165,7 +168,7 @@
             this.tabPageAuteur.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAuteur)).BeginInit();
             this.tabPageEmprunt.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmprunt)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmprunter)).BeginInit();
             this.SuspendLayout();
             // 
             // TextBoxLogin
@@ -825,43 +828,16 @@
             this.LivreId,
             this.LivreTitre,
             this.LivreAnneeParution,
-            this.LivreGenreId,
-            this.LivreAuteurId,
-            this.LivreEmplacementId});
+            this.LivreGenreLibelle,
+            this.LivreAuteurNom,
+            this.LivreAuteurPrenom,
+            this.LivreEmplacementLibelle});
             this.dataGridViewLivre.Location = new System.Drawing.Point(200, 9);
             this.dataGridViewLivre.Name = "dataGridViewLivre";
             this.dataGridViewLivre.Size = new System.Drawing.Size(675, 553);
             this.dataGridViewLivre.TabIndex = 12;
-            // 
-            // LivreId
-            // 
-            this.LivreId.HeaderText = "Id";
-            this.LivreId.Name = "LivreId";
-            // 
-            // LivreTitre
-            // 
-            this.LivreTitre.HeaderText = "Titre";
-            this.LivreTitre.Name = "LivreTitre";
-            // 
-            // LivreAnneeParution
-            // 
-            this.LivreAnneeParution.HeaderText = "Annee Parution";
-            this.LivreAnneeParution.Name = "LivreAnneeParution";
-            // 
-            // LivreGenreId
-            // 
-            this.LivreGenreId.HeaderText = "Genre";
-            this.LivreGenreId.Name = "LivreGenreId";
-            // 
-            // LivreAuteurId
-            // 
-            this.LivreAuteurId.HeaderText = "Auteur";
-            this.LivreAuteurId.Name = "LivreAuteurId";
-            // 
-            // LivreEmplacementId
-            // 
-            this.LivreEmplacementId.HeaderText = "Emplacement";
-            this.LivreEmplacementId.Name = "LivreEmplacementId";
+            this.dataGridViewLivre.CellStateChanged += new System.Windows.Forms.DataGridViewCellStateChangedEventHandler(this.dataGridViewLivre_CellStateChanged);
+            this.dataGridViewLivre.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dataGridViewLivre_RowStateChanged);
             // 
             // buttonLivreSuppression
             // 
@@ -945,6 +921,8 @@
             // 
             // tabPageAuteur
             // 
+            this.tabPageAuteur.Controls.Add(this.buttonAuteurAfficherTout);
+            this.tabPageAuteur.Controls.Add(this.buttonAuteurRechercher);
             this.tabPageAuteur.Controls.Add(this.dataGridViewAuteur);
             this.tabPageAuteur.Controls.Add(this.buttonAuteurSuppression);
             this.tabPageAuteur.Controls.Add(this.buttonAuteurModification);
@@ -980,6 +958,8 @@
             this.dataGridViewAuteur.Name = "dataGridViewAuteur";
             this.dataGridViewAuteur.Size = new System.Drawing.Size(675, 553);
             this.dataGridViewAuteur.TabIndex = 9;
+            this.dataGridViewAuteur.CellStateChanged += new System.Windows.Forms.DataGridViewCellStateChangedEventHandler(this.dataGridViewAuteur_CellStateChanged);
+            this.dataGridViewAuteur.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dataGridViewAuteur_RowStateChanged);
             // 
             // AuteurID
             // 
@@ -1078,16 +1058,16 @@
             // 
             this.tabPageEmprunt.Controls.Add(this.buttonEmpruntAfficherTout);
             this.tabPageEmprunt.Controls.Add(this.buttonListeRetards);
-            this.tabPageEmprunt.Controls.Add(this.dataGridViewEmprunt);
+            this.tabPageEmprunt.Controls.Add(this.dataGridViewEmprunter);
             this.tabPageEmprunt.Controls.Add(this.buttonRendre);
             this.tabPageEmprunt.Controls.Add(this.buttonEmprunt);
             this.tabPageEmprunt.Controls.Add(this.dateTimePickerDateRetour);
             this.tabPageEmprunt.Controls.Add(this.label28);
             this.tabPageEmprunt.Controls.Add(this.label27);
             this.tabPageEmprunt.Controls.Add(this.dateTimePickerDateEmprunt);
-            this.tabPageEmprunt.Controls.Add(this.textBoxIDLivre);
+            this.tabPageEmprunt.Controls.Add(this.textBoxEmprunterLivreId);
             this.tabPageEmprunt.Controls.Add(this.label26);
-            this.tabPageEmprunt.Controls.Add(this.textBoxIDAdherent);
+            this.tabPageEmprunt.Controls.Add(this.textBoxEmprunterAdherentId);
             this.tabPageEmprunt.Controls.Add(this.label25);
             this.tabPageEmprunt.Location = new System.Drawing.Point(4, 22);
             this.tabPageEmprunt.Name = "tabPageEmprunt";
@@ -1108,15 +1088,15 @@
             this.buttonListeRetards.UseVisualStyleBackColor = true;
             this.buttonListeRetards.Click += new System.EventHandler(this.buttonListeRetards_Click);
             // 
-            // dataGridViewEmprunt
+            // dataGridViewEmprunter
             // 
-            this.dataGridViewEmprunt.AllowUserToAddRows = false;
-            this.dataGridViewEmprunt.AllowUserToDeleteRows = false;
-            this.dataGridViewEmprunt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dataGridViewEmprunter.AllowUserToAddRows = false;
+            this.dataGridViewEmprunter.AllowUserToDeleteRows = false;
+            this.dataGridViewEmprunter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridViewEmprunt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewEmprunt.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewEmprunter.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewEmprunter.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdAdherent,
             this.NomAdherent,
             this.PrenomAdherent,
@@ -1124,10 +1104,10 @@
             this.TitreLivre,
             this.DateEmprunt,
             this.DateRetour});
-            this.dataGridViewEmprunt.Location = new System.Drawing.Point(200, 9);
-            this.dataGridViewEmprunt.Name = "dataGridViewEmprunt";
-            this.dataGridViewEmprunt.Size = new System.Drawing.Size(675, 553);
-            this.dataGridViewEmprunt.TabIndex = 7;
+            this.dataGridViewEmprunter.Location = new System.Drawing.Point(200, 9);
+            this.dataGridViewEmprunter.Name = "dataGridViewEmprunter";
+            this.dataGridViewEmprunter.Size = new System.Drawing.Size(675, 553);
+            this.dataGridViewEmprunter.TabIndex = 7;
             // 
             // IdAdherent
             // 
@@ -1222,12 +1202,12 @@
             this.dateTimePickerDateEmprunt.Size = new System.Drawing.Size(100, 20);
             this.dateTimePickerDateEmprunt.TabIndex = 2;
             // 
-            // textBoxIDLivre
+            // textBoxEmprunterLivreId
             // 
-            this.textBoxIDLivre.Location = new System.Drawing.Point(94, 35);
-            this.textBoxIDLivre.Name = "textBoxIDLivre";
-            this.textBoxIDLivre.Size = new System.Drawing.Size(100, 20);
-            this.textBoxIDLivre.TabIndex = 1;
+            this.textBoxEmprunterLivreId.Location = new System.Drawing.Point(94, 35);
+            this.textBoxEmprunterLivreId.Name = "textBoxEmprunterLivreId";
+            this.textBoxEmprunterLivreId.Size = new System.Drawing.Size(100, 20);
+            this.textBoxEmprunterLivreId.TabIndex = 1;
             // 
             // label26
             // 
@@ -1238,12 +1218,12 @@
             this.label26.TabIndex = 2;
             this.label26.Text = "ID Livre";
             // 
-            // textBoxIDAdherent
+            // textBoxEmprunterAdherentId
             // 
-            this.textBoxIDAdherent.Location = new System.Drawing.Point(94, 9);
-            this.textBoxIDAdherent.Name = "textBoxIDAdherent";
-            this.textBoxIDAdherent.Size = new System.Drawing.Size(100, 20);
-            this.textBoxIDAdherent.TabIndex = 0;
+            this.textBoxEmprunterAdherentId.Location = new System.Drawing.Point(94, 9);
+            this.textBoxEmprunterAdherentId.Name = "textBoxEmprunterAdherentId";
+            this.textBoxEmprunterAdherentId.Size = new System.Drawing.Size(100, 20);
+            this.textBoxEmprunterAdherentId.TabIndex = 0;
             // 
             // label25
             // 
@@ -1326,6 +1306,62 @@
             this.buttonLivreRechercher.UseVisualStyleBackColor = true;
             this.buttonLivreRechercher.Click += new System.EventHandler(this.buttonLivreRechercher_Click);
             // 
+            // LivreId
+            // 
+            this.LivreId.HeaderText = "Id";
+            this.LivreId.Name = "LivreId";
+            // 
+            // LivreTitre
+            // 
+            this.LivreTitre.HeaderText = "Titre";
+            this.LivreTitre.Name = "LivreTitre";
+            // 
+            // LivreAnneeParution
+            // 
+            this.LivreAnneeParution.HeaderText = "Annee Parution";
+            this.LivreAnneeParution.Name = "LivreAnneeParution";
+            // 
+            // LivreGenreLibelle
+            // 
+            this.LivreGenreLibelle.HeaderText = "Genre";
+            this.LivreGenreLibelle.Name = "LivreGenreLibelle";
+            // 
+            // LivreAuteurNom
+            // 
+            this.LivreAuteurNom.HeaderText = "Nom";
+            this.LivreAuteurNom.Name = "LivreAuteurNom";
+            // 
+            // LivreAuteurPrenom
+            // 
+            this.LivreAuteurPrenom.HeaderText = "Prénom";
+            this.LivreAuteurPrenom.Name = "LivreAuteurPrenom";
+            // 
+            // LivreEmplacementLibelle
+            // 
+            this.LivreEmplacementLibelle.HeaderText = "Emplacement";
+            this.LivreEmplacementLibelle.Name = "LivreEmplacementLibelle";
+            // 
+            // buttonAuteurAfficherTout
+            // 
+            this.buttonAuteurAfficherTout.Location = new System.Drawing.Point(94, 203);
+            this.buttonAuteurAfficherTout.Name = "buttonAuteurAfficherTout";
+            this.buttonAuteurAfficherTout.Size = new System.Drawing.Size(100, 23);
+            this.buttonAuteurAfficherTout.TabIndex = 13;
+            this.buttonAuteurAfficherTout.Text = "Afficher tout";
+            this.buttonAuteurAfficherTout.UseVisualStyleBackColor = true;
+            this.buttonAuteurAfficherTout.Visible = false;
+            this.buttonAuteurAfficherTout.Click += new System.EventHandler(this.buttonAuteurAfficherTout_Click);
+            // 
+            // buttonAuteurRechercher
+            // 
+            this.buttonAuteurRechercher.Location = new System.Drawing.Point(94, 174);
+            this.buttonAuteurRechercher.Name = "buttonAuteurRechercher";
+            this.buttonAuteurRechercher.Size = new System.Drawing.Size(100, 23);
+            this.buttonAuteurRechercher.TabIndex = 12;
+            this.buttonAuteurRechercher.Text = "Rechercher";
+            this.buttonAuteurRechercher.UseVisualStyleBackColor = true;
+            this.buttonAuteurRechercher.Click += new System.EventHandler(this.buttonAuteurRechercher_Click);
+            // 
             // FormBiBliotheque
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1352,7 +1388,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAuteur)).EndInit();
             this.tabPageEmprunt.ResumeLayout(false);
             this.tabPageEmprunt.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmprunt)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmprunter)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1434,12 +1470,6 @@
         private System.Windows.Forms.ComboBox comboBoxLivreAuteurNom;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LivreId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LivreTitre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LivreAnneeParution;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LivreGenreId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LivreAuteurId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LivreEmplacementId;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.ComboBox comboBoxLivreEmplacement;
         private System.Windows.Forms.TabPage tabPageAuteur;
@@ -1458,7 +1488,7 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.ComboBox comboBoxLivreAuteurPrenom;
         private System.Windows.Forms.TabPage tabPageEmprunt;
-        private System.Windows.Forms.DataGridView dataGridViewEmprunt;
+        private System.Windows.Forms.DataGridView dataGridViewEmprunter;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdAdherent;
         private System.Windows.Forms.DataGridViewTextBoxColumn NomAdherent;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrenomAdherent;
@@ -1472,9 +1502,9 @@
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.DateTimePicker dateTimePickerDateEmprunt;
-        private System.Windows.Forms.TextBox textBoxIDLivre;
+        private System.Windows.Forms.TextBox textBoxEmprunterLivreId;
         private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.TextBox textBoxIDAdherent;
+        private System.Windows.Forms.TextBox textBoxEmprunterAdherentId;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Button buttonListeRetards;
         private System.Windows.Forms.Button buttonEmpruntAfficherTout;
@@ -1484,6 +1514,15 @@
         private System.Windows.Forms.Button buttonAdherentRechercher;
         private System.Windows.Forms.Button buttonLivreAfficherTout;
         private System.Windows.Forms.Button buttonLivreRechercher;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LivreId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LivreTitre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LivreAnneeParution;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LivreGenreLibelle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LivreAuteurNom;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LivreAuteurPrenom;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LivreEmplacementLibelle;
+        private System.Windows.Forms.Button buttonAuteurAfficherTout;
+        private System.Windows.Forms.Button buttonAuteurRechercher;
     }
 }
 
