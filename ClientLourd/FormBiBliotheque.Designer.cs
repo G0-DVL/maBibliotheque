@@ -147,6 +147,12 @@
             this.textBoxIDAdherent = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
             this.buttonEmpruntAfficherTout = new System.Windows.Forms.Button();
+            this.buttonBibliothecaireRechercher = new System.Windows.Forms.Button();
+            this.buttonBibliothecaireAfficherTout = new System.Windows.Forms.Button();
+            this.buttonAdherentAfficherTout = new System.Windows.Forms.Button();
+            this.buttonAdherentRechercher = new System.Windows.Forms.Button();
+            this.buttonLivreAfficherTout = new System.Windows.Forms.Button();
+            this.buttonLivreRechercher = new System.Windows.Forms.Button();
             this.tabControlBibliotheque.SuspendLayout();
             this.tabPageIdentification.SuspendLayout();
             this.panelIdentification.SuspendLayout();
@@ -262,6 +268,8 @@
             // 
             // tabPageBibliothecaire
             // 
+            this.tabPageBibliothecaire.Controls.Add(this.buttonBibliothecaireAfficherTout);
+            this.tabPageBibliothecaire.Controls.Add(this.buttonBibliothecaireRechercher);
             this.tabPageBibliothecaire.Controls.Add(this.dataGridViewBibliothecaire);
             this.tabPageBibliothecaire.Controls.Add(this.buttonBibliothecaireSuppression);
             this.tabPageBibliothecaire.Controls.Add(this.buttonBibliothecaireModification);
@@ -300,7 +308,7 @@
             this.dataGridViewBibliothecaire.Location = new System.Drawing.Point(200, 9);
             this.dataGridViewBibliothecaire.Name = "dataGridViewBibliothecaire";
             this.dataGridViewBibliothecaire.Size = new System.Drawing.Size(675, 553);
-            this.dataGridViewBibliothecaire.TabIndex = 8;
+            this.dataGridViewBibliothecaire.TabIndex = 10;
             this.dataGridViewBibliothecaire.CellStateChanged += new System.Windows.Forms.DataGridViewCellStateChangedEventHandler(this.dataGridViewBibliothecaire_CellStateChanged);
             this.dataGridViewBibliothecaire.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dataGridViewBibliothecaire_RowStateChanged);
             // 
@@ -390,6 +398,7 @@
             // 
             this.textBoxBibliothecairePassword.Location = new System.Drawing.Point(94, 61);
             this.textBoxBibliothecairePassword.Name = "textBoxBibliothecairePassword";
+            this.textBoxBibliothecairePassword.PasswordChar = '*';
             this.textBoxBibliothecairePassword.Size = new System.Drawing.Size(100, 20);
             this.textBoxBibliothecairePassword.TabIndex = 2;
             // 
@@ -436,6 +445,8 @@
             // 
             // tabPageAdherent
             // 
+            this.tabPageAdherent.Controls.Add(this.buttonAdherentAfficherTout);
+            this.tabPageAdherent.Controls.Add(this.buttonAdherentRechercher);
             this.tabPageAdherent.Controls.Add(this.dateTimePickerAdherentDateInscr);
             this.tabPageAdherent.Controls.Add(this.dateTimePickerAdherentDateNaiss);
             this.tabPageAdherent.Controls.Add(this.dataGridViewAdherent);
@@ -505,7 +516,7 @@
             this.dataGridViewAdherent.Location = new System.Drawing.Point(200, 5);
             this.dataGridViewAdherent.Name = "dataGridViewAdherent";
             this.dataGridViewAdherent.Size = new System.Drawing.Size(675, 557);
-            this.dataGridViewAdherent.TabIndex = 12;
+            this.dataGridViewAdherent.TabIndex = 14;
             this.dataGridViewAdherent.CellStateChanged += new System.Windows.Forms.DataGridViewCellStateChangedEventHandler(this.dataGridViewAdherent_CellStateChanged);
             this.dataGridViewAdherent.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dataGridViewAdherent_RowStateChanged);
             // 
@@ -716,6 +727,8 @@
             // 
             // tabPageLivre
             // 
+            this.tabPageLivre.Controls.Add(this.buttonLivreAfficherTout);
+            this.tabPageLivre.Controls.Add(this.buttonLivreRechercher);
             this.tabPageLivre.Controls.Add(this.comboBoxLivreAuteurPrenom);
             this.tabPageLivre.Controls.Add(this.label21);
             this.tabPageLivre.Controls.Add(this.comboBoxLivreEmplacement);
@@ -744,10 +757,10 @@
             // comboBoxLivreAuteurPrenom
             // 
             this.comboBoxLivreAuteurPrenom.FormattingEnabled = true;
-            this.comboBoxLivreAuteurPrenom.Location = new System.Drawing.Point(124, 87);
+            this.comboBoxLivreAuteurPrenom.Location = new System.Drawing.Point(124, 114);
             this.comboBoxLivreAuteurPrenom.Name = "comboBoxLivreAuteurPrenom";
             this.comboBoxLivreAuteurPrenom.Size = new System.Drawing.Size(70, 21);
-            this.comboBoxLivreAuteurPrenom.TabIndex = 17;
+            this.comboBoxLivreAuteurPrenom.TabIndex = 5;
             // 
             // label21
             // 
@@ -764,29 +777,28 @@
             this.comboBoxLivreEmplacement.Location = new System.Drawing.Point(89, 141);
             this.comboBoxLivreEmplacement.Name = "comboBoxLivreEmplacement";
             this.comboBoxLivreEmplacement.Size = new System.Drawing.Size(105, 21);
-            this.comboBoxLivreEmplacement.TabIndex = 5;
-            this.comboBoxLivreEmplacement.SelectedIndexChanged += new System.EventHandler(this.comboBoxLivreEmplacement_SelectedIndexChanged);
+            this.comboBoxLivreEmplacement.TabIndex = 6;
             // 
             // comboBoxLivreGenre
             // 
             this.comboBoxLivreGenre.FormattingEnabled = true;
-            this.comboBoxLivreGenre.Location = new System.Drawing.Point(89, 114);
+            this.comboBoxLivreGenre.Location = new System.Drawing.Point(89, 87);
             this.comboBoxLivreGenre.Name = "comboBoxLivreGenre";
             this.comboBoxLivreGenre.Size = new System.Drawing.Size(105, 21);
-            this.comboBoxLivreGenre.TabIndex = 4;
+            this.comboBoxLivreGenre.TabIndex = 3;
             // 
             // comboBoxLivreAuteurNom
             // 
             this.comboBoxLivreAuteurNom.FormattingEnabled = true;
-            this.comboBoxLivreAuteurNom.Location = new System.Drawing.Point(48, 87);
+            this.comboBoxLivreAuteurNom.Location = new System.Drawing.Point(48, 114);
             this.comboBoxLivreAuteurNom.Name = "comboBoxLivreAuteurNom";
             this.comboBoxLivreAuteurNom.Size = new System.Drawing.Size(70, 21);
-            this.comboBoxLivreAuteurNom.TabIndex = 3;
+            this.comboBoxLivreAuteurNom.TabIndex = 4;
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(6, 117);
+            this.label20.Location = new System.Drawing.Point(6, 90);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(36, 13);
             this.label20.TabIndex = 12;
@@ -795,7 +807,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(6, 95);
+            this.label19.Location = new System.Drawing.Point(6, 117);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(38, 13);
             this.label19.TabIndex = 11;
@@ -819,7 +831,7 @@
             this.dataGridViewLivre.Location = new System.Drawing.Point(200, 9);
             this.dataGridViewLivre.Name = "dataGridViewLivre";
             this.dataGridViewLivre.Size = new System.Drawing.Size(675, 553);
-            this.dataGridViewLivre.TabIndex = 10;
+            this.dataGridViewLivre.TabIndex = 12;
             // 
             // LivreId
             // 
@@ -1252,6 +1264,68 @@
             this.buttonEmpruntAfficherTout.UseVisualStyleBackColor = true;
             this.buttonEmpruntAfficherTout.Click += new System.EventHandler(this.buttonEmpruntAfficherTout_Click);
             // 
+            // buttonBibliothecaireRechercher
+            // 
+            this.buttonBibliothecaireRechercher.Location = new System.Drawing.Point(94, 229);
+            this.buttonBibliothecaireRechercher.Name = "buttonBibliothecaireRechercher";
+            this.buttonBibliothecaireRechercher.Size = new System.Drawing.Size(100, 23);
+            this.buttonBibliothecaireRechercher.TabIndex = 8;
+            this.buttonBibliothecaireRechercher.Text = "Rechercher";
+            this.buttonBibliothecaireRechercher.UseVisualStyleBackColor = true;
+            this.buttonBibliothecaireRechercher.Click += new System.EventHandler(this.buttonBibliothecaireRechercher_Click);
+            // 
+            // buttonBibliothecaireAfficherTout
+            // 
+            this.buttonBibliothecaireAfficherTout.Location = new System.Drawing.Point(94, 258);
+            this.buttonBibliothecaireAfficherTout.Name = "buttonBibliothecaireAfficherTout";
+            this.buttonBibliothecaireAfficherTout.Size = new System.Drawing.Size(100, 23);
+            this.buttonBibliothecaireAfficherTout.TabIndex = 9;
+            this.buttonBibliothecaireAfficherTout.Text = "Afficher tout";
+            this.buttonBibliothecaireAfficherTout.UseVisualStyleBackColor = true;
+            this.buttonBibliothecaireAfficherTout.Click += new System.EventHandler(this.buttonBibliothecaireAfficherTout_Click);
+            // 
+            // buttonAdherentAfficherTout
+            // 
+            this.buttonAdherentAfficherTout.Location = new System.Drawing.Point(94, 359);
+            this.buttonAdherentAfficherTout.Name = "buttonAdherentAfficherTout";
+            this.buttonAdherentAfficherTout.Size = new System.Drawing.Size(100, 23);
+            this.buttonAdherentAfficherTout.TabIndex = 13;
+            this.buttonAdherentAfficherTout.Text = "Afficher tout";
+            this.buttonAdherentAfficherTout.UseVisualStyleBackColor = true;
+            this.buttonAdherentAfficherTout.Visible = false;
+            this.buttonAdherentAfficherTout.Click += new System.EventHandler(this.buttonAdherentAfficherTout_Click);
+            // 
+            // buttonAdherentRechercher
+            // 
+            this.buttonAdherentRechercher.Location = new System.Drawing.Point(94, 330);
+            this.buttonAdherentRechercher.Name = "buttonAdherentRechercher";
+            this.buttonAdherentRechercher.Size = new System.Drawing.Size(100, 23);
+            this.buttonAdherentRechercher.TabIndex = 12;
+            this.buttonAdherentRechercher.Text = "Rechercher";
+            this.buttonAdherentRechercher.UseVisualStyleBackColor = true;
+            this.buttonAdherentRechercher.Click += new System.EventHandler(this.buttonAdherentRechercher_Click);
+            // 
+            // buttonLivreAfficherTout
+            // 
+            this.buttonLivreAfficherTout.Location = new System.Drawing.Point(94, 284);
+            this.buttonLivreAfficherTout.Name = "buttonLivreAfficherTout";
+            this.buttonLivreAfficherTout.Size = new System.Drawing.Size(100, 23);
+            this.buttonLivreAfficherTout.TabIndex = 11;
+            this.buttonLivreAfficherTout.Text = "Afficher tout";
+            this.buttonLivreAfficherTout.UseVisualStyleBackColor = true;
+            this.buttonLivreAfficherTout.Visible = false;
+            this.buttonLivreAfficherTout.Click += new System.EventHandler(this.buttonLivreAfficherTout_Click);
+            // 
+            // buttonLivreRechercher
+            // 
+            this.buttonLivreRechercher.Location = new System.Drawing.Point(94, 255);
+            this.buttonLivreRechercher.Name = "buttonLivreRechercher";
+            this.buttonLivreRechercher.Size = new System.Drawing.Size(100, 23);
+            this.buttonLivreRechercher.TabIndex = 10;
+            this.buttonLivreRechercher.Text = "Rechercher";
+            this.buttonLivreRechercher.UseVisualStyleBackColor = true;
+            this.buttonLivreRechercher.Click += new System.EventHandler(this.buttonLivreRechercher_Click);
+            // 
             // FormBiBliotheque
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1404,6 +1478,12 @@
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Button buttonListeRetards;
         private System.Windows.Forms.Button buttonEmpruntAfficherTout;
+        private System.Windows.Forms.Button buttonBibliothecaireRechercher;
+        private System.Windows.Forms.Button buttonBibliothecaireAfficherTout;
+        private System.Windows.Forms.Button buttonAdherentAfficherTout;
+        private System.Windows.Forms.Button buttonAdherentRechercher;
+        private System.Windows.Forms.Button buttonLivreAfficherTout;
+        private System.Windows.Forms.Button buttonLivreRechercher;
     }
 }
 

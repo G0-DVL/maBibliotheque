@@ -318,25 +318,79 @@ namespace ClientLourd
                 MessageBox.Show("Impossible de supprimer le bibliothecaire !\n" + eException.Message);
             }
         }
+        
+        //  Se produit lors du clic sur le bouton "Rechercher"
+        private void buttonBibliothecaireRechercher_Click(object sender, EventArgs e)
+        {
+            buttonBibliothecaireAfficherTout.Visible = true;
+            rechercherBibliothecaire(
+                textBoxBibliothecaireId.Text,
+                textBoxBibliothecaireLogin.Text,
+                textBoxBibliothecaireNom.Text,
+                textBoxBibliothecairePrenom.Text
+            );
+        }
+
+        //  Se produit lors du clic sur le bouton "Afficher tout"
+        private void buttonBibliothecaireAfficherTout_Click(object sender, EventArgs e)
+        {
+            buttonBibliothecaireAfficherTout.Visible = false;
+            rechercherBibliothecaire();
+        }
+
+        //  Fonction qui gère l'affichage des bibliothécaires en fonction des paramètres de recherche
+        private void rechercherBibliothecaire(string sId = "", string sLogin = "", string sNom = "", string sPrenom = "")
+        {
+            using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+            {
+                var oBibliothecaireQuery = from tableBibliothecaire in monContext.bibliothecaires
+                                           select tableBibliothecaire;
+
+                if ("" != sId)
+                {
+                    int iBibliothecaireId = int.Parse(sId);
+                    oBibliothecaireQuery = oBibliothecaireQuery.Where(
+                        tableBibliothecaire => tableBibliothecaire.bibliothecaire_ID == iBibliothecaireId
+                    );
+                }
+                if ("" != sLogin)
+                {
+                    oBibliothecaireQuery = oBibliothecaireQuery.Where(
+                        tableBibliothecaire => tableBibliothecaire.bibliothecaire_login.Contains(sLogin)
+                    );
+                }
+                if ("" != sNom)
+                {
+                    oBibliothecaireQuery = oBibliothecaireQuery.Where(
+                        tableBibliothecaire => tableBibliothecaire.bibliothecaire_nom.Contains(sNom)
+                    );
+                }
+                if ("" != sPrenom)
+                {
+                    oBibliothecaireQuery = oBibliothecaireQuery.Where(
+                        tableBibliothecaire => tableBibliothecaire.bibliothecaire_prenom.Contains(sPrenom)
+                    );
+                }
+
+                var oListResultats = oBibliothecaireQuery.ToList();
+                dataGridViewBibliothecaire.Rows.Clear();
+                foreach (bibliothecaire oBibliothecaire in oListResultats)
+                {
+                    dataGridViewBibliothecaire.Rows.Add(
+                        oBibliothecaire.bibliothecaire_ID,
+                        oBibliothecaire.bibliothecaire_login,
+                        oBibliothecaire.bibliothecaire_nom,
+                        oBibliothecaire.bibliothecaire_prenom
+                    );
+                }
+            }
+        }
 
         private void tabPageBibliothecaire_Enter(object sender, EventArgs e)
         {
             if (0 == dataGridViewBibliothecaire.Rows.Count)
             {
-                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
-                {
-                    var oQuery = from nimportequoi in monContext.bibliothecaires select nimportequoi;
-                    var oListResultats = oQuery.ToList();
-                    foreach (bibliothecaire oBibliothecaire in oListResultats)
-                    {
-                        dataGridViewBibliothecaire.Rows.Add(
-                            oBibliothecaire.bibliothecaire_ID,
-                            oBibliothecaire.bibliothecaire_login,
-                            oBibliothecaire.bibliothecaire_nom,
-                            oBibliothecaire.bibliothecaire_prenom
-                        );
-                    }
-                }
+                buttonBibliothecaireAfficherTout_Click(sender, e);
             }
         }
 
@@ -595,29 +649,123 @@ namespace ClientLourd
             }
         }
 
+        private void buttonAdherentRechercher_Click(object sender, EventArgs e)
+        {
+            buttonAdherentAfficherTout.Visible = true;
+            rechercherAdherent(
+                textBoxAdherentId.Text,
+                textBoxAdherentNom.Text,
+                textBoxAdherentPrenom.Text,
+                dateTimePickerAdherentDateNaiss.Value,
+                textBoxAdherentAdresse.Text,
+                textBoxAdherentCodePostal.Text,
+                textBoxAdherentTelephone.Text,
+                textBoxAdherentEmail.Text,
+                dateTimePickerAdherentDateInscr.Value
+            );
+        }
+
+        private void buttonAdherentAfficherTout_Click(object sender, EventArgs e)
+        {
+            buttonAdherentAfficherTout.Visible = false;
+            rechercherAdherent();
+        }
+
+        private void rechercherAdherent(string sId="", string sNom="", string sPrenom="", DateTime? dDateNaiss=null, string sAdresse="",string sCodePostal = "", string sTelephone = "", string sEmail = "", DateTime? dDateInscr=null)
+        {
+            using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+            {
+                var oAdherentQuery = from tableAdherent in monContext.adherents
+                                     select tableAdherent;
+                if ("" != sId)
+                {
+                    int iAdherentId = int.Parse(sId);
+                    oAdherentQuery = oAdherentQuery.Where(
+                        tableAdherent => tableAdherent.adherent_ID == iAdherentId
+                    );
+                }
+
+                if ("" != sNom)
+                {
+                    oAdherentQuery = oAdherentQuery.Where(
+                        tableAdherent => tableAdherent.adherent_nom.Contains(sNom)
+                    );
+                }
+
+                if ("" != sPrenom)
+                {
+                    oAdherentQuery = oAdherentQuery.Where(
+                        tableAdherent => tableAdherent.adherent_prenom.Contains(sPrenom)
+                    );
+                }
+
+                if (null != dDateNaiss)
+                {
+                    oAdherentQuery = oAdherentQuery.Where(
+                        tableAdherent => tableAdherent.adherent_date_naissance == dDateNaiss
+                    );
+                }
+
+                if ("" != sAdresse)
+                {
+                    oAdherentQuery = oAdherentQuery.Where(
+                        tableAdherent => tableAdherent.adherent_adresse.Contains(sAdresse)
+                    );
+                }
+
+                if ("" != sCodePostal)
+                {
+                    oAdherentQuery = oAdherentQuery.Where(
+                        tableAdherent => tableAdherent.adherent_code_postal.Contains(sCodePostal)
+                    );
+                }
+
+                if ("" != sTelephone)
+                {
+                    oAdherentQuery = oAdherentQuery.Where(
+                        tableAdherent => tableAdherent.adherent_telephone.Contains(sTelephone)
+                    );
+                }
+
+                if ("" != sEmail)
+                {
+                    oAdherentQuery = oAdherentQuery.Where(
+                        tableAdherent => tableAdherent.adherent_email.Contains(sEmail)
+                    );
+                }
+
+                if (null != dDateInscr)
+                {
+                    oAdherentQuery = oAdherentQuery.Where(
+                        tableAdherent => tableAdherent.adherent_date_inscription == dDateInscr
+                    );
+                }
+
+
+                var oListResultats = oAdherentQuery.ToList();
+                dataGridViewAdherent.Rows.Clear();
+                foreach (adherent oAdherent in oListResultats)
+                {
+                    dataGridViewAdherent.Rows.Add(
+                        oAdherent.adherent_ID,
+                        oAdherent.adherent_nom,
+                        oAdherent.adherent_prenom,
+                        oAdherent.adherent_date_naissance,
+                        oAdherent.adherent_adresse,
+                        oAdherent.adherent_code_postal,
+                        oAdherent.adherent_telephone,
+                        oAdherent.adherent_email,
+                        oAdherent.adherent_date_inscription
+                    );
+                }
+            }
+        }
+
         private void tabPageAdherent_Enter(object sender, EventArgs e)
         {
             if ( 0 == dataGridViewAdherent.Rows.Count )
             {
-                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
-                {
-                    var oQuery = from nimportequoi in monContext.adherents select nimportequoi;
-                    var oListResultats = oQuery.ToList();
-                    foreach (adherent oAdherent in oListResultats)
-                    {
-                        dataGridViewAdherent.Rows.Add(
-                            oAdherent.adherent_ID,
-                            oAdherent.adherent_nom,
-                            oAdherent.adherent_prenom,
-                            oAdherent.adherent_date_naissance,
-                            oAdherent.adherent_adresse,
-                            oAdherent.adherent_code_postal,
-                            oAdherent.adherent_telephone,
-                            oAdherent.adherent_email,
-                            oAdherent.adherent_date_inscription
-                        );
-                    }
-                }
+                buttonAdherentAfficherTout_Click(sender, e);
             }
         }
 
@@ -653,6 +801,119 @@ namespace ClientLourd
         #endregion tabPageAdherent
 
         #region tabPageLivre
+        //*******************************************************************
+        //  Se produit au clic du bouton création dans l'onglet tabPageLivre
+        //*******************************************************************
+        private void buttonLivreCreation_Click(object sender, EventArgs e)
+        {   //  On initialise une variable message d'erreur. Si le message d'erreur reste vide, alors on n'a pas d'erreur
+
+
+
+            string sMessageDErreur = "";
+            try
+            {
+                if ("" == textBoxLivreTitre.Text
+                 || "" == comboBoxLivreAuteurNom.Text
+                 || "" == comboBoxLivreGenre.Text
+                 || "" == comboBoxLivreEmplacement.Text
+                    )
+                {   //  Si le moindre de nos controle est vide (hormis ID)
+                    sMessageDErreur += "\n" + "- Tous les champs saisis doivent être obligatoires";
+                }
+
+                if ("" != sMessageDErreur)
+                {   //  Pour le moindre motif d'erreur, nous levons une exception et on interrompt l'éxécution du code
+                    throw new Exception(sMessageDErreur);
+                }
+
+                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+                {   //  Nous créeons un nouveau livre à partir des données saisies, mais nous devons pour cela nous assurer
+                    //  que les auteurs, genres et emplacements éxistent
+                    var oAuteurQuery = from tableAuteur in monContext.auteurs
+                                       where tableAuteur.auteur_nom == comboBoxLivreAuteurNom.Text
+                                       && tableAuteur.auteur_prenom == comboBoxLivreAuteurPrenom.Text
+                                       select tableAuteur;
+                    auteur oAuteurTrouve = oAuteurQuery.FirstOrDefault();
+                    if (oAuteurTrouve == null)
+                    {
+                        oAuteurTrouve = new auteur
+                        {
+                            auteur_nom = comboBoxLivreAuteurNom.Text,
+                            auteur_prenom = comboBoxLivreAuteurPrenom.Text
+                        };
+                        monContext.auteurs.Add(oAuteurTrouve);
+                        monContext.SaveChanges();
+
+                        dataGridViewAuteur.Rows.Add(
+                            oAuteurTrouve.auteur_ID,
+                            oAuteurTrouve.auteur_nom,
+                            oAuteurTrouve.auteur_prenom
+                        );
+                        comboBoxLivreAuteurNom.Items.Add(oAuteurTrouve.auteur_nom);
+                        comboBoxLivreAuteurPrenom.Items.Add(oAuteurTrouve.auteur_prenom);
+                    }
+
+                    var oGenreQuery = from tableGenre in monContext.genres
+                                      where tableGenre.genre_libelle == comboBoxLivreGenre.Text
+                                      select tableGenre;
+                    genre oGenreTrouve = oGenreQuery.FirstOrDefault();
+                    if (oGenreTrouve == null)
+                    {
+                        oGenreTrouve = new genre
+                        {
+                            genre_libelle = comboBoxLivreGenre.Text
+                        };
+                        monContext.genres.Add(oGenreTrouve);
+                        monContext.SaveChanges();
+                        comboBoxLivreGenre.Items.Add(
+                            oGenreTrouve.genre_libelle
+                        );
+                    }
+
+                    var oEmplacementQuery = from tableEmplacement in monContext.emplacements
+                                            where tableEmplacement.emplacement_libelle == comboBoxLivreEmplacement.Text
+                                            select tableEmplacement;
+                    emplacement oEmplacementTrouve = oEmplacementQuery.FirstOrDefault();
+                    if (oEmplacementTrouve == null)
+                    {
+                        oEmplacementTrouve = new emplacement
+                        {
+                            emplacement_libelle = comboBoxLivreEmplacement.Text
+                        };
+                        monContext.emplacements.Add(oEmplacementTrouve);
+                        monContext.SaveChanges();
+                        comboBoxLivreEmplacement.Items.Add(
+                            oEmplacementTrouve.emplacement_libelle
+                        );
+                    }
+
+                    var oLivre = new livre
+                    {
+                        livre_titre = textBoxLivreTitre.Text,
+                        livre_annee_parution = dateTimePickerLivreAnneeParution.Value,
+                        auteur_ID = oAuteurTrouve.auteur_ID,
+                        genre_ID = oGenreTrouve.genre_ID,
+                        emplacement_ID = oEmplacementTrouve.emplacement_ID
+                    };
+                    monContext.livres.Add(oLivre);    //  On ajoute le nouveau livre
+                    monContext.SaveChanges();   //  puis nous sauvegardons le tout dans la base
+
+                    //  Nous rajoutons le nouvel adhérent à la DataGridView
+                    dataGridViewLivre.Rows.Add(
+                        oLivre.livre_ID,
+                        oLivre.livre_titre,
+                        oLivre.livre_annee_parution,
+                        oGenreTrouve.genre_libelle,
+                        oAuteurTrouve.auteur_prenom + " " + oAuteurTrouve.auteur_nom,
+                        oEmplacementTrouve.emplacement_libelle
+                    );
+                }
+            }
+            catch (Exception eException)
+            {
+                MessageBox.Show("Impossible de créer le livre !\n" + eException.Message);
+            }
+        }
         //**********************************************************************
         //  Se produit au clic du bouton Modification dans l'onglet tabPageLivre
         //**********************************************************************
@@ -812,197 +1073,167 @@ namespace ClientLourd
             }
         }
 
-        //*******************************************************************
-        //  Se produit au clic du bouton création dans l'onglet tabPageLivre
-        //*******************************************************************
-        private void buttonLivreCreation_Click(object sender, EventArgs e)
-        {   //  On initialise une variable message d'erreur. Si le message d'erreur reste vide, alors on n'a pas d'erreur
 
-             
-
-            string sMessageDErreur = "";
-            try
-            {
-                if ("" == textBoxLivreTitre.Text
-                 || "" == comboBoxLivreAuteurNom.Text
-                 || "" == comboBoxLivreGenre.Text
-                 || "" == comboBoxLivreEmplacement.Text
-                    )
-                {   //  Si le moindre de nos controle est vide (hormis ID)
-                    sMessageDErreur += "\n" + "- Tous les champs saisis doivent être obligatoires";
-                }
-
-                if ("" != sMessageDErreur)
-                {   //  Pour le moindre motif d'erreur, nous levons une exception et on interrompt l'éxécution du code
-                    throw new Exception(sMessageDErreur);
-                }
-
-                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
-                {   //  Nous créeons un nouveau livre à partir des données saisies, mais nous devons pour cela nous assurer
-                    //  que les auteurs, genres et emplacements éxistent
-                    var oAuteurQuery = from tableAuteur in monContext.auteurs
-                                 where tableAuteur.auteur_nom == comboBoxLivreAuteurNom.Text
-                                 && tableAuteur.auteur_prenom == comboBoxLivreAuteurPrenom.Text
-                                 select tableAuteur;
-                    auteur oAuteurTrouve = oAuteurQuery.FirstOrDefault();
-                    if (oAuteurTrouve == null)
-                    {
-                        oAuteurTrouve = new auteur
-                        {
-                            auteur_nom = comboBoxLivreAuteurNom.Text,
-                            auteur_prenom = comboBoxLivreAuteurPrenom.Text
-                        };
-                        monContext.auteurs.Add(oAuteurTrouve);
-                        monContext.SaveChanges();
-
-                        dataGridViewAuteur.Rows.Add(
-                            oAuteurTrouve.auteur_ID,
-                            oAuteurTrouve.auteur_nom,
-                            oAuteurTrouve.auteur_prenom
-                        );
-                        comboBoxLivreAuteurNom.Items.Add(oAuteurTrouve.auteur_nom);
-                        comboBoxLivreAuteurPrenom.Items.Add(oAuteurTrouve.auteur_prenom);
-                    }
-
-                    var oGenreQuery = from tableGenre in monContext.genres
-                                      where tableGenre.genre_libelle == comboBoxLivreGenre.Text
-                                      select tableGenre;
-                    genre oGenreTrouve = oGenreQuery.FirstOrDefault();
-                    if (oGenreTrouve == null)
-                    {
-                        oGenreTrouve = new genre
-                        {
-                            genre_libelle = comboBoxLivreGenre.Text
-                        };
-                        monContext.genres.Add(oGenreTrouve);
-                        monContext.SaveChanges();
-                        comboBoxLivreGenre.Items.Add(
-                            oGenreTrouve.genre_libelle
-                        );
-                    }
-
-                    var oEmplacementQuery = from tableEmplacement in monContext.emplacements
-                                      where tableEmplacement.emplacement_libelle == comboBoxLivreEmplacement.Text
-                                      select tableEmplacement;
-                    emplacement oEmplacementTrouve = oEmplacementQuery.FirstOrDefault();
-                    if (oEmplacementTrouve == null)
-                    {
-                        oEmplacementTrouve = new emplacement
-                        {
-                            emplacement_libelle = comboBoxLivreEmplacement.Text
-                        };
-                        monContext.emplacements.Add(oEmplacementTrouve);
-                        monContext.SaveChanges();
-                        comboBoxLivreEmplacement.Items.Add(
-                            oEmplacementTrouve.emplacement_libelle
-                        );
-                    }
-
-                    var oLivre = new livre
-                    {
-                        livre_titre = textBoxLivreTitre.Text,
-                        livre_annee_parution = dateTimePickerLivreAnneeParution.Value,
-                        auteur_ID = oAuteurTrouve.auteur_ID,
-                        genre_ID = oGenreTrouve.genre_ID,
-                        emplacement_ID = oEmplacementTrouve.emplacement_ID
-                    };
-                    monContext.livres.Add(oLivre);    //  On ajoute le nouveau livre
-                    monContext.SaveChanges();   //  puis nous sauvegardons le tout dans la base
-
-                    //  Nous rajoutons le nouvel adhérent à la DataGridView
-                    dataGridViewLivre.Rows.Add(
-                        oLivre.livre_ID,
-                        oLivre.livre_titre,
-                        oLivre.livre_annee_parution,
-                        oGenreTrouve.genre_libelle,
-                        oAuteurTrouve.auteur_prenom + " " + oAuteurTrouve.auteur_nom,
-                        oEmplacementTrouve.emplacement_libelle
-                    );
-                }
-            }
-            catch (Exception eException)
-            {
-                MessageBox.Show("Impossible de créer le livre !\n" + eException.Message);
-            }
+        private void buttonLivreRechercher_Click(object sender, EventArgs e)
+        {
+            buttonLivreAfficherTout.Visible = true;
+            rechercherLivre(
+                textBoxLivreId.Text,
+                textBoxLivreTitre.Text,
+                dateTimePickerLivreAnneeParution.Value,
+                comboBoxLivreGenre.Text,
+                comboBoxLivreAuteurNom.Text,
+                comboBoxLivreAuteurPrenom.Text,
+                comboBoxLivreEmplacement.Text
+            );
         }
-        private void comboBoxLivreEmplacement_SelectedIndexChanged(object sender, EventArgs e)
+
+        private void buttonLivreAfficherTout_Click(object sender, EventArgs e)
+        {
+            buttonLivreAfficherTout.Visible = false;
+            rechercherLivre();
+        }
+
+        private void rechercherLivre(string sId = "", string sTitre = "", DateTime? dAnneeParution = null, string sGenre = "", string sAuteurNom = "", string sAuteurPrenom = "", string sEmplacement = "")
         {
             using (maBibliothequeEntities monContext = new maBibliothequeEntities())
             {
+                var oLivreQuery = from tableLivre in monContext.livres
+                                  join tableGenre in monContext.genres on tableLivre.genre_ID equals tableGenre.genre_ID
+                                  join tableAuteur in monContext.auteurs on tableLivre.auteur_ID equals tableAuteur.auteur_ID
+                                  join tableEmplacement in monContext.emplacements on tableLivre.emplacement_ID equals tableEmplacement.emplacement_ID
+                                  select new
+                                  {
+                                      tableLivre.livre_ID,
+                                      tableLivre.livre_titre,
+                                      tableLivre.livre_annee_parution,
+                                      tableLivre.genre_ID,
+                                      tableGenre.genre_libelle,
+                                      tableLivre.auteur_ID,
+                                      tableAuteur.auteur_nom,
+                                      tableAuteur.auteur_prenom,
+                                      tableLivre.emplacement_ID,
+                                      tableEmplacement.emplacement_libelle
+                                  };
+                if ("" != sId)
+                {
+                    int iLivreId = int.Parse(sId);
+                    oLivreQuery = oLivreQuery.Where(
+                        tableLivre => tableLivre.livre_ID == iLivreId
+                    );
+                }
 
+                if ("" != sTitre)
+                {
+                    oLivreQuery = oLivreQuery.Where(
+                        tableLivre => tableLivre.livre_titre.Contains(sTitre)
+                    );
+                }
+
+                if (null != dAnneeParution)
+                {
+                    oLivreQuery = oLivreQuery.Where(
+                        tableLivre => tableLivre.livre_annee_parution == dAnneeParution
+                    );
+                }
+
+                if (null != sGenre)
+                {
+                    oLivreQuery = oLivreQuery.Where(
+                        tableLivre => tableLivre.genre_libelle.Contains(sGenre)
+                    );
+                }
+
+                if ("" != sAuteurNom)
+                {
+                    oLivreQuery = oLivreQuery.Where(
+                        tableLivre => tableLivre.auteur_nom.Contains(sAuteurNom)
+                    );
+                }
+
+                if ( "" != sAuteurPrenom)
+                {
+                    oLivreQuery = oLivreQuery.Where(
+                        tableLivre => tableLivre.auteur_prenom.Contains(sAuteurPrenom)
+                    );
+                }
+
+                if (null != sEmplacement)
+                {
+                    oLivreQuery = oLivreQuery.Where(
+                        tableLivre => tableLivre.emplacement_libelle.Contains(sEmplacement)
+                    );
+                }
+
+                var oListResultats = oLivreQuery.ToList();
+                dataGridViewLivre.Rows.Clear();
+                foreach(var oResult in oListResultats)
+                {
+                    dataGridViewLivre.Rows.Add(
+                        oResult.livre_ID,
+                        oResult.livre_titre,
+                        oResult.livre_annee_parution,
+                        oResult.genre_libelle,
+                        oResult.auteur_prenom + " " + oResult.auteur_nom,
+                        oResult.emplacement_libelle
+                    );
+                }
             }
         }
 
         private void tabPageLivre_Enter(object sender, EventArgs e)
         {
-            dataGridViewLivre.Rows.Clear();
+            if (0 == dataGridViewLivre.Rows.Count)
+            {
+                buttonLivreAfficherTout_Click(sender, e);
 
-                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
-                {
-                    //  Remplir le dataGrid des livres
-                    var oQuery = from nimportequoi in monContext.livres select nimportequoi;
-                    var oListResultats = oQuery.ToList();
-                    foreach (livre oLivre in oListResultats)
+                if (0 == comboBoxLivreAuteurNom.Items.Count)
+                {//  On remplit le ComboBox des genres
+                    using (maBibliothequeEntities monContext = new maBibliothequeEntities())
                     {
-                        dataGridViewLivre.Rows.Add(
-                            oLivre.livre_ID,
-                            oLivre.livre_titre,
-                            oLivre.livre_annee_parution,
-                            monContext.genres.Find(oLivre.genre_ID).genre_libelle,
-                            monContext.auteurs.Find(oLivre.auteur_ID).auteur_prenom + " " + monContext.auteurs.Find(oLivre.auteur_ID).auteur_nom,
-                            monContext.emplacements.Find(oLivre.emplacement_ID ).emplacement_libelle
-                        );
-                    }
-                //  Remplir les valeurs des combobox
-
-            }
-
-            if (0 == comboBoxLivreAuteurNom.Items.Count)
-            {//  On remplit le ComboBox des genres
-                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
-                {
-                    var oQuery = from nimportequoi in monContext.auteurs select nimportequoi;
-                    var oListResultats = oQuery.ToList();
-                    foreach (auteur oAuteur in oListResultats)
-                    {
-                        comboBoxLivreAuteurNom.Items.Add(oAuteur.auteur_nom);
-                        comboBoxLivreAuteurPrenom.Items.Add(oAuteur.auteur_prenom);
+                        var oQuery = from nimportequoi in monContext.auteurs select nimportequoi;
+                        var oListResultats = oQuery.ToList();
+                        foreach (auteur oAuteur in oListResultats)
+                        {
+                            comboBoxLivreAuteurNom.Items.Add(oAuteur.auteur_nom);
+                            comboBoxLivreAuteurPrenom.Items.Add(oAuteur.auteur_prenom);
+                        }
                     }
                 }
 
-            }
-
-            if (0 == comboBoxLivreGenre.Items.Count)
-            {//  On remplit le ComboBox des genres
-                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
-                {
-                    var oQuery = from nimportequoi in monContext.genres select nimportequoi;
-                    var oListResultats = oQuery.ToList();
-                    foreach (genre oGenre in oListResultats)
+                if (0 == comboBoxLivreGenre.Items.Count)
+                {//  On remplit le ComboBox des genres
+                    using (maBibliothequeEntities monContext = new maBibliothequeEntities())
                     {
-                        comboBoxLivreGenre.Items.Add(
-                            oGenre.genre_libelle
-                        );
+                        var oQuery = from nimportequoi in monContext.genres select nimportequoi;
+                        var oListResultats = oQuery.ToList();
+                        foreach (genre oGenre in oListResultats)
+                        {
+                            comboBoxLivreGenre.Items.Add(
+                                oGenre.genre_libelle
+                            );
+                        }
                     }
+
                 }
 
-            }
-
-            if (0 == comboBoxLivreEmplacement.Items.Count)
-            {//  On remplit le ComboBox des emplacements
-                using (maBibliothequeEntities monContext = new maBibliothequeEntities())
-                {
-                    var oQuery = from nimportequoi in monContext.emplacements select nimportequoi;
-                    var oListResultats = oQuery.ToList();
-                    foreach (emplacement oEmplacement in oListResultats)
+                if (0 == comboBoxLivreEmplacement.Items.Count)
+                {//  On remplit le ComboBox des emplacements
+                    using (maBibliothequeEntities monContext = new maBibliothequeEntities())
                     {
-                        comboBoxLivreEmplacement.Items.Add(
-                            oEmplacement.emplacement_libelle
-                        );
+                        var oQuery = from nimportequoi in monContext.emplacements select nimportequoi;
+                        var oListResultats = oQuery.ToList();
+                        foreach (emplacement oEmplacement in oListResultats)
+                        {
+                            comboBoxLivreEmplacement.Items.Add(
+                                oEmplacement.emplacement_libelle
+                            );
+                        }
                     }
                 }
             }
         }
+
         #endregion tabPageLivre
 
         #region tabPageAuteur
@@ -1209,7 +1440,9 @@ namespace ClientLourd
         }
 
         #endregion tabPageAuteur
-    
+
+        #region tabPageEmprunt
+
         //************************
         // Traitement de l'emprunt
         //************************
@@ -1430,6 +1663,7 @@ namespace ClientLourd
                 }
             }
         }
+
+        #endregion tabPageEmprunt
     }
-    
 }
