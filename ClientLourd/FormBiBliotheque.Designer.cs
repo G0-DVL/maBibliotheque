@@ -38,6 +38,8 @@
             this.tabPageIdentification = new System.Windows.Forms.TabPage();
             this.panelIdentification = new System.Windows.Forms.Panel();
             this.tabPageBibliothecaire = new System.Windows.Forms.TabPage();
+            this.buttonBibliothecaireAfficherTout = new System.Windows.Forms.Button();
+            this.buttonBibliothecaireRechercher = new System.Windows.Forms.Button();
             this.dataGridViewBibliothecaire = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Login = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,6 +59,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPageAdherent = new System.Windows.Forms.TabPage();
+            this.buttonAdherentAfficherTout = new System.Windows.Forms.Button();
+            this.buttonAdherentRechercher = new System.Windows.Forms.Button();
             this.dateTimePickerAdherentDateInscr = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerAdherentDateNaiss = new System.Windows.Forms.DateTimePicker();
             this.dataGridViewAdherent = new System.Windows.Forms.DataGridView();
@@ -89,6 +93,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.tabPageLivre = new System.Windows.Forms.TabPage();
+            this.buttonLivreAfficherTout = new System.Windows.Forms.Button();
+            this.buttonLivreRechercher = new System.Windows.Forms.Button();
             this.comboBoxLivreAuteurPrenom = new System.Windows.Forms.ComboBox();
             this.label21 = new System.Windows.Forms.Label();
             this.comboBoxLivreEmplacement = new System.Windows.Forms.ComboBox();
@@ -97,6 +103,13 @@
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.dataGridViewLivre = new System.Windows.Forms.DataGridView();
+            this.LivreId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LivreTitre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LivreAnneeParution = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LivreGenreLibelle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LivreAuteurNom = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LivreAuteurPrenom = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LivreEmplacementLibelle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonLivreSuppression = new System.Windows.Forms.Button();
             this.buttonLivreModification = new System.Windows.Forms.Button();
             this.buttonLivreCreation = new System.Windows.Forms.Button();
@@ -107,6 +120,8 @@
             this.textBoxLivreTitre = new System.Windows.Forms.TextBox();
             this.textBoxLivreId = new System.Windows.Forms.TextBox();
             this.tabPageAuteur = new System.Windows.Forms.TabPage();
+            this.buttonAuteurAfficherTout = new System.Windows.Forms.Button();
+            this.buttonAuteurRechercher = new System.Windows.Forms.Button();
             this.dataGridViewAuteur = new System.Windows.Forms.DataGridView();
             this.AuteurID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AuteurNom = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -121,7 +136,8 @@
             this.label23 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.tabPageEmprunt = new System.Windows.Forms.TabPage();
-            this.buttonListeRetards = new System.Windows.Forms.Button();
+            this.buttonEmpruntAfficherTout = new System.Windows.Forms.Button();
+            this.buttonEmpruntListeRetards = new System.Windows.Forms.Button();
             this.dataGridViewEmprunter = new System.Windows.Forms.DataGridView();
             this.IdAdherent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NomAdherent = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -130,8 +146,8 @@
             this.TitreLivre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DateEmprunt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DateRetour = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonRendre = new System.Windows.Forms.Button();
-            this.buttonEmprunt = new System.Windows.Forms.Button();
+            this.buttonEmpruntRendre = new System.Windows.Forms.Button();
+            this.buttonEmpruntEmprunter = new System.Windows.Forms.Button();
             this.dateTimePickerDateRetour = new System.Windows.Forms.DateTimePicker();
             this.label28 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
@@ -140,22 +156,7 @@
             this.label26 = new System.Windows.Forms.Label();
             this.textBoxEmprunterAdherentId = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
-            this.buttonEmpruntAfficherTout = new System.Windows.Forms.Button();
-            this.buttonBibliothecaireRechercher = new System.Windows.Forms.Button();
-            this.buttonBibliothecaireAfficherTout = new System.Windows.Forms.Button();
-            this.buttonAdherentAfficherTout = new System.Windows.Forms.Button();
-            this.buttonAdherentRechercher = new System.Windows.Forms.Button();
-            this.buttonLivreAfficherTout = new System.Windows.Forms.Button();
-            this.buttonLivreRechercher = new System.Windows.Forms.Button();
-            this.LivreId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LivreTitre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LivreAnneeParution = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LivreGenreLibelle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LivreAuteurNom = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LivreAuteurPrenom = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LivreEmplacementLibelle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonAuteurAfficherTout = new System.Windows.Forms.Button();
-            this.buttonAuteurRechercher = new System.Windows.Forms.Button();
+            this.buttonEmpruntRechercher = new System.Windows.Forms.Button();
             this.tabControlBibliotheque.SuspendLayout();
             this.tabPageIdentification.SuspendLayout();
             this.panelIdentification.SuspendLayout();
@@ -294,6 +295,26 @@
             this.tabPageBibliothecaire.Text = "Bibliothécaire";
             this.tabPageBibliothecaire.UseVisualStyleBackColor = true;
             this.tabPageBibliothecaire.Enter += new System.EventHandler(this.tabPageBibliothecaire_Enter);
+            // 
+            // buttonBibliothecaireAfficherTout
+            // 
+            this.buttonBibliothecaireAfficherTout.Location = new System.Drawing.Point(94, 258);
+            this.buttonBibliothecaireAfficherTout.Name = "buttonBibliothecaireAfficherTout";
+            this.buttonBibliothecaireAfficherTout.Size = new System.Drawing.Size(100, 23);
+            this.buttonBibliothecaireAfficherTout.TabIndex = 9;
+            this.buttonBibliothecaireAfficherTout.Text = "Afficher tout";
+            this.buttonBibliothecaireAfficherTout.UseVisualStyleBackColor = true;
+            this.buttonBibliothecaireAfficherTout.Click += new System.EventHandler(this.buttonBibliothecaireAfficherTout_Click);
+            // 
+            // buttonBibliothecaireRechercher
+            // 
+            this.buttonBibliothecaireRechercher.Location = new System.Drawing.Point(94, 229);
+            this.buttonBibliothecaireRechercher.Name = "buttonBibliothecaireRechercher";
+            this.buttonBibliothecaireRechercher.Size = new System.Drawing.Size(100, 23);
+            this.buttonBibliothecaireRechercher.TabIndex = 8;
+            this.buttonBibliothecaireRechercher.Text = "Rechercher";
+            this.buttonBibliothecaireRechercher.UseVisualStyleBackColor = true;
+            this.buttonBibliothecaireRechercher.Click += new System.EventHandler(this.buttonBibliothecaireRechercher_Click);
             // 
             // dataGridViewBibliothecaire
             // 
@@ -479,6 +500,27 @@
             this.tabPageAdherent.Text = "Adhérent";
             this.tabPageAdherent.UseVisualStyleBackColor = true;
             this.tabPageAdherent.Enter += new System.EventHandler(this.tabPageAdherent_Enter);
+            // 
+            // buttonAdherentAfficherTout
+            // 
+            this.buttonAdherentAfficherTout.Location = new System.Drawing.Point(94, 359);
+            this.buttonAdherentAfficherTout.Name = "buttonAdherentAfficherTout";
+            this.buttonAdherentAfficherTout.Size = new System.Drawing.Size(100, 23);
+            this.buttonAdherentAfficherTout.TabIndex = 13;
+            this.buttonAdherentAfficherTout.Text = "Afficher tout";
+            this.buttonAdherentAfficherTout.UseVisualStyleBackColor = true;
+            this.buttonAdherentAfficherTout.Visible = false;
+            this.buttonAdherentAfficherTout.Click += new System.EventHandler(this.buttonAdherentAfficherTout_Click);
+            // 
+            // buttonAdherentRechercher
+            // 
+            this.buttonAdherentRechercher.Location = new System.Drawing.Point(94, 330);
+            this.buttonAdherentRechercher.Name = "buttonAdherentRechercher";
+            this.buttonAdherentRechercher.Size = new System.Drawing.Size(100, 23);
+            this.buttonAdherentRechercher.TabIndex = 12;
+            this.buttonAdherentRechercher.Text = "Rechercher";
+            this.buttonAdherentRechercher.UseVisualStyleBackColor = true;
+            this.buttonAdherentRechercher.Click += new System.EventHandler(this.buttonAdherentRechercher_Click);
             // 
             // dateTimePickerAdherentDateInscr
             // 
@@ -757,6 +799,27 @@
             this.tabPageLivre.UseVisualStyleBackColor = true;
             this.tabPageLivre.Enter += new System.EventHandler(this.tabPageLivre_Enter);
             // 
+            // buttonLivreAfficherTout
+            // 
+            this.buttonLivreAfficherTout.Location = new System.Drawing.Point(94, 284);
+            this.buttonLivreAfficherTout.Name = "buttonLivreAfficherTout";
+            this.buttonLivreAfficherTout.Size = new System.Drawing.Size(100, 23);
+            this.buttonLivreAfficherTout.TabIndex = 11;
+            this.buttonLivreAfficherTout.Text = "Afficher tout";
+            this.buttonLivreAfficherTout.UseVisualStyleBackColor = true;
+            this.buttonLivreAfficherTout.Visible = false;
+            this.buttonLivreAfficherTout.Click += new System.EventHandler(this.buttonLivreAfficherTout_Click);
+            // 
+            // buttonLivreRechercher
+            // 
+            this.buttonLivreRechercher.Location = new System.Drawing.Point(94, 255);
+            this.buttonLivreRechercher.Name = "buttonLivreRechercher";
+            this.buttonLivreRechercher.Size = new System.Drawing.Size(100, 23);
+            this.buttonLivreRechercher.TabIndex = 10;
+            this.buttonLivreRechercher.Text = "Rechercher";
+            this.buttonLivreRechercher.UseVisualStyleBackColor = true;
+            this.buttonLivreRechercher.Click += new System.EventHandler(this.buttonLivreRechercher_Click);
+            // 
             // comboBoxLivreAuteurPrenom
             // 
             this.comboBoxLivreAuteurPrenom.FormattingEnabled = true;
@@ -838,6 +901,41 @@
             this.dataGridViewLivre.TabIndex = 12;
             this.dataGridViewLivre.CellStateChanged += new System.Windows.Forms.DataGridViewCellStateChangedEventHandler(this.dataGridViewLivre_CellStateChanged);
             this.dataGridViewLivre.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dataGridViewLivre_RowStateChanged);
+            // 
+            // LivreId
+            // 
+            this.LivreId.HeaderText = "Id";
+            this.LivreId.Name = "LivreId";
+            // 
+            // LivreTitre
+            // 
+            this.LivreTitre.HeaderText = "Titre";
+            this.LivreTitre.Name = "LivreTitre";
+            // 
+            // LivreAnneeParution
+            // 
+            this.LivreAnneeParution.HeaderText = "Annee Parution";
+            this.LivreAnneeParution.Name = "LivreAnneeParution";
+            // 
+            // LivreGenreLibelle
+            // 
+            this.LivreGenreLibelle.HeaderText = "Genre";
+            this.LivreGenreLibelle.Name = "LivreGenreLibelle";
+            // 
+            // LivreAuteurNom
+            // 
+            this.LivreAuteurNom.HeaderText = "Nom";
+            this.LivreAuteurNom.Name = "LivreAuteurNom";
+            // 
+            // LivreAuteurPrenom
+            // 
+            this.LivreAuteurPrenom.HeaderText = "Prénom";
+            this.LivreAuteurPrenom.Name = "LivreAuteurPrenom";
+            // 
+            // LivreEmplacementLibelle
+            // 
+            this.LivreEmplacementLibelle.HeaderText = "Emplacement";
+            this.LivreEmplacementLibelle.Name = "LivreEmplacementLibelle";
             // 
             // buttonLivreSuppression
             // 
@@ -941,6 +1039,27 @@
             this.tabPageAuteur.Text = "Auteur";
             this.tabPageAuteur.UseVisualStyleBackColor = true;
             this.tabPageAuteur.Enter += new System.EventHandler(this.tabPageAuteur_Enter);
+            // 
+            // buttonAuteurAfficherTout
+            // 
+            this.buttonAuteurAfficherTout.Location = new System.Drawing.Point(94, 203);
+            this.buttonAuteurAfficherTout.Name = "buttonAuteurAfficherTout";
+            this.buttonAuteurAfficherTout.Size = new System.Drawing.Size(100, 23);
+            this.buttonAuteurAfficherTout.TabIndex = 13;
+            this.buttonAuteurAfficherTout.Text = "Afficher tout";
+            this.buttonAuteurAfficherTout.UseVisualStyleBackColor = true;
+            this.buttonAuteurAfficherTout.Visible = false;
+            this.buttonAuteurAfficherTout.Click += new System.EventHandler(this.buttonAuteurAfficherTout_Click);
+            // 
+            // buttonAuteurRechercher
+            // 
+            this.buttonAuteurRechercher.Location = new System.Drawing.Point(94, 174);
+            this.buttonAuteurRechercher.Name = "buttonAuteurRechercher";
+            this.buttonAuteurRechercher.Size = new System.Drawing.Size(100, 23);
+            this.buttonAuteurRechercher.TabIndex = 12;
+            this.buttonAuteurRechercher.Text = "Rechercher";
+            this.buttonAuteurRechercher.UseVisualStyleBackColor = true;
+            this.buttonAuteurRechercher.Click += new System.EventHandler(this.buttonAuteurRechercher_Click);
             // 
             // dataGridViewAuteur
             // 
@@ -1056,11 +1175,12 @@
             // 
             // tabPageEmprunt
             // 
+            this.tabPageEmprunt.Controls.Add(this.buttonEmpruntRechercher);
             this.tabPageEmprunt.Controls.Add(this.buttonEmpruntAfficherTout);
-            this.tabPageEmprunt.Controls.Add(this.buttonListeRetards);
+            this.tabPageEmprunt.Controls.Add(this.buttonEmpruntListeRetards);
             this.tabPageEmprunt.Controls.Add(this.dataGridViewEmprunter);
-            this.tabPageEmprunt.Controls.Add(this.buttonRendre);
-            this.tabPageEmprunt.Controls.Add(this.buttonEmprunt);
+            this.tabPageEmprunt.Controls.Add(this.buttonEmpruntRendre);
+            this.tabPageEmprunt.Controls.Add(this.buttonEmpruntEmprunter);
             this.tabPageEmprunt.Controls.Add(this.dateTimePickerDateRetour);
             this.tabPageEmprunt.Controls.Add(this.label28);
             this.tabPageEmprunt.Controls.Add(this.label27);
@@ -1078,15 +1198,25 @@
             this.tabPageEmprunt.UseVisualStyleBackColor = true;
             this.tabPageEmprunt.Enter += new System.EventHandler(this.tabPageEmprunt_Enter);
             // 
-            // buttonListeRetards
+            // buttonEmpruntAfficherTout
             // 
-            this.buttonListeRetards.Location = new System.Drawing.Point(94, 200);
-            this.buttonListeRetards.Name = "buttonListeRetards";
-            this.buttonListeRetards.Size = new System.Drawing.Size(100, 23);
-            this.buttonListeRetards.TabIndex = 6;
-            this.buttonListeRetards.Text = "Liste des retards";
-            this.buttonListeRetards.UseVisualStyleBackColor = true;
-            this.buttonListeRetards.Click += new System.EventHandler(this.buttonListeRetards_Click);
+            this.buttonEmpruntAfficherTout.Location = new System.Drawing.Point(94, 200);
+            this.buttonEmpruntAfficherTout.Name = "buttonEmpruntAfficherTout";
+            this.buttonEmpruntAfficherTout.Size = new System.Drawing.Size(100, 23);
+            this.buttonEmpruntAfficherTout.TabIndex = 7;
+            this.buttonEmpruntAfficherTout.Text = "Afficher tout";
+            this.buttonEmpruntAfficherTout.UseVisualStyleBackColor = true;
+            this.buttonEmpruntAfficherTout.Click += new System.EventHandler(this.buttonEmpruntAfficherTout_Click);
+            // 
+            // buttonEmpruntListeRetards
+            // 
+            this.buttonEmpruntListeRetards.Location = new System.Drawing.Point(94, 229);
+            this.buttonEmpruntListeRetards.Name = "buttonEmpruntListeRetards";
+            this.buttonEmpruntListeRetards.Size = new System.Drawing.Size(100, 23);
+            this.buttonEmpruntListeRetards.TabIndex = 8;
+            this.buttonEmpruntListeRetards.Text = "Liste des retards";
+            this.buttonEmpruntListeRetards.UseVisualStyleBackColor = true;
+            this.buttonEmpruntListeRetards.Click += new System.EventHandler(this.buttonListeRetards_Click);
             // 
             // dataGridViewEmprunter
             // 
@@ -1107,7 +1237,9 @@
             this.dataGridViewEmprunter.Location = new System.Drawing.Point(200, 9);
             this.dataGridViewEmprunter.Name = "dataGridViewEmprunter";
             this.dataGridViewEmprunter.Size = new System.Drawing.Size(675, 553);
-            this.dataGridViewEmprunter.TabIndex = 7;
+            this.dataGridViewEmprunter.TabIndex = 9;
+            this.dataGridViewEmprunter.CellStateChanged += new System.Windows.Forms.DataGridViewCellStateChangedEventHandler(this.dataGridViewEmprunt_CellStateChanged);
+            this.dataGridViewEmprunter.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dataGridViewEmprunt_RowStateChanged);
             // 
             // IdAdherent
             // 
@@ -1144,25 +1276,25 @@
             this.DateRetour.HeaderText = "Date Retour";
             this.DateRetour.Name = "DateRetour";
             // 
-            // buttonRendre
+            // buttonEmpruntRendre
             // 
-            this.buttonRendre.Location = new System.Drawing.Point(94, 142);
-            this.buttonRendre.Name = "buttonRendre";
-            this.buttonRendre.Size = new System.Drawing.Size(100, 23);
-            this.buttonRendre.TabIndex = 5;
-            this.buttonRendre.Text = "Rendre";
-            this.buttonRendre.UseVisualStyleBackColor = true;
-            this.buttonRendre.Click += new System.EventHandler(this.buttonRendre_Click);
+            this.buttonEmpruntRendre.Location = new System.Drawing.Point(94, 142);
+            this.buttonEmpruntRendre.Name = "buttonEmpruntRendre";
+            this.buttonEmpruntRendre.Size = new System.Drawing.Size(100, 23);
+            this.buttonEmpruntRendre.TabIndex = 5;
+            this.buttonEmpruntRendre.Text = "Rendre";
+            this.buttonEmpruntRendre.UseVisualStyleBackColor = true;
+            this.buttonEmpruntRendre.Click += new System.EventHandler(this.buttonRendre_Click);
             // 
-            // buttonEmprunt
+            // buttonEmpruntEmprunter
             // 
-            this.buttonEmprunt.Location = new System.Drawing.Point(94, 113);
-            this.buttonEmprunt.Name = "buttonEmprunt";
-            this.buttonEmprunt.Size = new System.Drawing.Size(100, 23);
-            this.buttonEmprunt.TabIndex = 4;
-            this.buttonEmprunt.Text = "Emprunter";
-            this.buttonEmprunt.UseVisualStyleBackColor = true;
-            this.buttonEmprunt.Click += new System.EventHandler(this.buttonEmprunt_Click);
+            this.buttonEmpruntEmprunter.Location = new System.Drawing.Point(94, 113);
+            this.buttonEmpruntEmprunter.Name = "buttonEmpruntEmprunter";
+            this.buttonEmpruntEmprunter.Size = new System.Drawing.Size(100, 23);
+            this.buttonEmpruntEmprunter.TabIndex = 4;
+            this.buttonEmpruntEmprunter.Text = "Emprunter";
+            this.buttonEmpruntEmprunter.UseVisualStyleBackColor = true;
+            this.buttonEmpruntEmprunter.Click += new System.EventHandler(this.buttonEmprunt_Click);
             // 
             // dateTimePickerDateRetour
             // 
@@ -1234,133 +1366,15 @@
             this.label25.TabIndex = 0;
             this.label25.Text = "ID Adherent";
             // 
-            // buttonEmpruntAfficherTout
+            // buttonEmpruntRechercher
             // 
-            this.buttonEmpruntAfficherTout.Location = new System.Drawing.Point(94, 171);
-            this.buttonEmpruntAfficherTout.Name = "buttonEmpruntAfficherTout";
-            this.buttonEmpruntAfficherTout.Size = new System.Drawing.Size(100, 23);
-            this.buttonEmpruntAfficherTout.TabIndex = 8;
-            this.buttonEmpruntAfficherTout.Text = "Afficher tout";
-            this.buttonEmpruntAfficherTout.UseVisualStyleBackColor = true;
-            this.buttonEmpruntAfficherTout.Click += new System.EventHandler(this.buttonEmpruntAfficherTout_Click);
-            // 
-            // buttonBibliothecaireRechercher
-            // 
-            this.buttonBibliothecaireRechercher.Location = new System.Drawing.Point(94, 229);
-            this.buttonBibliothecaireRechercher.Name = "buttonBibliothecaireRechercher";
-            this.buttonBibliothecaireRechercher.Size = new System.Drawing.Size(100, 23);
-            this.buttonBibliothecaireRechercher.TabIndex = 8;
-            this.buttonBibliothecaireRechercher.Text = "Rechercher";
-            this.buttonBibliothecaireRechercher.UseVisualStyleBackColor = true;
-            this.buttonBibliothecaireRechercher.Click += new System.EventHandler(this.buttonBibliothecaireRechercher_Click);
-            // 
-            // buttonBibliothecaireAfficherTout
-            // 
-            this.buttonBibliothecaireAfficherTout.Location = new System.Drawing.Point(94, 258);
-            this.buttonBibliothecaireAfficherTout.Name = "buttonBibliothecaireAfficherTout";
-            this.buttonBibliothecaireAfficherTout.Size = new System.Drawing.Size(100, 23);
-            this.buttonBibliothecaireAfficherTout.TabIndex = 9;
-            this.buttonBibliothecaireAfficherTout.Text = "Afficher tout";
-            this.buttonBibliothecaireAfficherTout.UseVisualStyleBackColor = true;
-            this.buttonBibliothecaireAfficherTout.Click += new System.EventHandler(this.buttonBibliothecaireAfficherTout_Click);
-            // 
-            // buttonAdherentAfficherTout
-            // 
-            this.buttonAdherentAfficherTout.Location = new System.Drawing.Point(94, 359);
-            this.buttonAdherentAfficherTout.Name = "buttonAdherentAfficherTout";
-            this.buttonAdherentAfficherTout.Size = new System.Drawing.Size(100, 23);
-            this.buttonAdherentAfficherTout.TabIndex = 13;
-            this.buttonAdherentAfficherTout.Text = "Afficher tout";
-            this.buttonAdherentAfficherTout.UseVisualStyleBackColor = true;
-            this.buttonAdherentAfficherTout.Visible = false;
-            this.buttonAdherentAfficherTout.Click += new System.EventHandler(this.buttonAdherentAfficherTout_Click);
-            // 
-            // buttonAdherentRechercher
-            // 
-            this.buttonAdherentRechercher.Location = new System.Drawing.Point(94, 330);
-            this.buttonAdherentRechercher.Name = "buttonAdherentRechercher";
-            this.buttonAdherentRechercher.Size = new System.Drawing.Size(100, 23);
-            this.buttonAdherentRechercher.TabIndex = 12;
-            this.buttonAdherentRechercher.Text = "Rechercher";
-            this.buttonAdherentRechercher.UseVisualStyleBackColor = true;
-            this.buttonAdherentRechercher.Click += new System.EventHandler(this.buttonAdherentRechercher_Click);
-            // 
-            // buttonLivreAfficherTout
-            // 
-            this.buttonLivreAfficherTout.Location = new System.Drawing.Point(94, 284);
-            this.buttonLivreAfficherTout.Name = "buttonLivreAfficherTout";
-            this.buttonLivreAfficherTout.Size = new System.Drawing.Size(100, 23);
-            this.buttonLivreAfficherTout.TabIndex = 11;
-            this.buttonLivreAfficherTout.Text = "Afficher tout";
-            this.buttonLivreAfficherTout.UseVisualStyleBackColor = true;
-            this.buttonLivreAfficherTout.Visible = false;
-            this.buttonLivreAfficherTout.Click += new System.EventHandler(this.buttonLivreAfficherTout_Click);
-            // 
-            // buttonLivreRechercher
-            // 
-            this.buttonLivreRechercher.Location = new System.Drawing.Point(94, 255);
-            this.buttonLivreRechercher.Name = "buttonLivreRechercher";
-            this.buttonLivreRechercher.Size = new System.Drawing.Size(100, 23);
-            this.buttonLivreRechercher.TabIndex = 10;
-            this.buttonLivreRechercher.Text = "Rechercher";
-            this.buttonLivreRechercher.UseVisualStyleBackColor = true;
-            this.buttonLivreRechercher.Click += new System.EventHandler(this.buttonLivreRechercher_Click);
-            // 
-            // LivreId
-            // 
-            this.LivreId.HeaderText = "Id";
-            this.LivreId.Name = "LivreId";
-            // 
-            // LivreTitre
-            // 
-            this.LivreTitre.HeaderText = "Titre";
-            this.LivreTitre.Name = "LivreTitre";
-            // 
-            // LivreAnneeParution
-            // 
-            this.LivreAnneeParution.HeaderText = "Annee Parution";
-            this.LivreAnneeParution.Name = "LivreAnneeParution";
-            // 
-            // LivreGenreLibelle
-            // 
-            this.LivreGenreLibelle.HeaderText = "Genre";
-            this.LivreGenreLibelle.Name = "LivreGenreLibelle";
-            // 
-            // LivreAuteurNom
-            // 
-            this.LivreAuteurNom.HeaderText = "Nom";
-            this.LivreAuteurNom.Name = "LivreAuteurNom";
-            // 
-            // LivreAuteurPrenom
-            // 
-            this.LivreAuteurPrenom.HeaderText = "Prénom";
-            this.LivreAuteurPrenom.Name = "LivreAuteurPrenom";
-            // 
-            // LivreEmplacementLibelle
-            // 
-            this.LivreEmplacementLibelle.HeaderText = "Emplacement";
-            this.LivreEmplacementLibelle.Name = "LivreEmplacementLibelle";
-            // 
-            // buttonAuteurAfficherTout
-            // 
-            this.buttonAuteurAfficherTout.Location = new System.Drawing.Point(94, 203);
-            this.buttonAuteurAfficherTout.Name = "buttonAuteurAfficherTout";
-            this.buttonAuteurAfficherTout.Size = new System.Drawing.Size(100, 23);
-            this.buttonAuteurAfficherTout.TabIndex = 13;
-            this.buttonAuteurAfficherTout.Text = "Afficher tout";
-            this.buttonAuteurAfficherTout.UseVisualStyleBackColor = true;
-            this.buttonAuteurAfficherTout.Visible = false;
-            this.buttonAuteurAfficherTout.Click += new System.EventHandler(this.buttonAuteurAfficherTout_Click);
-            // 
-            // buttonAuteurRechercher
-            // 
-            this.buttonAuteurRechercher.Location = new System.Drawing.Point(94, 174);
-            this.buttonAuteurRechercher.Name = "buttonAuteurRechercher";
-            this.buttonAuteurRechercher.Size = new System.Drawing.Size(100, 23);
-            this.buttonAuteurRechercher.TabIndex = 12;
-            this.buttonAuteurRechercher.Text = "Rechercher";
-            this.buttonAuteurRechercher.UseVisualStyleBackColor = true;
-            this.buttonAuteurRechercher.Click += new System.EventHandler(this.buttonAuteurRechercher_Click);
+            this.buttonEmpruntRechercher.Location = new System.Drawing.Point(94, 171);
+            this.buttonEmpruntRechercher.Name = "buttonEmpruntRechercher";
+            this.buttonEmpruntRechercher.Size = new System.Drawing.Size(100, 23);
+            this.buttonEmpruntRechercher.TabIndex = 6;
+            this.buttonEmpruntRechercher.Text = "Rechercher";
+            this.buttonEmpruntRechercher.UseVisualStyleBackColor = true;
+            this.buttonEmpruntRechercher.Click += new System.EventHandler(this.buttonEmpruntRechercher_Click);
             // 
             // FormBiBliotheque
             // 
@@ -1496,8 +1510,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn TitreLivre;
         private System.Windows.Forms.DataGridViewTextBoxColumn DateEmprunt;
         private System.Windows.Forms.DataGridViewTextBoxColumn DateRetour;
-        private System.Windows.Forms.Button buttonRendre;
-        private System.Windows.Forms.Button buttonEmprunt;
+        private System.Windows.Forms.Button buttonEmpruntRendre;
+        private System.Windows.Forms.Button buttonEmpruntEmprunter;
         private System.Windows.Forms.DateTimePicker dateTimePickerDateRetour;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Label label27;
@@ -1506,7 +1520,7 @@
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.TextBox textBoxEmprunterAdherentId;
         private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Button buttonListeRetards;
+        private System.Windows.Forms.Button buttonEmpruntListeRetards;
         private System.Windows.Forms.Button buttonEmpruntAfficherTout;
         private System.Windows.Forms.Button buttonBibliothecaireRechercher;
         private System.Windows.Forms.Button buttonBibliothecaireAfficherTout;
@@ -1523,6 +1537,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn LivreEmplacementLibelle;
         private System.Windows.Forms.Button buttonAuteurAfficherTout;
         private System.Windows.Forms.Button buttonAuteurRechercher;
+        private System.Windows.Forms.Button buttonEmpruntRechercher;
     }
 }
 

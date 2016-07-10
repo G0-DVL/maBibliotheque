@@ -1674,91 +1674,8 @@ namespace ClientLourd
         //**************************************
         private void buttonListeRetards_Click(object sender, EventArgs e)
         {
-            // Effacer le dataGrid précédent 
-
-            dataGridViewEmprunter.Rows.Clear();
-
-
-            // Traitement des retards : liste des retards dans le DataGrid
-            using (maBibliothequeEntities monContext = new maBibliothequeEntities())
-            {   //  On liste les emprunts en retard
-                var oEmprunterQuery = from tableEmprunt in monContext.emprunters
-                                      join tableAdherent in monContext.adherents
-                                        on tableEmprunt.adherent_ID equals tableAdherent.adherent_ID
-                                      join tableLivre in monContext.livres
-                                        on tableEmprunt.livre_ID equals tableLivre.livre_ID
-                                      where tableEmprunt.date_retour < DateTime.Now
-                                      select new
-                                      {
-                                          tableAdherent.adherent_ID,
-                                          tableAdherent.adherent_nom,
-                                          tableAdherent.adherent_prenom,
-                                          tableLivre.livre_ID,
-                                          tableLivre.livre_titre,
-                                          tableEmprunt.date_emprunt,
-                                          tableEmprunt.date_retour
-                                      };
-
-                var listEmprunt = oEmprunterQuery.ToList();
-
-                foreach (var empr in listEmprunt)
-                {
-                    dataGridViewEmprunter.Rows.Add(
-                        empr.adherent_ID,
-                        empr.adherent_nom,
-                        empr.adherent_prenom,
-                        empr.livre_ID,
-                        empr.livre_titre,
-                        empr.date_emprunt,
-                        empr.date_retour
-
-                        );
-                }
-
-            }
-
-        }
-
-        private void buttonEmpruntAfficherTout_Click(object sender, EventArgs e)
-        {
-            // reenitialiser le dataGridViewEmprunt
-
-            dataGridViewEmprunter.Rows.Clear();
-
-            using (maBibliothequeEntities monContext = new maBibliothequeEntities())
-            {   //  On liste les emprunts en cours
-                var oEmprunterQuery = from tableEmprunt in monContext.emprunters
-                                      join tableAdherent in monContext.adherents
-                                        on tableEmprunt.adherent_ID equals tableAdherent.adherent_ID
-                                      join tableLivre in monContext.livres
-                                        on tableEmprunt.livre_ID equals tableLivre.livre_ID
-                                      select new
-                                      {
-                                          tableAdherent.adherent_ID,
-                                          tableAdherent.adherent_nom,
-                                          tableAdherent.adherent_prenom,
-                                          tableLivre.livre_ID,
-                                          tableLivre.livre_titre,
-                                          tableEmprunt.date_emprunt,
-                                          tableEmprunt.date_retour
-                                      };
-
-                var listEmprunt = oEmprunterQuery.ToList();
-
-                foreach (var empr in listEmprunt)
-                {
-                    dataGridViewEmprunter.Rows.Add(
-                        empr.adherent_ID,
-                        empr.adherent_nom,
-                        empr.adherent_prenom,
-                        empr.livre_ID,
-                        empr.livre_titre,
-                        empr.date_emprunt,
-                        empr.date_retour
-
-                        );
-                }
-            }
+            buttonEmpruntAfficherTout.Visible = true;
+            rechercherEmprunt("", "", null, null, true);
         }
 
         private void dataGridViewEmprunter_CellStateChanged(object sender, DataGridViewCellStateChangedEventArgs e)
@@ -1787,5 +1704,119 @@ namespace ClientLourd
         }
 
         #endregion tabPageEmprunt
+
+        private void buttonEmpruntRechercher_Click(object sender, EventArgs e)
+        {
+            buttonEmpruntAfficherTout.Visible = true;
+            rechercherEmprunt(
+                textBoxEmprunterAdherentId.Text,
+                textBoxEmprunterLivreId.Text
+            );
+        }
+
+        private void buttonEmpruntAfficherTout_Click(object sender, EventArgs e)
+        {
+            buttonEmpruntAfficherTout.Visible = false;
+            rechercherEmprunt();
+        }
+
+        private void rechercherEmprunt(string sIdAdherent = "", string sIdLivre = "", DateTime? dDateEmprunt = null, DateTime? dDateRetour = null, Boolean bAfficherRetards = false)
+        {
+            using (maBibliothequeEntities monContext = new maBibliothequeEntities())
+            {
+                var oEmpruntQuery = from tableEmprunt in monContext.emprunters
+                                    join tableAdherent in monContext.adherents
+                                      on tableEmprunt.adherent_ID equals tableAdherent.adherent_ID
+                                    join tableLivre in monContext.livres
+                                      on tableEmprunt.livre_ID equals tableLivre.livre_ID
+                                    select new
+                                    {
+                                        tableAdherent.adherent_ID,
+                                        tableAdherent.adherent_nom,
+                                        tableAdherent.adherent_prenom,
+                                        tableLivre.livre_ID,
+                                        tableLivre.livre_titre,
+                                        tableEmprunt.date_emprunt,
+                                        tableEmprunt.date_retour
+                                    };
+
+                if ("" != sIdAdherent)
+                {
+                    int iIdAdherent = int.Parse(sIdAdherent);
+                    oEmpruntQuery = oEmpruntQuery.Where(
+                        tableEmprunt => tableEmprunt.adherent_ID == iIdAdherent
+                    );
+                }
+
+                if ("" != sIdLivre)
+                {
+                    int iIdLivre = int.Parse(sIdLivre);
+                    oEmpruntQuery = oEmpruntQuery.Where(
+                        tableEmprunt => tableEmprunt.livre_ID == iIdLivre
+                    );
+                }
+
+                if (null != dDateEmprunt)
+                {
+                    oEmpruntQuery = oEmpruntQuery.Where(
+                        tableEmprunt => tableEmprunt.date_emprunt.Value.Date == dDateEmprunt.Value.Date
+                    );
+                }
+
+                if (null != dDateRetour)
+                {
+                    oEmpruntQuery = oEmpruntQuery.Where(
+                        tableEmprunt => tableEmprunt.date_retour.Value.Date == dDateRetour.Value.Date
+                    );
+                }
+
+                if(false != bAfficherRetards)
+                {
+                    DateTime dDateDemain = DateTime.Now.AddDays(1).Date;
+                    oEmpruntQuery = oEmpruntQuery.Where(
+                        tableEmprunt => tableEmprunt.date_retour.Value <= dDateDemain
+                    );
+                }
+
+
+                var oListResultats = oEmpruntQuery.ToList();
+                dataGridViewEmprunter.Rows.Clear();
+                foreach (var oEmprunt in oListResultats)
+                {
+                    dataGridViewEmprunter.Rows.Add(
+                        oEmprunt.adherent_ID,
+                        oEmprunt.adherent_nom,
+                        oEmprunt.adherent_prenom,
+                        oEmprunt.livre_ID,
+                        oEmprunt.livre_titre,
+                        oEmprunt.date_emprunt,
+                        oEmprunt.date_retour
+                    );
+                }
+            }
+        }
+
+        private void dataGridViewEmprunt_CellStateChanged(object sender, DataGridViewCellStateChangedEventArgs e)
+        {
+            dataGridViewEmprunt_StateChanged();
+        }
+
+        private void dataGridViewEmprunt_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
+        {
+            dataGridViewEmprunt_StateChanged();
+        }
+
+        private void dataGridViewEmprunt_StateChanged()
+        {
+            DataGridViewSelectedCellCollection oCellCollection = dataGridViewEmprunter.SelectedCells;
+            if (0 == oCellCollection.Count)
+            {
+                return;
+            }
+            DataGridViewCellCollection oRowCells = oCellCollection[0].OwningRow.Cells;
+
+            textBoxEmprunterAdherentId.Text = oRowCells[0].Value.ToString();
+            textBoxEmprunterLivreId.Text = oRowCells[3].Value.ToString();
+        }
     }
 }
